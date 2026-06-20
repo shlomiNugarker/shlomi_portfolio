@@ -23,7 +23,7 @@ Site is Currently deployed at <b>Netlify</b>'s Free tier .
 
 This is just a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Please use atleast Node v12, but the recommended version is Node v14 LTS. There's a `.nvmrc`, you can run `nvm use` if you have nvm installed.
+Please use at least Node v18.17 (required by Next.js 16); the recommended version is Node v22 LTS. There's a `.nvmrc`, you can run `nvm use` if you have nvm installed.
 
 ## Getting Started
 
