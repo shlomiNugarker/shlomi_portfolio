@@ -17,11 +17,14 @@ const useScrollDirection = (
   const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    const avatarContainer = document.querySelector('#klAvatar') as HTMLElement
-    const avatarScrollY =
-      avatarContainer?.offsetTop +
-      avatarContainer.clientHeight -
-      AVATAR_PADD_OFFSET
+    const avatarContainer = document.querySelector('#klAvatar') as HTMLElement | null
+    // Guard: under React 18 StrictMode the effect can run before #klAvatar is
+    // mounted (or after it unmounts on the double-invoke), so fall back to 0.
+    const avatarScrollY = avatarContainer
+      ? avatarContainer.offsetTop +
+        avatarContainer.clientHeight -
+        AVATAR_PADD_OFFSET
+      : 0
     const threshold = 10
     let lastScrollY = window.scrollY || 0
 

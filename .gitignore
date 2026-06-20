@@ -32,3 +32,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# npm lockfile — this project uses yarn
+package-lock.json
+
+# internal upgrade working doc (not for upstream PR)
+UPGRADE_PLAN.md
