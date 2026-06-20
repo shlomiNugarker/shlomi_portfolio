@@ -36,23 +36,21 @@ const useScrollDirection = (
         ticking = false
         return
       }
+      const scrollingDown = scrollY > lastScrollY
       const isBelowAvatar =
         !isMobileOnly && belowAvatar ? scrollY > avatarScrollY : true
-      let currentScrollDirection = ScrollDirection.Initial
 
-      // Used to tell if menu will show or not
-      if (scrollY > lastScrollY && isBelowAvatar) {
-        currentScrollDirection = ScrollDirection.Down
-      } else if (isBelowAvatar && !isMobile) {
-        currentScrollDirection = ScrollDirection.Down
-      } else {
-        currentScrollDirection = ScrollDirection.Up
-      }
+      // Whether the menu should be in its "Down" (collapsed) state: below the
+      // avatar and either actively scrolling down or on desktop.
+      const wantsDown = isBelowAvatar && (scrollingDown || !isMobile)
+      const gateDirection = wantsDown
+        ? ScrollDirection.Down
+        : ScrollDirection.Up
 
-      if (currentScrollDirection !== scrollDir) {
-        setScrollDir(
-          scrollY > lastScrollY ? ScrollDirection.Down : ScrollDirection.Up
-        )
+      // Only commit when the gate flips; the committed value tracks the actual
+      // scroll delta so a quick up-scroll still reveals the menu.
+      if (gateDirection !== scrollDir) {
+        setScrollDir(scrollingDown ? ScrollDirection.Down : ScrollDirection.Up)
       }
       lastScrollY = scrollY > 0 ? scrollY : 0
       ticking = false

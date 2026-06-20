@@ -11,8 +11,12 @@ import { motion } from 'framer-motion'
 import FeaturedCard from './FeaturedCard'
 import { fadeInUpSlower, galleryStagger } from 'config/animations'
 import { mobileBreakpointsMap } from 'config/theme'
+import { FeaturedWorksList } from 'config/works'
+
 const MotionGrid = motion.create(Grid)
 const MotionGridItem = motion.create(GridItem)
+
+const CARD_HEIGHT = { base: '130px', md: '225px', '2xl': '300px' }
 
 const FeaturedWorksSection = () => {
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
@@ -41,56 +45,20 @@ const FeaturedWorksSection = () => {
         gap={{ base: 5, md: 6 }}
         variants={galleryStagger}
       >
-        <MotionGridItem colSpan={6} variants={fadeInUpSlower}>
-          <FeaturedCard
-            idx={1}
-            title="Tobira!"
-            src="/works/tobira/IphoneX-tobira.webp"
-            description="Japanese social media platform for travelers to show off their
-          adventure to the world. I was incharge of Front end integration, made using React, Antd and Styled Components."
-            height={{ base: '130px', md: '225px', '2xl': '300px' }}
-            ctaUrl="https://tobira-app-test.netlify.app/"
-            objectPosition="right 20%"
-            isMobile={isMobile}
-          />
-        </MotionGridItem>
-
-        <MotionGridItem colSpan={6} variants={fadeInUpSlower}>
-          <FeaturedCard
-            idx={2}
-            title="RSV"
-            description="RSV is a smart contract (ERC20) powered reservation system. I am incharge of backend using NET.Core 2.1."
-            src="/works/rsv.webp"
-            height={{ base: '130px', md: '225px', '2xl': '300px' }}
-            ctaUrl="https://solution.rsv.ltd/jp"
-            isMobile={isMobile}
-          />
-        </MotionGridItem>
-
-        <MotionGridItem colSpan={6} variants={fadeInUpSlower}>
-          <FeaturedCard
-            idx={3}
-            title="Agora School"
-            description="A quizz - reviewer LMS, I made as a freelancer. Backend were powered by PHPSlim and VueJS for Front end."
-            src="/works/agora.webp"
-            height={{ base: '130px', md: '225px', '2xl': '300px' }}
-            ctaUrl="https://dev.agora-school.com"
-            objectPosition="right 20%"
-            isMobile={isMobile}
-          />
-        </MotionGridItem>
-
-        <MotionGridItem colSpan={6} variants={fadeInUpSlower}>
-          <FeaturedCard
-            idx={4}
-            title="TMH Layla EC"
-            description="A Japanese Semi-conductor e-commerce made at my old place at IVP. I was working with backend using ASP.NET MVC"
-            src="/works/tmh.webp"
-            height={{ base: '130px', md: '225px', '2xl': '300px' }}
-            ctaUrl="https://www.layla-ec.com/"
-            isMobile={isMobile}
-          />
-        </MotionGridItem>
+        {FeaturedWorksList.map((work, index) => (
+          <MotionGridItem key={work.title} colSpan={6} variants={fadeInUpSlower}>
+            <FeaturedCard
+              idx={index + 1}
+              title={work.title}
+              src={work.src}
+              description={work.description}
+              height={CARD_HEIGHT}
+              ctaUrl={work.ctaUrl}
+              objectPosition={work.objectPosition}
+              isMobile={isMobile}
+            />
+          </MotionGridItem>
+        ))}
       </MotionGrid>
     </Stack>
   )

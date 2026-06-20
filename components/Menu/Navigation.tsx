@@ -7,6 +7,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 import { LinkButton } from 'components/ui/link-button'
+import { NavLinks } from 'config/navigation'
 import { useColorMode, useColorModeValue } from 'components/ui/color-mode'
 import { BsSun as SunIcon, BsMoon as MoonIcon } from 'react-icons/bs'
 import { motion, useCycle } from 'framer-motion'
@@ -118,85 +119,29 @@ const Navigation = () => {
           paddingBottom={isMobile ? 10 : '0'}
           onClick={() => isMobile && toggleOpen()}
         >
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-          >
-            <LinkButton
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              href={isMobile ? '#aboutMe' : '#'}
-              rel="noreferrer"
-              onClick={onMenuItemClick}
+          {NavLinks.map((link, index) => (
+            <Box
+              key={link.label}
+              width={{ base: '100%', lg: 'auto' }}
+              textAlign={{ base: 'center', lg: 'left' }}
+              marginY={index === 0 ? undefined : { base: 2, lg: 0 }}
             >
-              About
-            </LinkButton>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <LinkButton
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              href="#jobs"
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              Experience
-            </LinkButton>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <LinkButton
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              href="#works"
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              Works
-            </LinkButton>
-          </Box>
-          <Box
-            width={{ base: '100%', lg: 'auto' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            marginY={{ base: 2, lg: 0 }}
-          >
-            <LinkButton
-              fontWeight="light"
-              variant="ghost"
-              fontSize={menuButtonSize}
-              letterSpacing={2}
-              className={btnClassName}
-              padding={2}
-              marginX={2}
-              href="#contact"
-              rel="noreferrer"
-              onClick={onMenuItemClick}
-            >
-              Contact
-            </LinkButton>
-          </Box>
+              <LinkButton
+                fontWeight="light"
+                variant="ghost"
+                fontSize={menuButtonSize}
+                letterSpacing={2}
+                className={btnClassName}
+                padding={2}
+                marginX={2}
+                href={isMobile && link.mobileHref ? link.mobileHref : link.href}
+                rel="noreferrer"
+                onClick={onMenuItemClick}
+              >
+                {link.label}
+              </LinkButton>
+            </Box>
+          ))}
           {!isMobile && (
             <Box>
               <IconButton

@@ -1,6 +1,6 @@
 import { Tooltip as ChakraTooltip, Portal } from '@chakra-ui/react'
 import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { useIsMounted } from 'hooks/useIsMounted'
 
 // Tooltip snippet for Chakra UI v3 (compound Tooltip API), exposing a simple
 // `content`-based API similar to the v2 `label` prop the app used.
@@ -27,9 +27,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
     // Ark's Tooltip generates a random id that differs between the SSR and the
     // client render, causing a hydration mismatch. Render the plain trigger on
     // the server and mount the interactive tooltip only after hydration.
-    const [mounted, setMounted] = useState(false)
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    useEffect(() => setMounted(true), [])
+    const mounted = useIsMounted()
 
     if (disabled || !mounted) return children
 

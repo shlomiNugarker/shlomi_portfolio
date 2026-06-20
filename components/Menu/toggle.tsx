@@ -1,9 +1,11 @@
  
 import * as React from 'react'
 import { motion } from 'framer-motion'
+import type { ComponentProps } from 'react'
 
- 
-const Path = ({ isDarkMode, ...props }: any) => (
+type PathProps = ComponentProps<typeof motion.path> & { isDarkMode?: boolean }
+
+const Path = ({ isDarkMode, ...props }: PathProps) => (
   // isDarkMode is destructured out so it is not spread onto the DOM <path>
   // element (React warns about unknown DOM attributes otherwise).
   <motion.path

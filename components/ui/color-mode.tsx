@@ -5,7 +5,7 @@
 // v2 API (useColorMode / useColorModeValue) that the rest of the app relies on.
 import { ThemeProvider, useTheme } from 'next-themes'
 import type { ThemeProviderProps } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useIsMounted } from 'hooks/useIsMounted'
 
 export type ColorMode = 'light' | 'dark'
 
@@ -17,12 +17,9 @@ export function ColorModeProvider(props: ThemeProviderProps) {
 
 export function useColorMode() {
   const { resolvedTheme, setTheme } = useTheme()
-  // Avoid hydration mismatch: next-themes resolves the theme only on the client.
-  // Flipping a mounted flag on first render is the canonical hydration-safe
-  // pattern; the rule's concern (cascading renders) doesn't apply to a one-shot.
-  const [mounted, setMounted] = useState(false)
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMounted(true), [])
+  // next-themes resolves the theme only on the client, so fall back to the
+  // SSR default until mounted to avoid a hydration mismatch.
+  const mounted = useIsMounted()
 
   const colorMode = (mounted ? resolvedTheme : 'dark') as ColorMode
   const toggleColorMode = () => {

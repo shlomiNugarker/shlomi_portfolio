@@ -21,7 +21,7 @@ const Logo = () => {
             className={!isMobile ? styles.logo : ''}
             boxSize={isMobile ? '30px' : '50px'}
             objectFit="cover"
-            src="./logo.png"
+            src="/logo.png"
             alt="KL Lawingco Logo"
             variants={simpleOpacity}
             initial="initial"
@@ -34,7 +34,7 @@ const Logo = () => {
             className={!isMobile ? styles.logo : ''}
             boxSize={isMobile ? '30px' : '50px'}
             objectFit="cover"
-            src="./logo_light.png"
+            src="/logo_light.png"
             alt="KL Lawingco Logo"
             variants={simpleOpacity}
             initial="initial"
