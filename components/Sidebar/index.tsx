@@ -3,13 +3,13 @@ import {
   Heading,
   Text,
   Button,
-  useColorMode,
   Container,
   Link,
   Box,
   Icon,
   useBreakpointValue,
 } from '@chakra-ui/react'
+import { useColorMode } from 'components/ui/color-mode'
 import { motion } from 'framer-motion'
 import styles from './styles.module.css'
 import {
@@ -23,7 +23,7 @@ import { SocialMedias } from 'config/sidebar'
 const Sidebar = () => {
   const { colorMode } = useColorMode()
   const display = useBreakpointValue({ base: 'none', lg: 'block' })
-  const surNameSize = useBreakpointValue({ base: '3xl', md: '4xl' })
+  const surNameSize = useBreakpointValue({ base: '6xl', md: '7xl' } as const)
   const MotionHeading = motion(Heading)
   const MotionText = motion(Text)
   const MotionStack = motion(Stack)
@@ -57,17 +57,18 @@ const Sidebar = () => {
         display={{ xl: 'flex' }}
         alignItems={{ xl: 'center' }}
       >
-        <MotionStack variants={stagger} spacing={6} w="100">
+        <MotionStack variants={stagger} gap={3} w="100">
           <MotionText
             variants={fadeInUp}
-            variant="accent"
+            color="kl.accent"
             fontWeight="light"
           >
             Ohh you found me?. Howdy! I am
           </MotionText>
           <MotionHeading
             as="h1"
-            size="2xl"
+            size="5xl"
+            lineHeight={1}
             paddingRight={{ lg: '20' }}
             textTransform="uppercase"
             variants={fadeInUp}
@@ -77,7 +78,8 @@ const Sidebar = () => {
           <MotionHeading
             as="h2"
             size={surNameSize}
-            variant="emphasis"
+            lineHeight={1}
+            color="kl.emphasis"
             className={styles.marginTopForce}
             textTransform="uppercase"
             variants={letterSpace}
@@ -98,7 +100,7 @@ const Sidebar = () => {
           <MotionHeading
             as="h3"
             size="md"
-            variant="emphasis"
+            color="kl.emphasis"
             className={styles.marginTopSmall}
             variants={fadeInUp}
           >
@@ -106,14 +108,14 @@ const Sidebar = () => {
           </MotionHeading>
 
           <MotionText
-            variant="description"
+            color="kl.description"
             fontSize="small"
             paddingRight={{ lg: '12' }}
             variants={fadeInUp}
             maxWidth={{ base: '100%', lg: '80%' }}
           >
             Hey! How nice of you to look at my personal site,
-            <Text variant="emphasis" as="span">
+            <Text color="kl.emphasis" as="span">
               {' '}
               Thank you!
             </Text>
@@ -141,7 +143,7 @@ const Sidebar = () => {
           <MotionBox display="flex" variants={simpleOpacity}>
             {SocialMedias.map((socMedia) => (
               <Link
-                variant="description"
+                color="kl.description"
                 key={socMedia.label}
                 aria-label={socMedia.label}
                 rel="noreferrer"

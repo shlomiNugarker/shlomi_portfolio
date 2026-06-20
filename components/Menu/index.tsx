@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import {
   Container,
-  useColorModeValue,
   useBreakpointValue,
 } from '@chakra-ui/react'
+import { useColorModeValue } from 'components/ui/color-mode'
 import { motion, Variants, useAnimation } from 'framer-motion'
 import Logo from '../Logo'
 import styles from './styles.module.css'

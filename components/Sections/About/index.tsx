@@ -6,11 +6,11 @@ import Detail from './Detail'
 const SkillSetModal = dynamic(() => import('./SkillSetModal'))
 
 const AboutSection = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
   return (
     <>
       <Detail onOpen={onOpen} />
-      <SkillSetModal isOpen={isOpen} onClose={onClose} />
+      <SkillSetModal isOpen={open} onClose={onClose} />
     </>
   )
 }

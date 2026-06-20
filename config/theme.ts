@@ -1,21 +1,10 @@
-import {
-  extendTheme,
-  ColorMode,
-  ChakraTheme,
-  ThemeComponentProps,
-  StyleFunctionProps,
-} from '@chakra-ui/react'
-import { mode } from '@chakra-ui/theme-tools'
+import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react'
 
-interface IThemeMode {
-  Light: ColorMode
-  Dark: ColorMode
-}
-
-export const ThemeMode: IThemeMode = {
+// Color-mode constants and the mobile breakpoint map, consumed across the app.
+export const ThemeMode = {
   Light: 'light',
   Dark: 'dark',
-}
+} as const
 
 export const mobileBreakpointsMap = {
   base: true,
@@ -24,108 +13,82 @@ export const mobileBreakpointsMap = {
   xl: false,
 }
 
-// Theme Config
-const config = {
-  initialColorMode: ThemeMode.Dark,
-  useSystemColorMode: false,
-}
-
-const colors = {
-  black: '#121212',
-}
-
-// Function-form `global` is valid at runtime; Chakra 1's Styles type rejects it
-// under stricter TS. Cast is a temporary bridge — this theme is rewritten to
-// Chakra 3's createSystem in a later stage.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const styles: any = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  global: (props: any) => ({
-    body: {
-      color: mode('gray.800', 'whiteAlpha.900')(props),
-      bg: mode('gray.100', '#121212')(props),
+// Chakra UI v3 theme. In v3 the runtime `mode()` helper is gone; color-mode
+// aware values are expressed as semantic tokens with _light / _dark conditions.
+// The token names below reproduce the v2 theme variants 1:1 (emphasis,
+// description, accent, accentAlternative) so the rest of the app is unchanged.
+const config = defineConfig({
+  theme: {
+    tokens: {
+      fonts: {
+        heading: { value: 'Poppins' },
+        body: { value: 'Poppins' },
+      },
+      colors: {
+        // Custom near-black used as the dark background (was `colors.black`).
+        kl: {
+          black: { value: '#121212' },
+        },
+        // Chakra v3 replaced its gray scale with a neutral one. The original
+        // design (light bg, nav bar, descriptions, borders) was built against
+        // v2's cooler grays, so pin the full v2 gray scale to preserve the exact
+        // original appearance in both color modes.
+        gray: {
+          50: { value: '#F7FAFC' },
+          100: { value: '#EDF2F7' },
+          200: { value: '#E2E8F0' },
+          300: { value: '#CBD5E0' },
+          400: { value: '#A0AEC0' },
+          500: { value: '#718096' },
+          600: { value: '#4A5568' },
+          700: { value: '#2D3748' },
+          800: { value: '#1A202C' },
+          900: { value: '#171923' },
+        },
+      },
     },
-  }),
-}
-
-const textVariants = {
-  emphasis: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('teal.500', 'cyan.200')(props),
-  }),
-  description: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('gray.800', 'gray.400')(props),
-  }),
-  accent: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('black.400', 'cyan.200')(props),
-  }),
-  accentAlternative: (props: ThemeComponentProps<ChakraTheme>) => ({
-    color: mode('#595959', '#A6A6A6')(props),
-  }),
-}
-
-const theme = extendTheme({
-  config,
-  fonts: {
-    body: 'Poppins',
+    semanticTokens: {
+      colors: {
+        // Page background and base text color (was the `styles.global` body rule).
+        'kl.bg': {
+          value: { _light: '{colors.gray.100}', _dark: '#121212' },
+        },
+        'kl.fg': {
+          value: { _light: '{colors.gray.800}', _dark: '{colors.whiteAlpha.900}' },
+        },
+        // Text/Heading/Link variants from the v2 theme.
+        'kl.emphasis': {
+          value: { _light: '{colors.teal.500}', _dark: '{colors.cyan.200}' },
+        },
+        'kl.description': {
+          value: { _light: '{colors.gray.800}', _dark: '{colors.gray.400}' },
+        },
+        'kl.accent': {
+          value: { _light: '#000000', _dark: '{colors.cyan.200}' },
+        },
+        'kl.accentAlternative': {
+          value: { _light: '#595959', _dark: '#A6A6A6' },
+        },
+      },
+    },
+    recipes: {
+      // The original theme gave Link an emphasis-colored baseStyle
+      // (teal.500 / cyan.200). Reproduce that so inline links keep their accent.
+      link: {
+        base: {
+          color: 'kl.emphasis',
+        },
+      },
+    },
   },
-  colors,
-  styles,
-  components: {
-    Link: {
-      baseStyle: (props: StyleFunctionProps) => ({
-        color: mode('teal.500', 'cyan.200')(props),
-      }),
-      variants: {
-        ...textVariants,
-        description: (props: ThemeComponentProps<ChakraTheme>) => ({
-          color: mode('gray.800', 'gray.400')(props),
-          _hover: {
-            color: mode('teal.500', 'cyan.200')(props),
-            textDecoration: 'none',
-          },
-        }),
-      },
-    },
-    Text: {
-      variants: textVariants,
-    },
-    Heading: {
-      variants: textVariants,
-    },
-    Button: {
-      variants: {
-        outline: (props: StyleFunctionProps) => ({
-          borderColor: mode('black.400', 'cyan.200')(props),
-        }),
-        outlineAlternative: (props: StyleFunctionProps) => ({
-          borderWidth: '1px',
-          borderRadius: 0,
-          borderColor: mode('#595959', 'whiteAlpha.500')(props),
-          _hover: {
-            backgroundColor: mode(
-              'rgba(49, 151, 149, 0.06)',
-              'rgba(157, 236, 249, 0.06)'
-            )(props),
-          },
-        }),
-      },
-    },
-    Icon: {
-      variants: {
-        accent: (props: StyleFunctionProps) => ({
-          borderColor: mode('gray.800', 'gray.400')(props),
-        }),
-      },
-    },
-    Divider: {
-      variants: {
-        solid: (props: StyleFunctionProps) => ({
-          borderColor: mode('gray.800', 'gray.400')(props),
-          marginLeft: 'auto',
-          marginRight: 'auto',
-        }),
-      },
+  globalCss: {
+    body: {
+      color: 'kl.fg',
+      bg: 'kl.bg',
     },
   },
 })
-export default theme
+
+const system = createSystem(defaultConfig, config)
+
+export default system

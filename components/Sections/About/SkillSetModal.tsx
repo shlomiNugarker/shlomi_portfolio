@@ -1,21 +1,16 @@
 /* eslint-disable react/no-multi-comp */
 import {
   Heading,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
+  Dialog,
+  Portal,
+  CloseButton,
   List,
-  ListItem,
-  ListIcon,
+  Icon,
   SimpleGrid,
-  useColorModeValue,
-  Divider,
+  Separator,
   Text,
 } from '@chakra-ui/react'
+import { useColorModeValue } from 'components/ui/color-mode'
 import styles from './styles.module.css'
 import { Skill, Skills, splitSkills } from 'config/skills'
 
@@ -35,37 +30,37 @@ const SkillList = ({
   const [colOne, colTwo = []] = columns
   return (
     <>
-      <Heading as="div" size="sm" paddingBottom={1} variant="description">
+      <Heading as="div" size="sm" paddingBottom={1} color="kl.description">
         {title}
       </Heading>
-      <Divider marginBottom={4} />
-      <SimpleGrid columns={2} spacing={4} paddingBottom={6}>
-        <List spacing={3}>
+      <Separator marginBottom={4} />
+      <SimpleGrid columns={2} gap={4} paddingBottom={6}>
+        <List.Root gap={3} listStyle="none">
           {colOne.map((item) => (
-            <ListItem
+            <List.Item
               key={item.name}
               fontSize="small"
               display="flex"
               alignItems="center"
             >
-              <ListIcon as={item.icon} color={emphasis} fontSize="2em" />
+              <Icon as={item.icon} color={emphasis} fontSize="2em" marginEnd={2} />
               {item.name}
-            </ListItem>
+            </List.Item>
           ))}
-        </List>
-        <List spacing={3}>
+        </List.Root>
+        <List.Root gap={3} listStyle="none">
           {colTwo.map((item) => (
-            <ListItem
+            <List.Item
               key={item.name}
               fontSize="small"
               display="flex"
               alignItems="center"
             >
-              <ListIcon as={item.icon} color={emphasis} fontSize="2em" />
+              <Icon as={item.icon} color={emphasis} fontSize="2em" marginEnd={2} />
               {item.name}
-            </ListItem>
+            </List.Item>
           ))}
-        </List>
+        </List.Root>
       </SimpleGrid>
     </>
   )
@@ -81,32 +76,40 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
   const gameCols = splitSkills(Skills.games)
   const desktopCols = splitSkills(Skills.desktop)
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      motionPreset="slideInBottom"
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+      motionPreset="slide-in-bottom"
       scrollBehavior="inside"
     >
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Full Skill Set List</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody className={styles.skillModal}>
-          <SkillList title="Backend Centric" columns={backendCols} />
-          <SkillList title="Frontend Centric" columns={frontendCols} />
-          <SkillList title="CICD centric" columns={cicdCols} />
-          <SkillList title="Database and Streams" columns={dataBaseCols} />
-          <SkillList title="Ui Frameworks" columns={uiFrameWorkCols} />
-          <SkillList title="Mobile Development" columns={mobileCols} />
-          <SkillList title="Game Development" columns={gameCols} />
-          <SkillList title="Desktop App" columns={desktopCols} />
-          <SkillList title="Productivity boosts" columns={productivityCols} />
-        </ModalBody>
-        <ModalFooter>
-          <Text fontSize="x-small">*Some micro frameworks not included </Text>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Header>Full Skill Set List</Dialog.Header>
+            <Dialog.CloseTrigger asChild>
+              <CloseButton size="sm" />
+            </Dialog.CloseTrigger>
+            <Dialog.Body className={styles.skillModal}>
+              <SkillList title="Backend Centric" columns={backendCols} />
+              <SkillList title="Frontend Centric" columns={frontendCols} />
+              <SkillList title="CICD centric" columns={cicdCols} />
+              <SkillList title="Database and Streams" columns={dataBaseCols} />
+              <SkillList title="Ui Frameworks" columns={uiFrameWorkCols} />
+              <SkillList title="Mobile Development" columns={mobileCols} />
+              <SkillList title="Game Development" columns={gameCols} />
+              <SkillList title="Desktop App" columns={desktopCols} />
+              <SkillList title="Productivity boosts" columns={productivityCols} />
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Text fontSize="x-small">
+                *Some micro frameworks not included{' '}
+              </Text>
+            </Dialog.Footer>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
   )
 }
 

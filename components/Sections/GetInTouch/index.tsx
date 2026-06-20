@@ -30,17 +30,17 @@ const GetInTouch = () => {
     <Stack
       width={{ base: '99%', lg: '60%', xl: '75%' }}
       height="100%"
-      spacing={{ base: 6, xl: 8 }}
+      gap={{ base: 6, xl: 8 }}
       as="footer"
     >
       <Heading
-        size="2xl"
+        size="5xl"
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
         Say hi!{' '}
-        <Text as="span" fontSize="2xl" variant="emphasis">
+        <Text as="span" fontSize="2xl" color="kl.emphasis">
           <motion.div
             style={{ display: 'inline-block' }}
             variants={rimuruVariant}
@@ -51,7 +51,7 @@ const GetInTouch = () => {
           </motion.div>
         </Text>
       </Heading>
-      <Text variant="description">
+      <Text color="kl.description">
         Though, I am fairly introverted myself. I do reply to messages as long
         as my human interaction battery lasts. Coding, work, movies or even weeb
         stuff, anything is cool. So feel free to message me on any of my social
@@ -73,7 +73,7 @@ const GetInTouch = () => {
         paddingBottom={{ base: 5, lg: 18 }}
       >
         <Link
-          variant="description"
+          color="kl.description"
           textDecoration="none"
           rel="noreferrer"
           href="https://github.com/klawingco/kl_portfolio"

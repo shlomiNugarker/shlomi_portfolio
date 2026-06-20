@@ -29,9 +29,9 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
     base: '5',
     md: '14',
     lg: '14',
-    xl: 0,
+    xl: '0',
   })
-  const paddTop = useBreakpointValue({ base: '20', sm: 20, md: 20 })
+  const paddTop = useBreakpointValue({ base: '20', sm: '20', md: '20' })
   return (
     <>
       <Script
@@ -79,7 +79,7 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
           colSpan={{ base: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
           overflow="hidden"
         >
-          <Stack w="100" spacing={24}>
+          <Stack w="100" gap={24}>
             <FadeInLayout>
               <Box
                 id="aboutMe"

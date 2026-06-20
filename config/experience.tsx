@@ -95,7 +95,6 @@ export const Experiences: {
       <>
         Worked on maintaining{' '}
         <Link
-          variant="primaryLink"
           href="https://www.westfield.com.au/"
           target="_blank"
           rel="noreferrer"

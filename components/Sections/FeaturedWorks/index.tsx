@@ -20,17 +20,17 @@ const FeaturedWorksSection = () => {
     <Stack
       width={{ base: '99%', lg: '60%', xl: '75%' }}
       height="100%"
-      spacing={{ base: 6, xl: 8 }}
+      gap={{ base: 6, xl: 8 }}
     >
       <Heading
-        size="2xl"
+        size="5xl"
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
         Some of my works.
       </Heading>
-      <Text variant="description">
+      <Text color="kl.description">
         Check out some of the works I made at freelancing, company projects and
         even case studies.
       </Text>

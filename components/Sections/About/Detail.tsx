@@ -3,15 +3,13 @@ import {
   Heading,
   Text,
   List,
-  ListItem,
-  ListIcon,
   Icon,
   SimpleGrid,
   Box,
-  Tooltip,
   Stack,
-  useColorModeValue,
 } from '@chakra-ui/react'
+import { Tooltip } from 'components/ui/tooltip'
+import { useColorModeValue } from 'components/ui/color-mode'
 import {
   SiDotNet,
   SiJavascript,
@@ -37,12 +35,12 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
   return (
     <Stack
       width={{ base: '100%', lg: '70%' }}
-      spacing={{ base: 6, xl: 8 }}
+      gap={{ base: 6, xl: 8 }}
       as="section"
     >
       <Heading
         as="h4"
-        size="2xl"
+        size="5xl"
         letterSpacing={1.8}
         style={{
           fontVariantCaps: 'small-caps',
@@ -50,76 +48,88 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
       >
         What i do.
       </Heading>
-      <Text variant="description">
+      <Text color="kl.description">
         I`ve been coding professionally for {professionalYears} years now and
         currently working as a <b>Software Engineer</b> that focuses on{' '}
         <b>architecture</b>, <b>APIs</b>,{' '}
-        <Tooltip
-          label="Ha!. Or more accurately TECH DEBT"
-          aria-label="Tech Debt?"
-          hasArrow
-        >
-          <Text as="span" variant="emphasis">
+        <Tooltip content="Ha!. Or more accurately TECH DEBT">
+          <Text as="span" color="kl.emphasis">
             <b>nitty-gritty business logics</b>
           </Text>
         </Tooltip>{' '}
         and even <b>front end integration</b> stuff now, how time flies!
         <br /> <br />
         Here are few technologies that are cup of my{' '}
-        <Tooltip
-          label="I only drink tea if I needed too!"
-          aria-label="I hate Tea!"
-          hasArrow
-        >
-          <Text as="span" variant="emphasis" textDecorationLine="line-through">
+        <Tooltip content="I only drink tea if I needed too!">
+          <Text as="span" color="kl.emphasis" textDecorationLine="line-through">
             tea
           </Text>
         </Tooltip>{' '}
         coffee <Icon as={GiCoffeePot} color={emphasis} />.
       </Text>
 
-      <SimpleGrid columns={2} spacing={4}>
-        <List spacing={3}>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiDotNet} color={emphasis} fontSize="2em" />
+      <SimpleGrid columns={2} gap={4}>
+        <List.Root gap={3} listStyle="none">
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon as={SiDotNet} color={emphasis} fontSize="2em" marginEnd={2} />
             C# - .NET.Core
-          </ListItem>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiJavascript} color={emphasis} fontSize="2em" />
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon
+              as={SiJavascript}
+              color={emphasis}
+              fontSize="2em"
+              marginEnd={2}
+            />
             Javascript (ES6+)
-          </ListItem>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiTypescript} color={emphasis} fontSize="2em" />
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon
+              as={SiTypescript}
+              color={emphasis}
+              fontSize="2em"
+              marginEnd={2}
+            />
             Typescript
-          </ListItem>
+          </List.Item>
 
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiNodeDotJs} color={emphasis} fontSize="2em" />
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon
+              as={SiNodeDotJs}
+              color={emphasis}
+              fontSize="2em"
+              marginEnd={2}
+            />
             Node
-          </ListItem>
-        </List>
-        <List spacing={3}>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiGraphql} color={emphasis} fontSize="2em" />
+          </List.Item>
+        </List.Root>
+        <List.Root gap={3} listStyle="none">
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon as={SiGraphql} color={emphasis} fontSize="2em" marginEnd={2} />
             Graphql
-          </ListItem>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiReact} color={emphasis} fontSize="2em" />
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon as={SiReact} color={emphasis} fontSize="2em" marginEnd={2} />
             React
-          </ListItem>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiNextDotJs} color={emphasis} fontSize="2em" />
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon
+              as={SiNextDotJs}
+              color={emphasis}
+              fontSize="2em"
+              marginEnd={2}
+            />
             NextJS
-          </ListItem>
-          <ListItem fontSize="small" display="flex" alignItems="center">
-            <ListIcon as={SiDocker} color={emphasis} fontSize="2em" />
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon as={SiDocker} color={emphasis} fontSize="2em" marginEnd={2} />
             Docker
-          </ListItem>
-        </List>
+          </List.Item>
+        </List.Root>
         <Box>
           <Text
             as="button"
-            variant="emphasis"
+            color="kl.emphasis"
             fontSize="smaller"
             textAlign="left"
             onClick={onOpen}

@@ -1,15 +1,14 @@
 import { memo, useCallback } from 'react'
 import {
   Container,
-  Button,
   Flex,
   Box,
   IconButton,
-  useColorMode,
-  useColorModeValue,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { LinkButton } from 'components/ui/link-button'
+import { useColorMode, useColorModeValue } from 'components/ui/color-mode'
+import { BsSun as SunIcon, BsMoon as MoonIcon } from 'react-icons/bs'
 import { motion, useCycle } from 'framer-motion'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
@@ -61,11 +60,12 @@ const Navigation = () => {
         <IconButton
           aria-label="Color Mode"
           variant="ghost"
-          icon={<Icon />}
           boxShadow="none"
           onClick={toggleColorMode}
           padding={0}
-        />
+        >
+          <Icon />
+        </IconButton>
         <MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
       </Box>
 
@@ -121,7 +121,7 @@ const Navigation = () => {
             width={{ base: '100%', lg: 'auto' }}
             textAlign={{ base: 'center', lg: 'left' }}
           >
-            <Button
+            <LinkButton
               fontWeight="light"
               variant="ghost"
               fontSize={menuButtonSize}
@@ -129,20 +129,19 @@ const Navigation = () => {
               className={btnClassName}
               padding={2}
               marginX={2}
-              as="a"
               href={isMobile ? '#aboutMe' : '#'}
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
               About
-            </Button>
+            </LinkButton>
           </Box>
           <Box
             width={{ base: '100%', lg: 'auto' }}
             textAlign={{ base: 'center', lg: 'left' }}
             marginY={{ base: 2, lg: 0 }}
           >
-            <Button
+            <LinkButton
               fontWeight="light"
               variant="ghost"
               fontSize={menuButtonSize}
@@ -150,20 +149,19 @@ const Navigation = () => {
               className={btnClassName}
               padding={2}
               marginX={2}
-              as="a"
               href="#jobs"
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
               Experience
-            </Button>
+            </LinkButton>
           </Box>
           <Box
             width={{ base: '100%', lg: 'auto' }}
             textAlign={{ base: 'center', lg: 'left' }}
             marginY={{ base: 2, lg: 0 }}
           >
-            <Button
+            <LinkButton
               fontWeight="light"
               variant="ghost"
               fontSize={menuButtonSize}
@@ -171,20 +169,19 @@ const Navigation = () => {
               className={btnClassName}
               padding={2}
               marginX={2}
-              as="a"
               href="#works"
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
               Works
-            </Button>
+            </LinkButton>
           </Box>
           <Box
             width={{ base: '100%', lg: 'auto' }}
             textAlign={{ base: 'center', lg: 'left' }}
             marginY={{ base: 2, lg: 0 }}
           >
-            <Button
+            <LinkButton
               fontWeight="light"
               variant="ghost"
               fontSize={menuButtonSize}
@@ -192,13 +189,12 @@ const Navigation = () => {
               className={btnClassName}
               padding={2}
               marginX={2}
-              as="a"
               href="#contact"
               rel="noreferrer"
               onClick={onMenuItemClick}
             >
               Contact
-            </Button>
+            </LinkButton>
           </Box>
           {!isMobile && (
             <Box>
@@ -206,10 +202,11 @@ const Navigation = () => {
                 marginX={1}
                 aria-label="Color Mode"
                 variant="ghost"
-                icon={<Icon />}
                 boxShadow="none"
                 onClick={toggleColorMode}
-              />
+              >
+                <Icon />
+              </IconButton>
             </Box>
           )}
         </Flex>

@@ -1,11 +1,5 @@
-import {
-  Box,
-  Image as ChkImage,
-  Text,
-  Link,
-  SkeletonCircle,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, Image as ChkImage, Text, Link } from '@chakra-ui/react'
+import { useColorModeValue } from 'components/ui/color-mode'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import { avatarAnimation } from 'config/animations'
@@ -55,9 +49,8 @@ const Avatar = () => {
           htmlWidth="250"
           htmlHeight="250"
           margin="auto"
-          fallback={<SkeletonCircle height="100%" width="100%" />}
         />
-        <Text textAlign="center" fontSize="smaller" variant="description">
+        <Text textAlign="center" fontSize="smaller" color="kl.description">
           Art by{' '}
           <Link
             href="https://twitter.com/kojiro_ai"

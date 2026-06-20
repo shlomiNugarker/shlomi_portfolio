@@ -2,24 +2,22 @@
 import {
   Box,
   Image,
-  ResponsiveValue,
-  Divider,
-  Skeleton,
+  Separator,
   Text,
   SimpleGrid,
-  Button,
   Container,
   Stack,
-  useColorModeValue,
 } from '@chakra-ui/react'
+import { LinkButton } from 'components/ui/link-button'
+import { useColorModeValue } from 'components/ui/color-mode'
 import { motion, TargetAndTransition } from 'framer-motion'
 import styles from './styles.module.css'
 import { easing, DURATIONS } from 'config/animations'
 
 export type FeaturedCardProps = {
-  // Still can't find what's correct value for responsive value
+  // Responsive height value (string or Chakra responsive object).
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  height: string | ResponsiveValue<any>
+  height: string | Record<string, any>
   src: string
   idx: number
   title: string
@@ -74,7 +72,7 @@ const ProjectDescription = ({
     justifyContent="space-around"
     flexDirection="column"
   >
-    <Stack spacing={1} width="100%">
+    <Stack gap={1} width="100%">
       <Text
         fontSize={{ base: 'md', md: 'large', '2xl': 'xx-large' }}
         fontWeight="bold"
@@ -84,13 +82,13 @@ const ProjectDescription = ({
         textTransform="uppercase"
         as="span"
       >
-        <Text variant="accentAlternative" fontSize="md" as="span">
+        <Text color="kl.accentAlternative" fontSize="md" as="span">
           #0{idx}
           {'  '}
         </Text>
         {title}
       </Text>
-      <Divider
+      <Separator
         borderColor="#A6A6A6"
         width="90%"
         marginLeft={0}
@@ -99,7 +97,7 @@ const ProjectDescription = ({
     </Stack>
     <Text
       fontSize="smaller"
-      variant="accentAlternative"
+      color="kl.accentAlternative"
       width="90%"
       alignSelf={isLeft ? 'flex-end' : 'flex-start'}
       wordBreak="break-word"
@@ -107,19 +105,27 @@ const ProjectDescription = ({
     >
       {description}
     </Text>
-    <Button
-      variant="outlineAlternative"
+    <LinkButton
+      variant="outline"
+      borderWidth="1px"
+      borderRadius={0}
+      borderColor={{ base: '#595959', _dark: 'whiteAlpha.500' }}
+      _hover={{
+        backgroundColor: {
+          base: 'rgba(49, 151, 149, 0.06)',
+          _dark: 'rgba(157, 236, 249, 0.06)',
+        },
+      }}
       fontWeight="light"
       fontSize={{ base: 'sm', '2xl': 'md' }}
       size="sm"
-      as="a"
       href={ctaUrl}
       rel="noreferrer"
       target="_blank"
       marginY={{ base: 3, md: 0 }}
     >
       View Project
-    </Button>
+    </LinkButton>
   </Container>
 )
 
@@ -147,7 +153,6 @@ const FeaturedCard = ({
       opacity={0.75}
       whileHover={variants.hover}
       whileTap={variants.tap}
-      fallback={<Skeleton height={height} width="100%" />}
     />
   )
 
@@ -162,7 +167,7 @@ const FeaturedCard = ({
     >
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
-        spacing={{ base: 3, md: 0 }}
+        gap={{ base: 3, md: 0 }}
         display={{ base: 'flex', md: 'grid' }}
         flexDirection={{ base: 'column-reverse', md: 'initial' }}
       >

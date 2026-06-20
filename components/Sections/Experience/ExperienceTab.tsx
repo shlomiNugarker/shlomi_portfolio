@@ -4,20 +4,13 @@ import {
   Link,
   Stack,
   Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
   Image,
   List,
-  ListIcon,
-  ListItem,
-  SlideFade,
-  Skeleton,
-  useColorModeValue,
+  Icon,
+  Box,
   useBreakpointValue,
-  useColorMode,
 } from '@chakra-ui/react'
+import { useColorMode, useColorModeValue } from 'components/ui/color-mode'
 import { BiRightArrow } from 'react-icons/bi'
 import styles from './styles.module.css'
 import { ExperiencesList } from 'config/experience'
@@ -47,23 +40,38 @@ const ExperienceTab = () => {
     xl: 'auto',
   })
   return (
-    <Tabs id="experienceTabs" orientation={tabOrientation} isLazy>
-      <TabList
-        width={!isMobile ? '30%' : 'auto'}
+    <Tabs.Root
+      id="experienceTabs"
+      orientation={tabOrientation}
+      defaultValue={ExperiencesList[0]?.name}
+      lazyMount
+      unmountOnExit={false}
+      variant="plain"
+      display="flex"
+      flexDirection={tabOrientation === 'vertical' ? 'row' : 'column'}
+      gap={{ base: 0, md: 6 }}
+    >
+      <Tabs.List
+        flexShrink={0}
+        flexDirection={tabOrientation === 'vertical' ? 'column' : 'row'}
+        width={tabOrientation === 'vertical' ? '30%' : 'auto'}
         borderColor="transparent"
-        overflowX={isMobile ? 'scroll' : 'auto'}
-        overflowY={'hidden'}
+        overflowX={tabOrientation === 'vertical' ? 'visible' : 'auto'}
+        overflowY="hidden"
         className={styles.experienceTabs}
       >
         {ExperiencesList.map((company) => (
-          <Tab
+          <Tabs.Trigger
+            value={company.name}
             key={`Tab-${company.name}`}
             fontSize="smaller"
             h="120px"
             minWidth={tabMinWidth}
             boxShadow="none"
+            borderRadius={0}
             borderColor={borderColor}
             borderLeftWidth={tabOrientation === 'vertical' ? '4px' : '0'}
+            borderBottomWidth={tabOrientation === 'horizontal' ? '4px' : '0'}
             _selected={{
               borderColor: activeBordercolor,
               boxShadow: 'none',
@@ -71,7 +79,6 @@ const ExperienceTab = () => {
               borderBottomWidth: tabOrientation === 'horizontal' ? '4px' : '0',
               background: 'whiteAlpha.100',
             }}
-            borderBottomWidth={tabOrientation === 'horizontal' ? '4px' : '0'}
           >
             <Image
               src={
@@ -79,72 +86,70 @@ const ExperienceTab = () => {
               }
               alt={company.longName}
               maxWidth="88px"
-              fallback={<Skeleton height="100%" width="100%" />}
-            ></Image>
-          </Tab>
+            />
+          </Tabs.Trigger>
         ))}
-      </TabList>
-      <TabPanels>
-        {ExperiencesList.map((company) => (
-          <TabPanel key={`TabPanel-${company.name}`}>
-            <SlideFade offsetY="20px" in={true}>
-              <Stack spacing={0}>
-                <Text
-                  as="span"
+      </Tabs.List>
+      {ExperiencesList.map((company) => (
+        <Tabs.Content value={company.name} key={`TabPanel-${company.name}`}>
+          <Box>
+            <Stack gap={0}>
+              <Text
+                as="span"
+                fontSize="lg"
+                fontWeight="bold"
+                color="kl.description"
+              >
+                {company.position}
+              </Text>
+              <Text as="span">
+                <Link
+                  href={company.url}
+                  aria-label="scentregroup"
+                  rel="noreferrer"
+                  target="_blank"
                   fontSize="lg"
                   fontWeight="bold"
-                  variant="description"
                 >
-                  {company.position}
+                  #{company.name}
+                </Link>
+                <Text
+                  as="span"
+                  textTransform="none"
+                  fontSize="x-small"
+                  color="kl.description"
+                >
+                  {' '}
+                  {company.subDetail}
                 </Text>
-                <Text as="span">
-                  <Link
-                    href={company.url}
-                    aria-label="scentregroup"
-                    rel="noreferrer"
-                    target="_blank"
-                    fontSize="lg"
-                    fontWeight="bold"
-                  >
-                    #{company.name}
-                  </Link>
-                  <Text
-                    as="span"
-                    textTransform="none"
-                    fontSize="x-small"
-                    variant="description"
-                  >
-                    {' '}
-                    {company.subDetail}
+              </Text>
+              <Text fontSize="smaller">{company.duration}</Text>
+            </Stack>
+            <List.Root gap={3} pt={5} listStyle="none">
+              {company.roles?.map((roleDesc, idx) => (
+                <List.Item
+                  key={`${company.name}-desc-${idx}`}
+                  fontSize="smaller"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                >
+                  <Icon
+                    as={BiRightArrow}
+                    color={emphasis}
+                    display="block"
+                    marginEnd={2}
+                  />
+                  <Text as="span" display="block" color="kl.description">
+                    {roleDesc}
                   </Text>
-                </Text>
-                <Text fontSize="smaller">{company.duration}</Text>
-              </Stack>
-              <List spacing={3} pt={5}>
-                {company.roles?.map((roleDesc, idx) => (
-                  <ListItem
-                    key={`${company.name}-desc-${idx}`}
-                    fontSize="smaller"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                  >
-                    <ListIcon
-                      as={BiRightArrow}
-                      color={emphasis}
-                      display="block"
-                    />
-                    <Text as="span" display="block" variant="description">
-                      {roleDesc}
-                    </Text>
-                  </ListItem>
-                ))}
-              </List>
-            </SlideFade>
-          </TabPanel>
-        ))}
-      </TabPanels>
-    </Tabs>
+                </List.Item>
+              ))}
+            </List.Root>
+          </Box>
+        </Tabs.Content>
+      ))}
+    </Tabs.Root>
   )
 }
 

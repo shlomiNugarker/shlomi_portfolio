@@ -5,9 +5,9 @@ import {
   Link,
   Stack,
   SimpleGrid,
-  Divider,
-  useColorModeValue,
+  Separator,
 } from '@chakra-ui/react'
+import { useColorModeValue } from 'components/ui/color-mode'
 import { Article } from 'types/article'
 
 const DevToArticles = ({ articles }: { articles: Article[] }) => {
@@ -21,20 +21,20 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
     <Stack
       width={{ base: '99%', lg: '60%', xl: '75%' }}
       height="100%"
-      spacing={{ base: 6, xl: 8 }}
+      gap={{ base: 6, xl: 8 }}
     >
       <Heading
-        size="2xl"
+        size="5xl"
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
         Dev.to blog
       </Heading>
-      <Text variant="description">
+      <Text color="kl.description">
         I write dev related things from time to time!
       </Text>
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 5, md: 10 }}>
+      <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 5, md: 10 }}>
         {articles.map((item) => (
           <Link
             aria-label={item.title}
@@ -48,7 +48,7 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
             role="group"
           >
             <Stack
-              spacing={3}
+              gap={3}
               borderWidth="1px"
               borderColor={borderColor}
               borderRadius="1em"
@@ -64,20 +64,20 @@ const DevToArticles = ({ articles }: { articles: Article[] }) => {
               <Heading fontSize="larger" paddingX={2}>
                 {item.title}
               </Heading>
-              <Divider borderColor="#A6A6A6" width="95%" />
-              <Stack spacing={1}>
+              <Separator borderColor="#A6A6A6" width="95%" />
+              <Stack gap={1}>
                 <Heading
                   fontSize="small"
                   paddingX={2}
-                  variant="accentAlternative"
+                  color="kl.accentAlternative"
                 >
                   {item.tag_list.join(', ')}
                 </Heading>
-                <Heading fontSize="smaller" variant="description" paddingX={2}>
+                <Heading fontSize="smaller" color="kl.description" paddingX={2}>
                   {item.readable_publish_date}
                 </Heading>
               </Stack>
-              <Text fontSize="smaller" variant="description" paddingX={2}>
+              <Text fontSize="smaller" color="kl.description" paddingX={2}>
                 {item.description}
               </Text>
             </Stack>

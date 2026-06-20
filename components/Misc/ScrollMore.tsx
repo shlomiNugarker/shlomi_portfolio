@@ -1,10 +1,5 @@
-import {
-  Box,
-  Icon,
-  Text,
-  useBreakpointValue,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, Icon, Link, useBreakpointValue } from '@chakra-ui/react'
+import { useColorModeValue } from 'components/ui/color-mode'
 import { RiMouseLine } from 'react-icons/ri'
 import { motion, Variants, AnimatePresence } from 'framer-motion'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
@@ -99,8 +94,7 @@ const ScrollMore = () => {
               bottom: '-8%',
             }}
           >
-            <Text
-              as="a"
+            <Link
               paddingY={3}
               fontFamily="monospace"
               href="mailto:marcjhon18@gmail.com"
@@ -131,7 +125,7 @@ const ScrollMore = () => {
               }}
             >
               marcjhon@gmail.com{' '}
-            </Text>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
