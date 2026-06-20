@@ -431,11 +431,6 @@
     "@babel/helper-string-parser" "^7.29.7"
     "@babel/helper-validator-identifier" "^7.29.7"
 
-"@chakra-ui/icons@2.2.6":
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/@chakra-ui/icons/-/icons-2.2.6.tgz#04e815ad344052e334866bc42ecf14b3705e73cf"
-  integrity sha512-WhNdb4hWMOhSGtgknV6INILg/sZDHFRJVwNRwO5B2JO4bPr+/9NPEf8jZuvcx5xMFi00qAC4qIvbMoN4ID0XDQ==
-
 "@chakra-ui/react@3":
   version "3.36.0"
   resolved "https://registry.yarnpkg.com/@chakra-ui/react/-/react-3.36.0.tgz#639c37f7773f81f424cef03e902688a41128b7b1"

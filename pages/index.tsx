@@ -14,11 +14,16 @@ import Menu from 'components/Menu'
 import Sidebar from 'components/Sidebar'
 import Avatar from 'components/Avatar'
 import About from 'components/Sections/About'
-import Experience from 'components/Sections/Experience'
-import FeaturedWorks from 'components/Sections/FeaturedWorks'
 import ScrollMore from 'components/Misc/ScrollMore'
 import { Article } from 'types/article'
-// These are on bottom sections so no need to render it instantly
+
+// Only the above-the-fold content (Menu, Sidebar, Avatar, About) is in the
+// initial bundle. Every section below the hero is code-split so its
+// framer-motion / Chakra weight isn't shipped on first load.
+const Experience = dynamic(() => import('components/Sections/Experience'))
+const FeaturedWorks = dynamic(
+  () => import('components/Sections/FeaturedWorks')
+)
 const DevToArticles = dynamic(() => import('components/Sections/DevToArticles'))
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))
 

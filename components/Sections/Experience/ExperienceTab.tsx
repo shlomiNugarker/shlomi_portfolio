@@ -4,12 +4,12 @@ import {
   Link,
   Stack,
   Tabs,
-  Image,
   List,
   Icon,
   Box,
   useBreakpointValue,
 } from '@chakra-ui/react'
+import NextImage from 'next/image'
 import { useColorMode, useColorModeValue } from 'components/ui/color-mode'
 import { BiRightArrow } from 'react-icons/bi'
 import styles from './styles.module.css'
@@ -83,12 +83,16 @@ const ExperienceTab = () => {
               background: 'whiteAlpha.100',
             }}
           >
-            <Image
+            <NextImage
               src={
-                colorMode === 'dark' ? company.logo.dark : company.logo.light
+                (colorMode === 'dark'
+                  ? company.logo.dark
+                  : company.logo.light) ?? company.logo.light
               }
               alt={company.longName}
-              maxWidth="88px"
+              width={88}
+              height={88}
+              style={{ width: '88px', height: 'auto', objectFit: 'contain' }}
             />
           </Tabs.Trigger>
         ))}

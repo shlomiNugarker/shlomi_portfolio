@@ -152,7 +152,8 @@ const FeaturedCard = ({
         alt={title}
         fill
         loading="lazy"
-        sizes="(max-width: 768px) 100vw, 50vw"
+        quality={70}
+        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
         style={{ objectFit: 'cover', objectPosition }}
       />
     </MotionBox>
