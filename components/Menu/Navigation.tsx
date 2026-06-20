@@ -87,13 +87,15 @@ const Navigation = () => {
             !isMobile && scrollDirection === ScrollDirection.Down
               ? '12%'
               : '100%',
-          top: !isOpen && isMobile && '-100vh',
-          opacity: !isOpen && isMobile && '0',
-          left: isOpen && isMobile && 0,
+          // Resolve to undefined (omitted) when false so server and client
+          // render the same style string — avoids React hydration mismatches.
+          top: !isOpen && isMobile ? '-100vh' : undefined,
+          opacity: !isOpen && isMobile ? 0 : undefined,
+          left: isOpen && isMobile ? 0 : undefined,
         }}
-        borderColor={isOpen && isMobile && borderColor}
-        borderBottomWidth={isOpen && isMobile && '1px'}
-        paddingBottom={isOpen && isMobile && '1px'}
+        borderColor={isOpen && isMobile ? borderColor : undefined}
+        borderBottomWidth={isOpen && isMobile ? '1px' : undefined}
+        paddingBottom={isOpen && isMobile ? '1px' : undefined}
         ease={easing}
         variants={menuAnim}
         marginTop={0}
