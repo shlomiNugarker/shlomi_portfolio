@@ -3,7 +3,9 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      // next-themes sets a theme class/style on <html> on the client only, so
+      // suppress the resulting hydration attribute warning on this element.
+      <Html lang="en" suppressHydrationWarning>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
