@@ -14,7 +14,7 @@ import { motion, useCycle } from 'framer-motion'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
-import { easing, menuAnim } from 'config/animations'
+import { menuAnim } from 'config/animations'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 
 const Navigation = () => {
@@ -96,7 +96,6 @@ const Navigation = () => {
         borderColor={isOpen && isMobile ? borderColor : undefined}
         borderBottomWidth={isOpen && isMobile ? '1px' : undefined}
         paddingBottom={isOpen && isMobile ? '1px' : undefined}
-        ease={easing}
         variants={menuAnim}
         marginTop={0}
         paddingTop={1}

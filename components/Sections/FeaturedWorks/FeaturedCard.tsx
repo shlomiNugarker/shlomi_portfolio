@@ -12,7 +12,7 @@ import {
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { motion, TargetAndTransition } from 'framer-motion'
 import styles from './styles.module.css'
 import { easing, DURATIONS } from 'config/animations'
 
@@ -29,7 +29,7 @@ export type FeaturedCardProps = {
   isMobile?: boolean
 }
 
-const variants = {
+const variants: Record<'normal' | 'hover' | 'tap', TargetAndTransition> = {
   normal: {
     opacity: 0.85,
   },

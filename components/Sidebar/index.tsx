@@ -27,7 +27,10 @@ const Sidebar = () => {
   const MotionHeading = motion(Heading)
   const MotionText = motion(Text)
   const MotionStack = motion(Stack)
-  const MotionButton = motion(Button)
+  // `as="a"` renders an anchor at runtime; Chakra 2 types don't infer the
+  // polymorphic anchor props (href/target) through motion(), so this is cast.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const MotionButton: any = motion(Button)
   const MotionBox = motion(Box)
 
   return (
@@ -57,7 +60,6 @@ const Sidebar = () => {
         <MotionStack variants={stagger} spacing={6} w="100">
           <MotionText
             variants={fadeInUp}
-            delay={1}
             variant="accent"
             fontWeight="light"
           >
@@ -136,7 +138,7 @@ const Sidebar = () => {
             Get in touch!
           </MotionButton>
 
-          <MotionBox d="flex" variants={simpleOpacity}>
+          <MotionBox display="flex" variants={simpleOpacity}>
             {SocialMedias.map((socMedia) => (
               <Link
                 variant="description"
