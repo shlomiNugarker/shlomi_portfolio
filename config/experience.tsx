@@ -22,8 +22,8 @@ export const Experiences: {
 } = {
   Deloitte: {
     name: 'Deloitte',
-    longName: 'Deloitte Consulthing Phils. Delivery Center',
-    subDetail: 'Consulthing Phils. Delivery Center',
+    longName: 'Deloitte Consulting Phils. Delivery Center',
+    subDetail: 'Consulting Phils. Delivery Center',
     url: 'https://www2.deloitte.com/',
     position: 'Software Engineer Consultant',
     duration: 'Sep 2021 - Present',
@@ -36,7 +36,7 @@ export const Experiences: {
        Contributed to the design and development of a comprehensive .NET payment integration project for a client
        That covered credit card payments and subscription management.
        Introduced Stripe as a new payment provider within the system architecture.
-       Participated in triaging, fixing and adding new functionalitiesto multiple Azure powered APIs of the same client.
+       Participated in triaging, fixing and adding new functionalities to multiple Azure powered APIs of the same client.
       </>,
       <>
         Worked as a Sitecore Backend on new{' '}
@@ -50,7 +50,7 @@ export const Experiences: {
         </Link>
       </>,
       <>
-        Udergone training for .NET Sitecore 10,
+        Undergone training for .NET Sitecore 10,
         Sitecore SXA and different topologies it provides.{' '} and Passed {' '}
         <Link
           aria-label="Sitecore 10 .NET Developer Certification"
@@ -140,7 +140,7 @@ export const Experiences: {
         statistics similar to Facebook Ads.
       </>,
       <>
-        In 2019 got promoted as Senior Software Engineer and worked with Cryto
+        In 2019 got promoted as Senior Software Engineer and worked with Crypto
         Exchange, Smart Contracts and other APIs using several techs such as
         NodeJS, .NET Core and React.
       </>,
