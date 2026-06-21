@@ -55,6 +55,10 @@
       "wanderly": {
         "title": "Wanderly",
         "description": "A social network for travelers — plan multi-stop trips, share them as posts, and layer community routes onto an interactive map. Integrates Claude AI for itinerary generation and real-time Socket.IO for a live feed."
+      },
+      "roga": {
+        "title": "Roga Events",
+        "description": "A bilingual (Hebrew/French) marketing site for a corporate wellness company. A multi-page site with full RTL support, service pages statically generated from Markdown, image optimization, and thorough SEO (JSON-LD, Open Graph). Built with accessibility and performance in mind."
       }
     }
   },

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Box,
   Separator,
@@ -9,12 +10,13 @@ import {
 import NextImage from 'next/image'
 import { LinkButton } from 'components/ui/link-button'
 import { useColorModeValue } from 'components/ui/color-mode'
-import { motion, TargetAndTransition } from 'framer-motion'
+import { motion, AnimatePresence, TargetAndTransition } from 'framer-motion'
 import styles from './styles.module.css'
 import { easing, DURATIONS } from 'config/animations'
 
 export type FeaturedCardProps = {
-  src: string
+  // One or more cover images; a gallery is shown when length > 1.
+  images: string[]
   idx: number
   title: string
   description: string
@@ -57,9 +59,89 @@ const Tag = ({ label }: { label: string }) => (
   </Box>
 )
 
+const Cover = ({
+  images,
+  title,
+  objectPosition,
+}: {
+  images: string[]
+  title: string
+  objectPosition?: string
+}) => {
+  const [active, setActive] = useState(0)
+  const hasGallery = images.length > 1
+  const dotBg = useColorModeValue('blackAlpha.400', 'whiteAlpha.500')
+  const dotActive = useColorModeValue('teal.500', 'cyan.200')
+
+  return (
+    <Box
+      position="relative"
+      width="100%"
+      aspectRatio={16 / 8}
+      overflow="hidden"
+      bg={{ base: 'blackAlpha.100', _dark: 'whiteAlpha.50' }}
+    >
+      <MotionImageBox
+        position="absolute"
+        inset={0}
+        whileHover={imageVariants.hover}
+      >
+        <AnimatePresence initial={false} mode="wait">
+          <motion.div
+            key={images[active]}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: DURATIONS.Fast }}
+            style={{ position: 'absolute', inset: 0 }}
+          >
+            <NextImage
+              src={images[active]}
+              alt={
+                hasGallery ? `${title} — image ${active + 1}` : title
+              }
+              fill
+              loading="lazy"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 760px"
+              style={{ objectFit: 'cover', objectPosition }}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </MotionImageBox>
+
+      {hasGallery && (
+        <HStack
+          position="absolute"
+          bottom={3}
+          insetStart="50%"
+          transform="translateX(-50%)"
+          gap={2}
+          zIndex={1}
+        >
+          {images.map((img, i) => (
+            <Box
+              as="button"
+              key={img}
+              aria-label={`Show image ${i + 1}`}
+              onClick={() => setActive(i)}
+              width={i === active ? '18px' : '8px'}
+              height="8px"
+              borderRadius="full"
+              bg={i === active ? dotActive : dotBg}
+              transition="width 0.2s ease, background 0.2s ease"
+              cursor="pointer"
+            />
+          ))}
+        </HStack>
+      )}
+    </Box>
+  )
+}
+
 const FeaturedCard = ({
   idx,
-  src,
+  images,
   title,
   description,
   objectPosition,
@@ -87,31 +169,8 @@ const FeaturedCard = ({
         borderColor: { base: 'teal.400', _dark: 'teal.300' },
       }}
     >
-      {/* Wide, full-bleed cover. Aspect ratio keeps it from breaking across
-          breakpoints; the image fills the entire card width. */}
-      <Box
-        position="relative"
-        width="100%"
-        aspectRatio={16 / 8}
-        overflow="hidden"
-        bg={{ base: 'blackAlpha.100', _dark: 'whiteAlpha.50' }}
-      >
-        <MotionImageBox
-          position="absolute"
-          inset={0}
-          whileHover={imageVariants.hover}
-        >
-          <NextImage
-            src={src}
-            alt={title}
-            fill
-            loading="lazy"
-            quality={75}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 760px"
-            style={{ objectFit: 'cover', objectPosition }}
-          />
-        </MotionImageBox>
-      </Box>
+      {/* Wide, full-bleed cover (single image or a small gallery). */}
+      <Cover images={images} title={title} objectPosition={objectPosition} />
 
       {/* Content */}
       <Stack

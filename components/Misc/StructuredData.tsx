@@ -101,7 +101,7 @@ const StructuredData = () => {
         '@id': `${pageUrl}/#project-${i + 1}`,
         name: t(`works.items.${work.key}.title`),
         description: t(`works.items.${work.key}.description`),
-        image: `${SITE_URL}${work.src}`,
+        image: work.images.map((img) => `${SITE_URL}${img}`),
         url: work.ctaUrl,
         author: { '@type': 'Person', name: PERSON.name, url: SITE_URL },
         ...(work.tags ? { keywords: work.tags.join(', ') } : {}),

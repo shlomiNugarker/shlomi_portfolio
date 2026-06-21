@@ -77,7 +77,9 @@ const Navigation = () => {
 
       <MotionContainer
         width="100%"
-        backgroundColor={bg}
+        // Transparent on desktop; the solid panel bg is only needed for the
+        // full-screen mobile menu overlay.
+        backgroundColor={isMobile && isOpen ? bg : 'transparent'}
         maxWidth={{ base: '100%', sm: '100%', lg: '50%', xl: '60%' }}
         className={styles.menu}
         insetEnd={{

@@ -39,7 +39,7 @@ const FeaturedWorksSection = () => {
             <FeaturedCard
               idx={index + 1}
               title={t(`works.items.${work.key}.title`)}
-              src={work.src}
+              images={work.images}
               description={t(`works.items.${work.key}.description`)}
               ctaUrl={work.ctaUrl}
               objectPosition={work.objectPosition}
