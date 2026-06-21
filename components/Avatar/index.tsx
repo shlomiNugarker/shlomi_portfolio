@@ -1,4 +1,4 @@
-import { Box, Text, Link } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import NextImage from 'next/image'
 import { useColorModeValue } from 'components/ui/color-mode'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -30,23 +30,12 @@ const Avatar = () => {
       >
         <NextImage
           src={imgAvatar}
-          alt="KL Lawingco Avatar"
+          alt="Shlomi Nugarker"
           width={250}
           height={250}
           priority
           style={{ width: '100%', height: 'auto', margin: 'auto' }}
         />
-        <Text textAlign="center" fontSize="smaller" color="kl.description">
-          Art by{' '}
-          <Link
-            href="https://twitter.com/kojiro_ai"
-            target="_blank"
-            aria-label="KojiroArt"
-            rel="noreferrer"
-          >
-            KojiroArt
-          </Link>
-        </Text>
       </MotionBox>
     </AnimatePresence>
   )

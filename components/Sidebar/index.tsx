@@ -65,7 +65,7 @@ const Sidebar = () => {
             color="kl.accent"
             fontWeight="light"
           >
-            Ohh you found me?. Howdy! I am
+            Hey there! I am
           </MotionText>
           <MotionHeading
             as="h1"
@@ -75,7 +75,7 @@ const Sidebar = () => {
             textTransform="uppercase"
             variants={fadeInUp}
           >
-            Marc Jhon
+            Shlomi
           </MotionHeading>
           <MotionHeading
             as="h2"
@@ -88,7 +88,7 @@ const Sidebar = () => {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            Lawingco.
+            Nugarker.
           </MotionHeading>
           <MotionText
             colorScheme="gray"
@@ -96,7 +96,7 @@ const Sidebar = () => {
             className={styles.marginTopForce}
             variants={fadeInUp}
           >
-            Or you could call me KL. That works too . . .
+            Based in Tel Aviv, Israel . . .
           </MotionText>
 
           <MotionHeading
@@ -106,7 +106,7 @@ const Sidebar = () => {
             className={styles.marginTopSmall}
             variants={fadeInUp}
           >
-            Software Engineer
+            Full-Stack Developer
           </MotionHeading>
 
           <MotionText
@@ -116,13 +116,13 @@ const Sidebar = () => {
             variants={fadeInUp}
             maxWidth={{ base: '100%', lg: '80%' }}
           >
-            Hey! How nice of you to look at my personal site,
+            Thanks for stopping by!
             <Text color="kl.emphasis" as="span">
               {' '}
-              Thank you!
+              Welcome.
             </Text>
-            <br />I am software engineer that specializes at backend apis, front
-            end integration, recently found myself studying UX too.
+            <br />I build websites and small-to-mid web applications end-to-end
+            — from the database and API to the interface users actually touch.
           </MotionText>
           <MotionButton
             size="lg"
@@ -134,7 +134,7 @@ const Sidebar = () => {
             width="120px"
             variants={simpleOpacity}
             as={'a'}
-            href="mailto:marcjhon18@gmail.com"
+            href="mailto:shlomin.dev@gmail.com"
             target="_blank"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

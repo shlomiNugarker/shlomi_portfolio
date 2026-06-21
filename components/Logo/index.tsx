@@ -22,7 +22,7 @@ const Logo = () => {
             boxSize={isMobile ? '30px' : '50px'}
             objectFit="cover"
             src="/logo.png"
-            alt="KL Lawingco Logo"
+            alt="Shlomi Nugarker logo"
             variants={simpleOpacity}
             initial="initial"
             animate={isLogoLoaded && 'animate'}
@@ -35,7 +35,7 @@ const Logo = () => {
             boxSize={isMobile ? '30px' : '50px'}
             objectFit="cover"
             src="/logo_light.png"
-            alt="KL Lawingco Logo"
+            alt="Shlomi Nugarker logo"
             variants={simpleOpacity}
             initial="initial"
             animate={isLogoLoaded && 'animate'}

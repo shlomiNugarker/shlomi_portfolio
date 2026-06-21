@@ -66,15 +66,10 @@ const SkillList = ({
   )
 }
 const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
-  const backendCols = splitSkills(Skills.backend)
   const frontendCols = splitSkills(Skills.frontend)
-  const cicdCols = splitSkills(Skills.cicd)
+  const backendCols = splitSkills(Skills.backend)
   const dataBaseCols = splitSkills(Skills.database)
-  const uiFrameWorkCols = splitSkills(Skills['ui frameworks'])
-  const productivityCols = splitSkills(Skills['productivity boost'])
-  const mobileCols = splitSkills(Skills.mobile)
-  const gameCols = splitSkills(Skills.games)
-  const desktopCols = splitSkills(Skills.desktop)
+  const toolsCols = splitSkills(Skills.tools)
   return (
     <Dialog.Root
       open={isOpen}
@@ -91,21 +86,11 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
               <CloseButton size="sm" />
             </Dialog.CloseTrigger>
             <Dialog.Body className={styles.skillModal}>
-              <SkillList title="Backend Centric" columns={backendCols} />
-              <SkillList title="Frontend Centric" columns={frontendCols} />
-              <SkillList title="CICD centric" columns={cicdCols} />
-              <SkillList title="Database and Streams" columns={dataBaseCols} />
-              <SkillList title="Ui Frameworks" columns={uiFrameWorkCols} />
-              <SkillList title="Mobile Development" columns={mobileCols} />
-              <SkillList title="Game Development" columns={gameCols} />
-              <SkillList title="Desktop App" columns={desktopCols} />
-              <SkillList title="Productivity boosts" columns={productivityCols} />
+              <SkillList title="Frontend" columns={frontendCols} />
+              <SkillList title="Backend" columns={backendCols} />
+              <SkillList title="Databases" columns={dataBaseCols} />
+              <SkillList title="Tools & Platforms" columns={toolsCols} />
             </Dialog.Body>
-            <Dialog.Footer>
-              <Text fontSize="x-small">
-                *Some micro frameworks not included{' '}
-              </Text>
-            </Dialog.Footer>
           </Dialog.Content>
         </Dialog.Positioner>
       </Portal>

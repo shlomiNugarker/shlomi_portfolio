@@ -1,4 +1,3 @@
- 
 import type { JSX } from 'react'
 import {
   Grid,
@@ -15,19 +14,17 @@ import Sidebar from 'components/Sidebar'
 import Avatar from 'components/Avatar'
 import About from 'components/Sections/About'
 import ScrollMore from 'components/Misc/ScrollMore'
-import { Article } from 'types/article'
 
 // Only the above-the-fold content (Menu, Sidebar, Avatar, About) is in the
 // initial bundle. Every section below the hero is code-split so its
 // framer-motion / Chakra weight isn't shipped on first load.
-const Experience = dynamic(() => import('components/Sections/Experience'))
+const Services = dynamic(() => import('components/Sections/Services'))
 const FeaturedWorks = dynamic(
   () => import('components/Sections/FeaturedWorks')
 )
-const DevToArticles = dynamic(() => import('components/Sections/DevToArticles'))
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))
 
-const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
+const Portfolio = (): JSX.Element => {
   const sideBarPadding = useBreakpointValue({ base: '5', md: '8', lg: '14' })
   const mainContent = useBreakpointValue({
     base: '5',
@@ -93,14 +90,14 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
             </FadeInLayout>
             <FadeInLayout>
               <Box
-                id="jobs"
+                id="services"
                 className="contentRow"
                 paddingTop={{ base: 0, lg: 20, xl: 0 }}
                 paddingBottom={{ base: 12, lg: 10 }}
                 paddingX={0}
                 flexDirection={'row'}
               >
-                <Experience />
+                <Services />
               </Box>
             </FadeInLayout>
             <FadeInLayout>
@@ -113,18 +110,6 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
                 flexDirection={'row'}
               >
                 <FeaturedWorks />
-              </Box>
-            </FadeInLayout>
-            <FadeInLayout>
-              <Box
-                id="blog"
-                className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 20 }}
-                paddingBottom={{ base: 12, lg: 10 }}
-                paddingX={0}
-                flexDirection={'row'}
-              >
-                <DevToArticles articles={articles} />
               </Box>
             </FadeInLayout>
             <FadeInLayout>
@@ -144,29 +129,6 @@ const Portfolio = ({ articles }: { articles: Article[] }): JSX.Element => {
       <ScrollMore />
     </>
   )
-}
-
-export async function getStaticProps() {
-  let articles: Article[] = []
-  try {
-    const res = await fetch('https://dev.to/api/articles?username=klawingco')
-    if (res.ok) {
-      const data = await res.json()
-      if (Array.isArray(data)) {
-        articles = data
-      }
-    }
-  } catch {
-    // dev.to is unavailable at build time — fall back to an empty list rather
-    // than failing the whole build.
-  }
-  return {
-    props: {
-      articles,
-    },
-    // Re-fetch the article list at most once per hour (ISR).
-    revalidate: 3600,
-  }
 }
 
 export default Portfolio

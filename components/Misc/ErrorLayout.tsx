@@ -14,7 +14,7 @@ type ErrorLayoutProps = {
 const ErrorLayout = ({ code, title, message }: ErrorLayoutProps) => (
   <>
     <Head>
-      <title>{`${code} — ${title} | KL Lawingco`}</title>
+      <title>{`${code} — ${title} | Shlomi Nugarker`}</title>
       <meta name="robots" content="noindex" />
     </Head>
     <Box

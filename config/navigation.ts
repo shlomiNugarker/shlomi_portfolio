@@ -9,7 +9,7 @@ export type NavLink = {
 
 export const NavLinks: NavLink[] = [
   { label: 'About', href: '#', mobileHref: '#aboutMe' },
-  { label: 'Experience', href: '#jobs' },
+  { label: 'Services', href: '#services' },
   { label: 'Works', href: '#works' },
   { label: 'Contact', href: '#contact' },
 ]

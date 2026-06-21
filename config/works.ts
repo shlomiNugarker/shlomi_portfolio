@@ -6,37 +6,29 @@ export type FeaturedWork = {
   objectPosition?: string
 }
 
-// Featured projects shown in the "Some of my works" section. Kept here as data
-// (mirrors the config/experience.tsx pattern) so the component stays presentational.
+// Featured projects shown in the "Some of my works" section. These are
+// placeholders — swap in your real projects (title, description, link, and an
+// image in /public/works) when ready.
 export const FeaturedWorksList: FeaturedWork[] = [
   {
-    title: 'Tobira!',
+    title: 'Project One',
     description:
-      'Japanese social media platform for travelers to show off their adventure to the world. I was incharge of Front end integration, made using React, Antd and Styled Components.',
-    src: '/works/tobira/IphoneX-tobira.webp',
-    ctaUrl: 'https://tobira-app-test.netlify.app/',
-    objectPosition: 'right 20%',
+      'A short description of the project — what it does, your role, and the stack you used.',
+    src: '/works/placeholder.svg',
+    ctaUrl: '#',
   },
   {
-    title: 'RSV',
+    title: 'Project Two',
     description:
-      'RSV is a smart contract (ERC20) powered reservation system. I am incharge of backend using NET.Core 2.1.',
-    src: '/works/rsv.webp',
-    ctaUrl: 'https://solution.rsv.ltd/jp',
+      'A short description of the project — what it does, your role, and the stack you used.',
+    src: '/works/placeholder.svg',
+    ctaUrl: '#',
   },
   {
-    title: 'Agora School',
+    title: 'Project Three',
     description:
-      'A quizz - reviewer LMS, I made as a freelancer. Backend were powered by PHPSlim and VueJS for Front end.',
-    src: '/works/agora.webp',
-    ctaUrl: 'https://dev.agora-school.com',
-    objectPosition: 'right 20%',
-  },
-  {
-    title: 'TMH Layla EC',
-    description:
-      'A Japanese Semi-conductor e-commerce made at my old place at IVP. I was working with backend using ASP.NET MVC',
-    src: '/works/tmh.webp',
-    ctaUrl: 'https://www.layla-ec.com/',
+      'A short description of the project — what it does, your role, and the stack you used.',
+    src: '/works/placeholder.svg',
+    ctaUrl: '#',
   },
 ]

@@ -1,20 +1,25 @@
 import Head from 'next/head'
+
+const SITE_URL = 'https://www.shlomi.dev'
+
 const OpenGraphHead = () => (
   <Head>
-    <title>KL Lawingco | Software Engineer</title>
-    <meta name="description" content="My personal solace place on web-earth." />
-    <meta property="og:title" content="KL Lawingco | Software Engineer" />
-    <meta property="og:site_name" content="Marc Jhon Lawingco" />
-    <meta property="og:url" content="https://kllawingco.netlify.app/" />
+    <title>Shlomi Nugarker | Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Shlomi Nugarker — full-stack developer based in Israel, building web apps end-to-end from database to interface."
+    />
+    <link rel="canonical" href={SITE_URL} />
+    <meta property="og:title" content="Shlomi Nugarker | Full-Stack Developer" />
+    <meta property="og:site_name" content="Shlomi Nugarker" />
+    <meta property="og:url" content={SITE_URL} />
     <meta
       property="og:description"
-      content="Ohh you found me?. Howdy! I am Marc Jhon Lawingco. Or you could call me KL. That works too . . . I am a Software Engineer"
+      content="Full-stack developer based in Israel. I build websites and web applications end-to-end — from the database and API to the interface."
     />
     <meta property="og:type" content="profile" />
-    <meta
-      property="og:image"
-      content="https://kllawingco.netlify.app/KL_avatar.png"
-    ></meta>
+    <meta property="og:image" content={`${SITE_URL}/KL_avatar.png`} />
+    <meta name="twitter:card" content="summary" />
   </Head>
 )
 export default OpenGraphHead

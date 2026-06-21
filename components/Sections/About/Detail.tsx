@@ -11,14 +11,14 @@ import {
 import { Tooltip } from 'components/ui/tooltip'
 import { useColorModeValue } from 'components/ui/color-mode'
 import {
-  SiDotNet,
-  SiJavascript,
-  SiTypescript,
-  SiGraphql,
   SiReact,
-  SiNextDotJs,
-  SiNodeDotJs,
-  SiDocker,
+  SiNextdotjs,
+  SiTypescript,
+  SiJavascript,
+  SiNodedotjs,
+  SiPostgresql,
+  SiMongodb,
+  SiTailwindcss,
 } from 'react-icons/si'
 import { GiCoffeePot } from 'react-icons/gi'
 import { IoMdOpen } from 'react-icons/io'
@@ -29,8 +29,6 @@ type ISkillSetModal = {
 
 const Detail = ({ onOpen }: ISkillSetModal) => {
   const emphasis = useColorModeValue('teal.500', 'cyan.200')
-  const currentYear = new Date().getFullYear()
-  const professionalYears = currentYear - 2016
 
   return (
     <Stack
@@ -46,42 +44,42 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
           fontVariantCaps: 'small-caps',
         }}
       >
-        What i do.
+        About me.
       </Heading>
       <Text color="kl.description">
-        I`ve been coding professionally for {professionalYears} years now and
-        currently working as a <b>Software Engineer</b> that focuses on{' '}
-        <b>architecture</b>, <b>APIs</b>,{' '}
-        <Tooltip content="Ha!. Or more accurately TECH DEBT">
+        I&apos;m a <b>full-stack developer</b> based in Israel, working as a{' '}
+        <b>freelancer</b>. I build websites and small-to-mid web applications{' '}
+        <Tooltip content="Database, API and UI — the whole thing.">
           <Text as="span" color="kl.emphasis">
-            <b>nitty-gritty business logics</b>
+            <b>end-to-end</b>
           </Text>
         </Tooltip>{' '}
-        and even <b>front end integration</b> stuff now, how time flies!
+        — from the database and API to the interface users actually touch.
         <br /> <br />
-        Here are few technologies that are cup of my{' '}
-        <Tooltip content="I only drink tea if I needed too!">
-          <Text as="span" color="kl.emphasis" textDecorationLine="line-through">
-            tea
+        I try to keep the code simple enough that the next person to open it can
+        pick it up quickly. Here are a few technologies I reach for, fueled by{' '}
+        <Tooltip content="Lots of it.">
+          <Text as="span" color="kl.emphasis">
+            coffee
           </Text>
         </Tooltip>{' '}
-        coffee <Icon as={GiCoffeePot} color={emphasis} />.
+        <Icon as={GiCoffeePot} color={emphasis} />.
       </Text>
 
       <SimpleGrid columns={2} gap={4}>
         <List.Root gap={3} listStyle="none">
           <List.Item fontSize="small" display="flex" alignItems="center">
-            <Icon as={SiDotNet} color={emphasis} fontSize="2em" marginEnd={2} />
-            C# - .NET.Core
+            <Icon as={SiReact} color={emphasis} fontSize="2em" marginEnd={2} />
+            React
           </List.Item>
           <List.Item fontSize="small" display="flex" alignItems="center">
             <Icon
-              as={SiJavascript}
+              as={SiNextdotjs}
               color={emphasis}
               fontSize="2em"
               marginEnd={2}
             />
-            Javascript (ES6+)
+            Next.js
           </List.Item>
           <List.Item fontSize="small" display="flex" alignItems="center">
             <Icon
@@ -90,40 +88,50 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
               fontSize="2em"
               marginEnd={2}
             />
-            Typescript
+            TypeScript
           </List.Item>
 
           <List.Item fontSize="small" display="flex" alignItems="center">
             <Icon
-              as={SiNodeDotJs}
+              as={SiJavascript}
               color={emphasis}
               fontSize="2em"
               marginEnd={2}
             />
-            Node
+            JavaScript
           </List.Item>
         </List.Root>
         <List.Root gap={3} listStyle="none">
           <List.Item fontSize="small" display="flex" alignItems="center">
-            <Icon as={SiGraphql} color={emphasis} fontSize="2em" marginEnd={2} />
-            Graphql
-          </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
-            <Icon as={SiReact} color={emphasis} fontSize="2em" marginEnd={2} />
-            React
-          </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
             <Icon
-              as={SiNextDotJs}
+              as={SiNodedotjs}
               color={emphasis}
               fontSize="2em"
               marginEnd={2}
             />
-            NextJS
+            Node.js
           </List.Item>
           <List.Item fontSize="small" display="flex" alignItems="center">
-            <Icon as={SiDocker} color={emphasis} fontSize="2em" marginEnd={2} />
-            Docker
+            <Icon
+              as={SiPostgresql}
+              color={emphasis}
+              fontSize="2em"
+              marginEnd={2}
+            />
+            PostgreSQL
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon as={SiMongodb} color={emphasis} fontSize="2em" marginEnd={2} />
+            MongoDB
+          </List.Item>
+          <List.Item fontSize="small" display="flex" alignItems="center">
+            <Icon
+              as={SiTailwindcss}
+              color={emphasis}
+              fontSize="2em"
+              marginEnd={2}
+            />
+            Tailwind CSS
           </List.Item>
         </List.Root>
         <Box>

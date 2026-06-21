@@ -52,12 +52,18 @@ const GetInTouch = () => {
         </Text>
       </Heading>
       <Text color="kl.description">
-        Though, I am fairly introverted myself. I do reply to messages as long
-        as my human interaction battery lasts. Coding, work, movies or even weeb
-        stuff, anything is cool. So feel free to message me on any of my social
-        media or shoot me an{' '}
+        Have a project in mind, or just want to talk shop? I&apos;m always happy
+        to hear about new ideas and collaborations. Feel free to reach out on{' '}
         <Link
-          href="mailto:marcjhon18@gmail.com"
+          href="https://www.linkedin.com/in/shlomi-nugarker-b89777155/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          LinkedIn
+        </Link>{' '}
+        or shoot me an{' '}
+        <Link
+          href="mailto:shlomin.dev@gmail.com"
           target="_blank"
           rel="noreferrer"
         >
@@ -76,14 +82,14 @@ const GetInTouch = () => {
           color="kl.description"
           textDecoration="none"
           rel="noreferrer"
-          href="https://github.com/klawingco/kl_portfolio"
+          href="https://github.com/shlomiNugarker"
           target="_blank"
           _focus={{ boxShadow: 'none' }}
         >
           <Text as="span">
             <Icon as={RiGithubFill} h={6} w={6} /> <br />
             Designed and Made with <Icon as={RiHeartPulseFill} /> <br />
-            KL Lawingco <Icon as={RiCopyleftLine} /> 2021
+            Shlomi Nugarker <Icon as={RiCopyleftLine} /> 2026
           </Text>
         </Link>
       </Box>
