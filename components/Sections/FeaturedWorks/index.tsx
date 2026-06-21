@@ -22,9 +22,10 @@ const FeaturedWorksSection = () => {
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   return (
     <Stack
-      width={{ base: '99%', lg: '60%', xl: '75%' }}
+      width={{ base: '99%', xl: '75%' }}
       height="100%"
       gap={{ base: 6, xl: 8 }}
+      textAlign={{ base: 'center', xl: 'left' }}
     >
       <Heading
         size="5xl"
@@ -40,6 +41,7 @@ const FeaturedWorksSection = () => {
       </Text>
 
       <MotionGrid
+        textAlign="left"
         templateRows="repeat(1, 1fr)"
         templateColumns="repeat(6, 1fr)"
         gap={{ base: 5, md: 6 }}

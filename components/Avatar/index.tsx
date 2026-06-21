@@ -9,9 +9,9 @@ const Avatar = () => (
   <AnimatePresence>
     <MotionBox
       id="klAvatar"
-      boxSize={{ base: 64, lg: 'sm' }}
-      padding={{ base: 8 }}
-      marginBottom={{ base: 10, md: 0, lg: 0 }}
+      boxSize={{ base: 56, md: 64, xl: 'sm' }}
+      flexShrink={0}
+      padding={{ base: 0, xl: 8 }}
       initial="initial"
       animate={'animate'}
       variants={avatarAnimation}

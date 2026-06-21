@@ -32,8 +32,10 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 
   return (
     <Stack
-      width={{ base: '100%', lg: '70%' }}
+      width={{ base: '100%', xl: '70%' }}
       gap={{ base: 6, xl: 8 }}
+      textAlign={{ base: 'center', xl: 'left' }}
+      alignItems={{ base: 'center', xl: 'stretch' }}
       as="section"
     >
       <Heading

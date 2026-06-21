@@ -9,9 +9,10 @@ const ServicesSection = () => {
   const borderColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.100')
   return (
     <Stack
-      width={{ base: '99%', lg: '60%', xl: '75%' }}
+      width={{ base: '99%', xl: '75%' }}
       height="100%"
       gap={{ base: 6, xl: 8 }}
+      textAlign={{ base: 'center', xl: 'left' }}
     >
       <Heading
         size="5xl"
@@ -26,7 +27,11 @@ const ServicesSection = () => {
         shipping web products. Here is how I can help.
       </Text>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        gap={{ base: 4, md: 6 }}
+        textAlign="left"
+      >
         {ServicesList.map((service) => (
           <Box
             key={service.title}

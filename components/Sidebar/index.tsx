@@ -59,7 +59,13 @@ const Sidebar = () => {
         display={{ xl: 'flex' }}
         alignItems={{ xl: 'center' }}
       >
-        <MotionStack variants={stagger} gap={3} w="100">
+        <MotionStack
+          variants={stagger}
+          gap={3}
+          w="100%"
+          textAlign={{ base: 'center', xl: 'left' }}
+          alignItems={{ base: 'center', xl: 'flex-start' }}
+        >
           <MotionText
             variants={fadeInUp}
             color="kl.accent"
@@ -133,7 +139,11 @@ const Sidebar = () => {
             Get in touch!
           </MotionButton>
 
-          <MotionBox display="flex" variants={simpleOpacity}>
+          <MotionBox
+            display="flex"
+            justifyContent={{ base: 'center', xl: 'flex-start' }}
+            variants={simpleOpacity}
+          >
             {SocialMedias.map((socMedia) => {
               const isExternal = socMedia.href.startsWith('http')
               return (

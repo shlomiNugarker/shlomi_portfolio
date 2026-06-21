@@ -32,7 +32,7 @@ const Portfolio = (): JSX.Element => {
     lg: '14',
     xl: '0',
   })
-  const paddTop = useBreakpointValue({ base: '20', sm: '20', md: '20' })
+  const paddTop = useBreakpointValue({ base: '6', xl: '20' })
   return (
     <>
       <OpenGraphHead />
@@ -69,19 +69,21 @@ const Portfolio = (): JSX.Element => {
           colSpan={{ base: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
           overflow="hidden"
         >
-          <Stack w="100" gap={24}>
+          <Stack w="100%" gap={{ base: 16, xl: 24 }}>
             <FadeInLayout>
               <Box
                 id="aboutMe"
                 className="contentRow"
-                minH={{ lg: '100vh' }}
+                minH={{ xl: '100vh' }}
                 display="flex"
                 alignItems="center"
-                paddingTop={{ base: 0, lg: 20, xl: 0 }}
-                paddingBottom={{ base: 12, lg: 0 }}
+                justifyContent="center"
+                gap={{ base: 10, xl: 0 }}
+                paddingTop={{ base: 4, xl: 0 }}
+                paddingBottom={{ base: 4, xl: 0 }}
                 flexDirection={{
-                  base: 'column-reverse',
-                  lg: 'row',
+                  base: 'column',
+                  xl: 'row',
                 }}
               >
                 <About />

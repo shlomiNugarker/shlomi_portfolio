@@ -28,9 +28,10 @@ const GetInTouch = () => {
   const [ref, inView] = useInView()
   return (
     <Stack
-      width={{ base: '99%', lg: '60%', xl: '75%' }}
+      width={{ base: '99%', xl: '75%' }}
       height="100%"
       gap={{ base: 6, xl: 8 }}
+      textAlign={{ base: 'center', xl: 'left' }}
       as="footer"
     >
       <Heading
