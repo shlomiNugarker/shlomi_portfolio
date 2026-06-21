@@ -89,8 +89,15 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
           {/* Portaled content escapes the page's RTL context, so set the
               direction explicitly to keep the modal aligned in he/ar. */}
           <Dialog.Content dir={dir}>
-            <Dialog.Header>{t('skills.modal_title')}</Dialog.Header>
-            <Dialog.CloseTrigger asChild>
+            {/* The close button sits at the inline-end edge (right in LTR, left
+                in RTL). Reserve space there so the title never sits under it. */}
+            <Dialog.Header paddingInlineEnd={10}>
+              {t('skills.modal_title')}
+            </Dialog.Header>
+            {/* The portaled close trigger doesn't inherit the Content's dir, so
+                its inset-inline-end resolves as LTR (right) even in RTL. Set dir
+                explicitly so it lands on the correct (start/left) corner. */}
+            <Dialog.CloseTrigger asChild dir={dir}>
               <CloseButton size="sm" />
             </Dialog.CloseTrigger>
             <Dialog.Body className={styles.skillModal}>

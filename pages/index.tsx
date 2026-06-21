@@ -36,7 +36,9 @@ const Portfolio = (): JSX.Element => {
     lg: '14',
     xl: '0',
   })
-  const paddTop = useBreakpointValue({ base: '6', xl: '20' })
+  // Below xl the header is a fixed ~68px bar; 4rem (64px) top space tucks the
+  // hero just under it. At xl the header is transparent and non-blocking.
+  const paddTop = useBreakpointValue({ base: '4rem', xl: '20' })
   return (
     <>
       <OpenGraphHead />
