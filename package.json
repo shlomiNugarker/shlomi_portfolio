@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "browserslist": [
     "chrome >= 111",
@@ -27,16 +29,12 @@
     "react-icons": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@types/node": "18",
+    "@types/node": "22",
     "@types/react": "18.3.31",
     "@types/react-dom": "18.3.7",
-    "@typescript-eslint/eslint-plugin": "^4.28.5",
-    "@typescript-eslint/parser": "^4.28.5",
     "eslint": "9",
     "eslint-config-next": "16",
-    "eslint-plugin-react": "^7.24.0",
-    "prettier": "^2.3.2",
+    "prettier": "3",
     "typescript": "5.3.3"
   }
 }
