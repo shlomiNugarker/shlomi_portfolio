@@ -1,25 +1,14 @@
 import { memo } from 'react'
-import {
-  Heading,
-  Text,
-  Stack,
-  Grid,
-  GridItem,
-  useBreakpointValue,
-} from '@chakra-ui/react'
+import { Heading, Text, Stack, SimpleGrid, Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import FeaturedCard from './FeaturedCard'
 import { fadeInUpSlower, galleryStagger } from 'config/animations'
-import { mobileBreakpointsMap } from 'config/theme'
 import { FeaturedWorksList } from 'config/works'
 
-const MotionGrid = motion.create(Grid)
-const MotionGridItem = motion.create(GridItem)
-
-const CARD_HEIGHT = { base: '130px', md: '225px', '2xl': '300px' }
+const MotionGrid = motion.create(SimpleGrid)
+const MotionBox = motion.create(Box)
 
 const FeaturedWorksSection = () => {
-  const isMobile = useBreakpointValue(mobileBreakpointsMap)
   return (
     <Stack
       width={{ base: '99%', xl: '75%' }}
@@ -41,25 +30,23 @@ const FeaturedWorksSection = () => {
       </Text>
 
       <MotionGrid
-        textAlign="left"
-        templateRows="repeat(1, 1fr)"
-        templateColumns="repeat(6, 1fr)"
-        gap={{ base: 5, md: 6 }}
+        columns={1}
+        gap={{ base: 6, md: 8 }}
         variants={galleryStagger}
+        marginTop={2}
       >
         {FeaturedWorksList.map((work, index) => (
-          <MotionGridItem key={work.title} colSpan={6} variants={fadeInUpSlower}>
+          <MotionBox key={work.title} variants={fadeInUpSlower} height="100%">
             <FeaturedCard
               idx={index + 1}
               title={work.title}
               src={work.src}
               description={work.description}
-              height={CARD_HEIGHT}
               ctaUrl={work.ctaUrl}
               objectPosition={work.objectPosition}
-              isMobile={isMobile}
+              tags={work.tags}
             />
-          </MotionGridItem>
+          </MotionBox>
         ))}
       </MotionGrid>
     </Stack>

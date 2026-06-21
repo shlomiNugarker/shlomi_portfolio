@@ -1,5 +1,11 @@
- 
-import { Box, Separator, Text, SimpleGrid, Container, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  Separator,
+  Text,
+  Stack,
+  HStack,
+  Heading,
+} from '@chakra-ui/react'
 import NextImage from 'next/image'
 import { LinkButton } from 'components/ui/link-button'
 import { useColorModeValue } from 'components/ui/color-mode'
@@ -8,183 +14,175 @@ import styles from './styles.module.css'
 import { easing, DURATIONS } from 'config/animations'
 
 export type FeaturedCardProps = {
-  // Responsive height value (string or Chakra responsive object).
-   
-  height: string | Record<string, any>
   src: string
   idx: number
   title: string
   description: string
   objectPosition?: string
   ctaUrl: string
+  tags?: string[]
+  // Kept for API compatibility with the section; layout is now uniform.
   isMobile?: boolean
 }
 
-const variants: Record<'normal' | 'hover' | 'tap', TargetAndTransition> = {
-  normal: {
-    opacity: 0.85,
-  },
+const imageVariants: Record<'hover', TargetAndTransition> = {
   hover: {
-    scale: 1.1,
-    opacity: 1,
+    scale: 1.06,
     transition: {
-      duration: DURATIONS.Fast,
-      ease: 'backOut',
-    },
-  },
-  tap: {
-    scale: 0.85,
-    opacity: 1,
-    transition: {
-      duration: DURATIONS.Fast,
+      duration: DURATIONS.Normal,
       ease: easing,
     },
   },
 }
 
-const MotionBox = motion.create(Box)
+const MotionImageBox = motion.create(Box)
 
-const ProjectDescription = ({
-  idx,
-  title,
-  description,
-  ctaUrl,
-  isLeft,
-}: {
-  idx?: number
-  title: string
-  description: string
-  ctaUrl: string
-  isLeft: boolean
-}) => (
-  <Container
-    paddingX={5}
+const Tag = ({ label }: { label: string }) => (
+  <Box
+    as="span"
+    fontSize="xs"
+    fontWeight="medium"
+    letterSpacing="0.02em"
+    paddingX={2.5}
     paddingY={1}
-    display="flex"
-    alignItems="center"
-    justifyContent="space-around"
-    flexDirection="column"
+    borderRadius="full"
+    borderWidth="1px"
+    borderColor={{ base: 'blackAlpha.200', _dark: 'whiteAlpha.300' }}
+    color="kl.accentAlternative"
+    bg={{ base: 'blackAlpha.50', _dark: 'whiteAlpha.100' }}
+    whiteSpace="nowrap"
   >
-    <Stack gap={1} width="100%">
-      <Text
-        fontSize={{ base: 'md', md: 'large', '2xl': 'xx-large' }}
-        fontWeight="bold"
-        letterSpacing={2}
-        width="90%"
-        alignSelf={isLeft ? 'flex-end' : 'flex-start'}
-        textTransform="uppercase"
-        as="span"
-      >
-        <Text color="kl.accentAlternative" fontSize="md" as="span">
-          #0{idx}
-          {'  '}
-        </Text>
-        {title}
-      </Text>
-      <Separator
-        borderColor="#A6A6A6"
-        width="90%"
-        marginLeft={0}
-        alignSelf={isLeft ? 'flex-end' : 'flex-start'}
-      />
-    </Stack>
-    <Text
-      fontSize="smaller"
-      color="kl.accentAlternative"
-      width="90%"
-      alignSelf={isLeft ? 'flex-end' : 'flex-start'}
-      wordBreak="break-word"
-      paddingY={{ base: 3, md: 0 }}
-    >
-      {description}
-    </Text>
-    <LinkButton
-      variant="outline"
-      borderWidth="1px"
-      borderRadius={0}
-      borderColor={{ base: '#595959', _dark: 'whiteAlpha.500' }}
-      _hover={{
-        backgroundColor: {
-          base: 'rgba(49, 151, 149, 0.06)',
-          _dark: 'rgba(157, 236, 249, 0.06)',
-        },
-      }}
-      fontWeight="light"
-      fontSize={{ base: 'sm', '2xl': 'md' }}
-      size="sm"
-      href={ctaUrl}
-      rel="noreferrer"
-      target="_blank"
-      marginY={{ base: 3, md: 0 }}
-    >
-      View Project
-    </LinkButton>
-  </Container>
+    {label}
+  </Box>
 )
 
 const FeaturedCard = ({
   idx,
-  height,
   src,
   title,
   description,
   objectPosition,
   ctaUrl,
-  isMobile,
+  tags,
 }: FeaturedCardProps) => {
-  const isLeftImage = isMobile ? false : idx % 2 === 0
-  const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.200')
-  // A JSX element (not a nested component) so it isn't re-created each render.
-  // next/image with `fill` needs a positioned parent that owns the responsive
-  // height; the hover/tap scale lives on that parent box.
-  const coverImage = (
-    <MotionBox
-      position="relative"
-      height={height}
-      width="100%"
-      overflow="hidden"
-      opacity={0.75}
-      whileHover={variants.hover}
-      whileTap={variants.tap}
-    >
-      <NextImage
-        src={src}
-        alt={title}
-        fill
-        loading="lazy"
-        quality={70}
-        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
-        style={{ objectFit: 'cover', objectPosition }}
-      />
-    </MotionBox>
-  )
+  const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
+  const borderCol = useColorModeValue('blackAlpha.100', 'whiteAlpha.200')
 
   return (
     <Box
-      height="auto"
+      role="group"
       bg={bg}
-      borderRadius="1em"
-      className={styles.featureCard}
-      borderColor={bg}
+      borderRadius="1.25em"
       borderWidth="1px"
+      borderColor={borderCol}
+      overflow="hidden"
+      height="100%"
+      display="flex"
+      flexDirection="column"
+      className={styles.featureCard}
+      transition="border-color 0.2s ease, transform 0.2s ease"
+      _hover={{
+        borderColor: { base: 'teal.400', _dark: 'teal.300' },
+      }}
     >
-      <SimpleGrid
-        columns={{ base: 1, md: 2 }}
-        gap={{ base: 3, md: 0 }}
-        display={{ base: 'flex', md: 'grid' }}
-        flexDirection={{ base: 'column-reverse', md: 'initial' }}
+      {/* Wide, full-bleed cover. Aspect ratio keeps it from breaking across
+          breakpoints; the image fills the entire card width. */}
+      <Box
+        position="relative"
+        width="100%"
+        aspectRatio={16 / 8}
+        overflow="hidden"
+        bg={{ base: 'blackAlpha.100', _dark: 'whiteAlpha.50' }}
       >
-        {isLeftImage && coverImage}
-        <ProjectDescription
-          idx={idx}
-          title={title}
-          description={description}
-          ctaUrl={ctaUrl}
-          isLeft={isLeftImage}
-        />
-        {!isLeftImage && coverImage}
-      </SimpleGrid>
+        <MotionImageBox
+          position="absolute"
+          inset={0}
+          whileHover={imageVariants.hover}
+        >
+          <NextImage
+            src={src}
+            alt={title}
+            fill
+            loading="lazy"
+            quality={75}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 760px"
+            style={{ objectFit: 'cover', objectPosition }}
+          />
+        </MotionImageBox>
+      </Box>
+
+      {/* Content */}
+      <Stack
+        gap={4}
+        flex="1"
+        paddingX={{ base: 5, md: 7 }}
+        paddingY={{ base: 5, md: 6 }}
+        textAlign="left"
+      >
+        <Stack gap={2}>
+          <HStack gap={3} align="baseline">
+            <Text
+              color="kl.accentAlternative"
+              fontSize={{ base: 'sm', md: 'md' }}
+              fontWeight="bold"
+              fontVariantNumeric="tabular-nums"
+            >
+              #0{idx}
+            </Text>
+            <Heading
+              as="h3"
+              size={{ base: 'lg', md: 'xl' }}
+              letterSpacing="wide"
+              textTransform="uppercase"
+            >
+              {title}
+            </Heading>
+          </HStack>
+          <Separator borderColor={borderCol} />
+        </Stack>
+
+        <Text
+          fontSize={{ base: 'sm', md: 'md' }}
+          color="kl.description"
+          lineHeight="tall"
+        >
+          {description}
+        </Text>
+
+        {tags && tags.length > 0 && (
+          <HStack gap={2} wrap="wrap">
+            {tags.map((t) => (
+              <Tag key={t} label={t} />
+            ))}
+          </HStack>
+        )}
+
+        <LinkButton
+          variant="outline"
+          borderWidth="1px"
+          borderRadius="md"
+          alignSelf="flex-start"
+          borderColor={{ base: '#595959', _dark: 'whiteAlpha.500' }}
+          _hover={{
+            backgroundColor: {
+              base: 'rgba(49, 151, 149, 0.08)',
+              _dark: 'rgba(157, 236, 249, 0.08)',
+            },
+            borderColor: { base: 'teal.400', _dark: 'teal.300' },
+          }}
+          fontWeight="medium"
+          fontSize={{ base: 'sm', md: 'md' }}
+          size="sm"
+          href={ctaUrl}
+          rel="noreferrer"
+          target="_blank"
+          marginTop="auto"
+        >
+          View Project
+        </LinkButton>
+      </Stack>
     </Box>
   )
 }
+
 export default FeaturedCard

@@ -4,6 +4,7 @@ export type FeaturedWork = {
   src: string
   ctaUrl: string
   objectPosition?: string
+  tags?: string[]
 }
 
 // Featured projects shown in the "Some of my works" section. Add real projects
@@ -12,23 +13,19 @@ export const FeaturedWorksList: FeaturedWork[] = [
   {
     title: 'Makeble',
     description:
-      'An AI-powered website builder — describe what you want in plain English or Hebrew and it generates, previews and deploys a Next.js app live. Built with Next.js, with a Monaco editor and one-click deploy. "Describe it. Ship it."',
+      'An AI-powered website builder — describe what you want in plain English or Hebrew and it generates, previews and deploys a Next.js app live. Built with a Monaco editor and one-click deploy. "Describe it. Ship it."',
     src: '/works/makeble.webp',
     ctaUrl: 'https://makeble.vercel.app/',
     objectPosition: 'left top',
+    tags: ['Next.js', 'AI', 'Monaco Editor', 'Vercel'],
   },
   {
-    title: 'Project Two',
+    title: 'Wanderly',
     description:
-      'A short description of the project — what it does, your role, and the stack you used.',
-    src: '/works/placeholder.svg',
-    ctaUrl: '#',
-  },
-  {
-    title: 'Project Three',
-    description:
-      'A short description of the project — what it does, your role, and the stack you used.',
-    src: '/works/placeholder.svg',
-    ctaUrl: '#',
+      'A social network for travelers — plan multi-stop trips, share them as posts, and layer community routes onto an interactive map. Integrates Claude AI for itinerary generation and real-time Socket.IO for a live feed.',
+    src: '/works/wanderly.webp',
+    ctaUrl: 'https://wanderly-seven.vercel.app',
+    objectPosition: 'left top',
+    tags: ['Next.js 16', 'React 19', 'Mapbox', 'Claude AI', 'Socket.IO'],
   },
 ]
