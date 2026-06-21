@@ -35,7 +35,11 @@ const Sidebar = () => {
   const { t } = useTranslation('common')
   const { colorMode } = useColorMode()
   const display = useBreakpointValue({ base: 'none', lg: 'block' })
-  const titleSize = useBreakpointValue({ base: '4xl', md: '5xl' } as const)
+  const titleSize = useBreakpointValue({
+    base: '4xl',
+    md: '4xl',
+    xl: '5xl',
+  } as const)
 
   return (
     <MotionBox
@@ -76,6 +80,7 @@ const Sidebar = () => {
             variants={fadeInUp}
             color="kl.accent"
             fontWeight="light"
+            fontSize={{ base: 'md', md: 'lg' }}
           >
             {t('sidebar.greeting')}
           </MotionText>
@@ -105,7 +110,7 @@ const Sidebar = () => {
           </MotionHeading>
           <MotionText
             colorScheme="gray"
-            fontSize="smaller"
+            fontSize={{ base: 'sm', md: 'md' }}
             className={styles.marginTopForce}
             variants={fadeInUp}
           >
@@ -114,7 +119,8 @@ const Sidebar = () => {
 
           <MotionText
             color="kl.description"
-            fontSize="small"
+            fontSize={{ base: 'sm', md: 'md' }}
+            lineHeight="tall"
             paddingEnd={{ lg: '12' }}
             variants={fadeInUp}
             maxWidth={{ base: '100%', lg: '80%' }}

@@ -10,10 +10,12 @@ import {
   Separator,
   Text,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { useColorModeValue } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
 import styles from './styles.module.css'
 import { Skill, Skills, splitSkills } from 'config/skills'
+import { isRtl } from 'config/seo'
 
 type ISkillSetModal = {
   isOpen: boolean
@@ -40,7 +42,7 @@ const SkillList = ({
           {colOne.map((item) => (
             <List.Item
               key={item.name}
-              fontSize="small"
+              fontSize={{ base: 'sm', md: 'md' }}
               display="flex"
               alignItems="center"
             >
@@ -53,7 +55,7 @@ const SkillList = ({
           {colTwo.map((item) => (
             <List.Item
               key={item.name}
-              fontSize="small"
+              fontSize={{ base: 'sm', md: 'md' }}
               display="flex"
               alignItems="center"
             >
@@ -68,6 +70,8 @@ const SkillList = ({
 }
 const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
   const { t } = useTranslation('common')
+  const { locale } = useRouter()
+  const dir = isRtl(locale) ? 'rtl' : 'ltr'
   const frontendCols = splitSkills(Skills.frontend)
   const backendCols = splitSkills(Skills.backend)
   const dataBaseCols = splitSkills(Skills.database)
@@ -82,7 +86,9 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content>
+          {/* Portaled content escapes the page's RTL context, so set the
+              direction explicitly to keep the modal aligned in he/ar. */}
+          <Dialog.Content dir={dir}>
             <Dialog.Header>{t('skills.modal_title')}</Dialog.Header>
             <Dialog.CloseTrigger asChild>
               <CloseButton size="sm" />

@@ -37,7 +37,7 @@ const GetInTouch = () => {
       as="footer"
     >
       <Heading
-        size="5xl"
+        size={{ base: '4xl', xl: '5xl' }}
         style={{
           fontVariantCaps: 'small-caps',
         }}
@@ -54,7 +54,11 @@ const GetInTouch = () => {
           </motion.div>
         </Text>
       </Heading>
-      <Text color="kl.description">
+      <Text
+        color="kl.description"
+        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
+        lineHeight="tall"
+      >
         {t('contact.body')}{' '}
         <Link
           href="https://www.linkedin.com/in/shlomi-nugarker-b89777155/"

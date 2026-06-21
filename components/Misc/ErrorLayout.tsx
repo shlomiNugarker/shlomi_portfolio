@@ -62,7 +62,7 @@ const ErrorLayout = ({
           <Heading as="h2" size="xl">
             {title}
           </Heading>
-          <Text color="kl.description" fontSize="md">
+          <Text color="kl.description" fontSize={{ base: 'sm', md: 'md' }}>
             {message}
           </Text>
           <LinkButton

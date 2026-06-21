@@ -41,16 +41,19 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
       as="section"
     >
       <Heading
-        as="h4"
-        size="5xl"
-        letterSpacing={1.8}
+        as="h2"
+        size={{ base: '4xl', xl: '5xl' }}
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
         {t('about.heading')}
       </Heading>
-      <Text color="kl.description">
+      <Text
+        color="kl.description"
+        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
+        lineHeight="tall"
+      >
         {t('about.lead_1')}{' '}
         <Tooltip content={t('about.end_to_end_tip')}>
           <Text as="span" color="kl.emphasis">
@@ -70,11 +73,11 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
 
       <SimpleGrid columns={2} gap={4}>
         <List.Root gap={3} listStyle="none">
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon as={SiReact} color={emphasis} fontSize="2em" marginEnd={2} />
             React
           </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon
               as={SiNextdotjs}
               color={emphasis}
@@ -83,7 +86,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             />
             Next.js
           </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon
               as={SiTypescript}
               color={emphasis}
@@ -93,7 +96,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             TypeScript
           </List.Item>
 
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon
               as={SiJavascript}
               color={emphasis}
@@ -104,7 +107,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
           </List.Item>
         </List.Root>
         <List.Root gap={3} listStyle="none">
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon
               as={SiNodedotjs}
               color={emphasis}
@@ -113,7 +116,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             />
             Node.js
           </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon
               as={SiPostgresql}
               color={emphasis}
@@ -122,11 +125,11 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             />
             PostgreSQL
           </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon as={SiMongodb} color={emphasis} fontSize="2em" marginEnd={2} />
             MongoDB
           </List.Item>
-          <List.Item fontSize="small" display="flex" alignItems="center">
+          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
             <Icon
               as={SiTailwindcss}
               color={emphasis}
@@ -140,7 +143,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
           <Text
             as="button"
             color="kl.emphasis"
-            fontSize="smaller"
+            fontSize={{ base: 'sm', md: 'md' }}
             textAlign="start"
             onClick={onOpen}
           >

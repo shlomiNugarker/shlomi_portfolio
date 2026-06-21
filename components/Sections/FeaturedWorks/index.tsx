@@ -19,14 +19,20 @@ const FeaturedWorksSection = () => {
       textAlign={{ base: 'center', xl: 'start' }}
     >
       <Heading
-        size="5xl"
+        size={{ base: '4xl', xl: '5xl' }}
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
         {t('works.heading')}
       </Heading>
-      <Text color="kl.description">{t('works.description')}</Text>
+      <Text
+        color="kl.description"
+        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
+        lineHeight="tall"
+      >
+        {t('works.description')}
+      </Text>
 
       <MotionGrid
         columns={1}

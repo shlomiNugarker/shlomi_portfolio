@@ -46,12 +46,11 @@ const Portfolio = (): JSX.Element => {
         id="mainGrid"
         templateColumns={{
           base: 'repeat(1, 1fr)',
-          lg: 'repeat(3, 1fr)',
           xl: 'repeat(5, 1fr)',
         }}
         templateRows={{
-          sm: 'repeat(1, 0)',
-          lg: 'repeat(2, 1fr)',
+          base: 'auto',
+          xl: 'repeat(2, 1fr)',
         }}
         gap={4}
       >

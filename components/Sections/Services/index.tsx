@@ -17,14 +17,20 @@ const ServicesSection = () => {
       textAlign={{ base: 'center', xl: 'start' }}
     >
       <Heading
-        size="5xl"
+        size={{ base: '4xl', xl: '5xl' }}
         style={{
           fontVariantCaps: 'small-caps',
         }}
       >
         {t('services.heading')}
       </Heading>
-      <Text color="kl.description">{t('services.description')}</Text>
+      <Text
+        color="kl.description"
+        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
+        lineHeight="tall"
+      >
+        {t('services.description')}
+      </Text>
 
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
@@ -46,10 +52,18 @@ const ServicesSection = () => {
               fontSize="2.25em"
               marginBottom={3}
             />
-            <Heading as="h3" fontSize="larger" marginBottom={2}>
+            <Heading
+              as="h3"
+              fontSize={{ base: 'lg', md: 'xl' }}
+              marginBottom={2}
+            >
               {t(`services.items.${service.key}.title`)}
             </Heading>
-            <Text color="kl.description" fontSize="smaller">
+            <Text
+              color="kl.description"
+              fontSize={{ base: 'sm', md: 'md' }}
+              lineHeight="tall"
+            >
               {t(`services.items.${service.key}.description`)}
             </Text>
           </Box>
