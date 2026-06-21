@@ -72,6 +72,8 @@ const OpenGraphHead = () => {
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:image" content={OG_IMAGE} />
+      <meta name="twitter:image:width" content="1200" />
+      <meta name="twitter:image:height" content="630" />
       <meta name="twitter:image:alt" content={meta.ogImageAlt} />
       <meta name="twitter:creator" content={PERSON.twitter} />
       <meta name="twitter:site" content={PERSON.twitter} />

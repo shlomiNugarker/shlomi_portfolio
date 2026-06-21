@@ -44,12 +44,14 @@ const Portfolio = (): JSX.Element => {
       <Menu />
       <Grid
         id="mainGrid"
+        // Below xl the hero and main simply stack in normal flow; the two-column
+        // grid (with its 2-row track) only kicks in on the wide xl layout. This
+        // avoids the collapsed first row that overlapped the hero on tablet.
+        display={{ base: 'block', xl: 'grid' }}
         templateColumns={{
-          base: 'repeat(1, 1fr)',
           xl: 'repeat(5, 1fr)',
         }}
         templateRows={{
-          base: 'auto',
           xl: 'repeat(2, 1fr)',
         }}
         gap={4}
@@ -57,8 +59,8 @@ const Portfolio = (): JSX.Element => {
         <GridItem
           padding={sideBarPadding}
           marginTop={paddTop}
-          rowSpan={2}
-          colSpan={{ base: 1, sm: 1, md: 1, lg: 1, xl: 2 }}
+          rowSpan={{ base: 1, xl: 2 }}
+          colSpan={{ base: 1, xl: 2 }}
           display="flex"
           alignContent="center"
           as="div"
@@ -69,8 +71,8 @@ const Portfolio = (): JSX.Element => {
         <GridItem
           as="main"
           padding={mainContent}
-          rowSpan={2}
-          colSpan={{ base: 1, sm: 2, md: 2, lg: 3, xl: 3 }}
+          rowSpan={{ base: 1, xl: 2 }}
+          colSpan={{ base: 1, xl: 3 }}
           overflow="hidden"
         >
           <Stack w="100%" gap={{ base: 16, xl: 24 }}>

@@ -25,6 +25,30 @@ const rimuruVariant: Variants = {
   },
 }
 
+// Inline links inside the body copy. The body Text sets a muted color, so a
+// bare <Link> blends in and reads as plain text — give these an explicit accent
+// color, weight and a persistent underline so it's obvious they're clickable.
+const InlineLink = ({
+  href,
+  children,
+}: {
+  href: string
+  children: React.ReactNode
+}) => (
+  <Link
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    color="kl.emphasis"
+    fontWeight="semibold"
+    textDecoration="underline"
+    textUnderlineOffset="3px"
+    _hover={{ textDecoration: 'none' }}
+  >
+    {children}
+  </Link>
+)
+
 const GetInTouch = () => {
   const { t } = useTranslation('common')
   const [ref, inView] = useInView()
@@ -60,21 +84,13 @@ const GetInTouch = () => {
         lineHeight="tall"
       >
         {t('contact.body')}{' '}
-        <Link
-          href="https://www.linkedin.com/in/shlomi-nugarker-b89777155/"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <InlineLink href="https://www.linkedin.com/in/shlomi-nugarker-b89777155/">
           {t('contact.linkedin')}
-        </Link>{' '}
+        </InlineLink>{' '}
         {t('contact.or_email')}{' '}
-        <Link
-          href="mailto:shlomin1231@gmail.com"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <InlineLink href="mailto:shlomin1231@gmail.com">
           {t('contact.email')}
-        </Link>
+        </InlineLink>
         .
       </Text>
 

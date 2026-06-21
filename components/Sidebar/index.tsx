@@ -45,9 +45,10 @@ const Sidebar = () => {
     <MotionBox
       initial="initial"
       animate="animate"
+      width="100%"
       position={{ xl: 'fixed' }}
       maxWidth={{ xl: '34%' }}
-      top={{ lg: 0 }}
+      top={{ xl: 0 }}
     >
       {/* The arc is mirrored for RTL via the wrapper (.circleWrap), because
           framer-motion writes transform:scale on the arc node itself. */}
@@ -87,7 +88,7 @@ const Sidebar = () => {
           <MotionHeading
             as="h1"
             size="xl"
-            paddingEnd={{ lg: '20' }}
+            paddingEnd={{ xl: '20' }}
             textTransform="uppercase"
             variants={fadeInUp}
           >
@@ -121,9 +122,9 @@ const Sidebar = () => {
             color="kl.description"
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight="tall"
-            paddingEnd={{ lg: '12' }}
+            paddingEnd={{ xl: '12' }}
             variants={fadeInUp}
-            maxWidth={{ base: '100%', lg: '80%' }}
+            maxWidth={{ base: '100%', xl: '80%' }}
           >
             {t('sidebar.intro')}
             <Text color="kl.emphasis" as="span">

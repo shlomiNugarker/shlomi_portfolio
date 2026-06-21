@@ -3,7 +3,6 @@ import {
   Container,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { useColorModeValue } from 'components/ui/color-mode'
 import { motion, Variants, useAnimation } from 'framer-motion'
 import Logo from '../Logo'
 import styles from './styles.module.css'
@@ -31,7 +30,9 @@ const mobileMenuVariants: Variants = {
 }
 
 const Menu = () => {
-  const bg = useColorModeValue('gray.100', 'black')
+  // Match the site background exactly so the mobile/tablet header blends in
+  // (kl.bg is gray.100 in light, #121212 in dark — same as the page body).
+  const bg = 'kl.bg'
   const controls = useAnimation()
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const scrollDirection = useScrollDirection(true, isMobile)
