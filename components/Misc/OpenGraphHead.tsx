@@ -33,20 +33,9 @@ const OpenGraphHead = () => {
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={canonical} />
 
-      {/* hreflang alternates — one per locale + x-default */}
-      {LOCALES.map((l) => (
-        <link
-          key={l}
-          rel="alternate"
-          hrefLang={l}
-          href={localeUrl(l)}
-        />
-      ))}
-      <link
-        rel="alternate"
-        hrefLang="x-default"
-        href={localeUrl(DEFAULT_LOCALE)}
-      />
+      {/* hreflang alternates are emitted from _document.tsx — the Pages Router
+          next/head de-duplicates repeated <link rel="alternate"> tags, so they
+          must live in the document <Head> to all survive. */}
 
       {/* Open Graph */}
       <meta property="og:type" content="profile" />

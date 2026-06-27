@@ -94,7 +94,8 @@
   "a11y": {
     "color_mode": "Color Mode",
     "toggle_menu": "Toggle navigation menu",
-    "language": "Change language"
+    "language": "Change language",
+    "skip_to_content": "Skip to content"
   },
   "error": {
     "back_home": "Back home",

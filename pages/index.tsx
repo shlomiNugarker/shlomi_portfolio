@@ -5,9 +5,11 @@ import {
   GridItem,
   Stack,
   Box,
+  Link,
   useBreakpointValue,
 } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
+import { useTranslation } from 'next-i18next/pages'
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
 import nextI18NextConfig from '../next-i18next.config'
 import OpenGraphHead from 'components/Misc/OpenGraphHead'
@@ -29,6 +31,7 @@ const FeaturedWorks = dynamic(
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))
 
 const Portfolio = (): JSX.Element => {
+  const { t } = useTranslation('common')
   const sideBarPadding = useBreakpointValue({ base: '5', md: '8', lg: '14' })
   const mainContent = useBreakpointValue({
     base: '5',
@@ -43,6 +46,26 @@ const Portfolio = (): JSX.Element => {
     <>
       <OpenGraphHead />
       <StructuredData />
+      {/* Skip-link: visually hidden until focused, lets keyboard users jump
+          past the nav straight to the main content. */}
+      <Link
+        href="#main-content"
+        position="absolute"
+        insetStart={3}
+        top={3}
+        zIndex={10}
+        paddingX={4}
+        paddingY={2}
+        borderRadius="md"
+        bg="kl.bg"
+        color="kl.emphasis"
+        fontWeight="semibold"
+        transform="translateY(-150%)"
+        transition="transform 0.2s ease"
+        _focus={{ transform: 'translateY(0)' }}
+      >
+        {t('a11y.skip_to_content')}
+      </Link>
       <Menu />
       <Grid
         id="mainGrid"
@@ -72,6 +95,7 @@ const Portfolio = (): JSX.Element => {
         </GridItem>
         <GridItem
           as="main"
+          id="main-content"
           padding={mainContent}
           rowSpan={{ base: 1, xl: 2 }}
           colSpan={{ base: 1, xl: 3 }}

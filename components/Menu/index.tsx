@@ -51,6 +51,7 @@ const Menu = () => {
       className={isMobile ? styles.mobileMenuContainer : ''}
     >
       <Container
+        as="header"
         display="flex"
         alignItems="center"
         justifyContent="space-between"

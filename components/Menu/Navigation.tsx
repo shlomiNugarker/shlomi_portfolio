@@ -36,7 +36,7 @@ const Navigation = () => {
     'rgba(18, 18, 18, 0.9)'
   )
 
-  const borderColor = useColorModeValue('teal.500', 'cyan.200')
+  const borderColor = useColorModeValue('teal.700', 'cyan.200')
 
   const IsDark = colorMode === ThemeMode.Dark
   const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`

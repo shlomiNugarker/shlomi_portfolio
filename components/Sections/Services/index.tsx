@@ -6,7 +6,7 @@ import { Services as ServicesList } from 'config/services'
 
 const ServicesSection = () => {
   const { t } = useTranslation('common')
-  const emphasis = useColorModeValue('teal.500', 'cyan.200')
+  const emphasis = useColorModeValue('teal.700', 'cyan.200')
   const cardBg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
   const borderColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.100')
   return (

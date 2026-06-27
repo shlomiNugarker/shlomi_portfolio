@@ -59,9 +59,12 @@ const config = defineConfig({
         'kl.fg': {
           value: { _light: '{colors.gray.800}', _dark: '{colors.whiteAlpha.900}' },
         },
-        // Text/Heading/Link variants from the v2 theme.
+        // Text/Heading/Link variants from the v2 theme. The light value is
+        // teal.700 (not teal.500) so the turquoise accent — used for the big
+        // headline and small inline links — clears WCAG AA contrast on the
+        // light background; teal.500 sat at ~2.2:1, below the AA threshold.
         'kl.emphasis': {
-          value: { _light: '{colors.teal.500}', _dark: '{colors.cyan.200}' },
+          value: { _light: '{colors.teal.700}', _dark: '{colors.cyan.200}' },
         },
         'kl.description': {
           value: { _light: '{colors.gray.800}', _dark: '{colors.gray.400}' },

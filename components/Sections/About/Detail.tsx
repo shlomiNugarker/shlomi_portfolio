@@ -30,7 +30,7 @@ type ISkillSetModal = {
 
 const Detail = ({ onOpen }: ISkillSetModal) => {
   const { t } = useTranslation('common')
-  const emphasis = useColorModeValue('teal.500', 'cyan.200')
+  const emphasis = useColorModeValue('teal.700', 'cyan.200')
 
   return (
     <Stack

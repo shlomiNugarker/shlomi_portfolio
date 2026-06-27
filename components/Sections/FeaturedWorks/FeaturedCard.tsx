@@ -102,7 +102,7 @@ const Cover = ({
   const [active, setActive] = useState(0)
   const hasGallery = images.length > 1
   const dotBg = useColorModeValue('blackAlpha.400', 'whiteAlpha.500')
-  const dotActive = useColorModeValue('teal.500', 'cyan.200')
+  const dotActive = useColorModeValue('teal.700', 'cyan.200')
 
   return (
     <Box

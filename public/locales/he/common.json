@@ -94,7 +94,8 @@
   "a11y": {
     "color_mode": "מצב צבע",
     "toggle_menu": "פתח/סגור תפריט ניווט",
-    "language": "שנה שפה"
+    "language": "שנה שפה",
+    "skip_to_content": "דלג לתוכן"
   },
   "error": {
     "back_home": "חזרה לדף הבית",
