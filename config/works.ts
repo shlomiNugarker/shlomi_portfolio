@@ -10,6 +10,10 @@ export type FeaturedWork = {
   // small gallery/carousel.
   images: string[]
   ctaUrl: string
+  // Public source repo. Shown as a secondary "Code" link — a strong trust
+  // signal for developers, since readable code is proof of competence. Omit
+  // for private/client repos.
+  repoUrl?: string
   objectPosition?: string
   tags?: string[]
   // 'client' = real paid client work, 'personal' = self-initiated project.
@@ -32,6 +36,9 @@ export const FeaturedWorksList: FeaturedWork[] = [
     key: 'makeble',
     images: ['/works/makeble.webp'],
     ctaUrl: 'https://makeble.vercel.app/',
+    // TODO: set the real public repo URL (e.g. https://github.com/shlomiNugarker/makeble)
+    // so the "Code" link appears. Remove this line if the repo is private.
+    repoUrl: undefined,
     objectPosition: 'left top',
     tags: ['Next.js', 'AI', 'Monaco Editor', 'Vercel'],
     type: 'personal',
@@ -40,6 +47,9 @@ export const FeaturedWorksList: FeaturedWork[] = [
     key: 'wanderly',
     images: ['/works/wanderly.webp'],
     ctaUrl: 'https://wanderly-seven.vercel.app',
+    // TODO: set the real public repo URL (e.g. https://github.com/shlomiNugarker/wanderly)
+    // so the "Code" link appears. Remove this line if the repo is private.
+    repoUrl: undefined,
     objectPosition: 'left top',
     tags: ['Next.js 16', 'React 19', 'Mapbox', 'Claude AI', 'Socket.IO'],
     type: 'personal',

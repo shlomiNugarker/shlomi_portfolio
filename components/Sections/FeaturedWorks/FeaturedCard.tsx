@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import NextImage from 'next/image'
+import { RiGithubFill } from 'react-icons/ri'
 import styles from './styles.module.css'
 
 export type FeaturedCardProps = {
@@ -11,6 +12,9 @@ export type FeaturedCardProps = {
   objectPosition?: string
   ctaUrl: string
   ctaLabel: string
+  // Optional public source repo + its localized label ("Code").
+  repoUrl?: string
+  repoLabel: string
   tags?: string[]
   // Localized badge text ("Client work" / "Personal project").
   badgeLabel: string
@@ -102,6 +106,8 @@ const FeaturedCard = ({
   objectPosition,
   ctaUrl,
   ctaLabel,
+  repoUrl,
+  repoLabel,
   tags,
   badgeLabel,
   isClient,
@@ -145,14 +151,27 @@ const FeaturedCard = ({
           </div>
         )}
 
-        <a
-          href={ctaUrl}
-          rel="noreferrer"
-          target="_blank"
-          className="mt-auto inline-flex h-8 items-center justify-center self-start rounded-md border border-[#595959] px-3 text-sm font-medium transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-white/50 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)] md:text-base"
-        >
-          {ctaLabel}
-        </a>
+        <div className="mt-auto flex flex-wrap items-center gap-2">
+          <a
+            href={ctaUrl}
+            rel="noreferrer"
+            target="_blank"
+            className="inline-flex h-8 items-center justify-center rounded-md border border-[#595959] px-3 text-sm font-medium transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-white/50 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)] md:text-base"
+          >
+            {ctaLabel}
+          </a>
+          {repoUrl && (
+            <a
+              href={repoUrl}
+              rel="noreferrer"
+              target="_blank"
+              className="inline-flex h-8 items-center justify-center gap-1.5 rounded-md border border-[#595959] px-3 text-sm font-medium transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-white/50 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)] md:text-base"
+            >
+              <RiGithubFill aria-hidden />
+              {repoLabel}
+            </a>
+          )}
+        </div>
       </div>
     </div>
   )

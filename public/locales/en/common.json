@@ -2,28 +2,28 @@
   "sidebar": {
     "greeting": "Hi, I'm",
     "name": "Shlomi Nugarker",
-    "headline_line1": "Full-Stack",
-    "headline_line2": "Developer.",
-    "location": "From Tel Aviv · open to a role or a project",
-    "intro": "Glad you're here.",
-    "welcome": "Nice to meet you.",
-    "description": "I turn ideas into products that work — fast, clean, easy-to-maintain websites and apps. If you have something that needs a developer who takes ownership from idea to launch, I'm here for it.",
-    "cta": "Let's talk"
+    "headline_line1": "I build & ship",
+    "headline_line2": "whole web apps.",
+    "location": "Freelance full-stack developer · Tel Aviv",
+    "intro": "One developer, idea to launch.",
+    "welcome": "No hand-offs, no gaps.",
+    "description": "Need a web app or site built? I take it the whole way — database, API, and the interface your users actually touch — so you deal with one person who owns the result, not three teams pointing at each other.",
+    "cta": "Tell me what you're building"
   },
   "about": {
     "heading": "A bit about me.",
-    "lead_1": "I'm a full-stack developer from Israel, building websites and apps",
+    "lead_1": "I'm a freelance full-stack developer in Tel Aviv. I build and ship complete web apps",
     "end_to_end": "end-to-end",
     "end_to_end_tip": "Server, client, and everything in between.",
-    "lead_2": "— from the server and database to the screen the user sees.",
-    "body": "What matters to me is bringing real value: clean code that's easy to maintain and extend, fast performance, and attention to the small details that make the difference. I like taking ownership of a task and seeing it through. Here are a few tools I work with, fueled by",
+    "lead_2": "— one person owning the database, the API, and the screen the user sees.",
+    "body": "I've shipped a bilingual marketing site for a paying client and built two products of my own from scratch, including an AI website builder that generates, previews and deploys live apps. When you hire me you get one person accountable from first idea to launch — fueled by",
     "coffee": "coffee",
     "coffee_tip": "Lots of it.",
     "see_skills": "See the full list"
   },
   "services": {
     "heading": "How I can help.",
-    "description": "From the first idea to a live, stable product — I cover the whole development pipeline. Here are the areas where I can bring value.",
+    "description": "From the first idea to a live, stable product — I cover the whole development pipeline myself.",
     "items": {
       "web_apps": {
         "title": "Web Applications",
@@ -46,7 +46,8 @@
   "works": {
     "heading": "A few things I've built.",
     "description": "Real work for a client, plus projects I started myself to push my skills. Each one built from scratch, end to end.",
-    "view_project": "View",
+    "view_project": "Live site",
+    "view_code": "Code",
     "badge_client": "Client work",
     "badge_personal": "Personal project",
     "items": {
@@ -72,12 +73,12 @@
     "tools": "Tools & Platforms"
   },
   "contact": {
-    "heading": "Let's talk.",
-    "body": "Looking for a developer for a project or a role, or just want to chat? I'd love to hear from you and see how I can help. Reach out on",
+    "heading": "Let's build it.",
+    "body": "Got a project that needs a developer who'll own it end-to-end? Tell me what you're building and I'll get back to you fast. Reach me on",
     "linkedin": "LinkedIn",
     "or_email": "or drop me an",
     "email": "email",
-    "cta_whatsapp": "Message me on WhatsApp",
+    "cta_whatsapp": "Send me your project on WhatsApp",
     "cta_email": "Send an email"
   },
   "nav": {

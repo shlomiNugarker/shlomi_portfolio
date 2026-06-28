@@ -42,10 +42,8 @@ const Sidebar = () => {
           </p>
 
           <a
-            href="mailto:shlomin1231@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex h-12 w-[120px] items-center justify-center border border-current text-sm font-normal transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+            href="#contact"
+            className="inline-flex h-12 items-center justify-center border border-current px-6 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
           >
             {t('sidebar.cta')}
           </a>

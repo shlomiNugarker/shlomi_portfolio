@@ -26,9 +26,11 @@ const FeaturedWorksSection = () => {
               images={work.images}
               description={t(`works.items.${work.key}.description`)}
               ctaUrl={work.ctaUrl}
+              repoUrl={work.repoUrl}
               objectPosition={work.objectPosition}
               tags={work.tags}
               ctaLabel={t('works.view_project')}
+              repoLabel={t('works.view_code')}
               badgeLabel={t(
                 work.type === 'client'
                   ? 'works.badge_client'

@@ -37,31 +37,31 @@ type Meta = {
 
 export const META: Record<Locale, Meta> = {
   en: {
-    title: 'Shlomi Nugarker — Full-Stack Developer',
+    title: 'Hire a Full-Stack Developer in Tel Aviv — Shlomi Nugarker',
     description:
-      'Full-Stack developer working with React, Next.js, and Node.js. Available for full-time roles or freelance work.',
+      'Freelance full-stack developer in Tel Aviv. I build and ship complete web apps end-to-end — React, Next.js & Node.js — one person owning the database, API and interface. Available for new projects.',
     keywords:
-      'Full-Stack Developer, React Developer, Next.js, Node.js, TypeScript, Israel, Freelance Developer',
-    siteName: 'Shlomi Nugarker — Full-Stack Developer',
-    ogImageAlt: 'Shlomi Nugarker',
+      'hire full-stack developer, freelance web developer Tel Aviv, React developer for hire, Next.js developer, Node.js developer, build a web app, freelance developer Israel',
+    siteName: 'Shlomi Nugarker — Freelance Full-Stack Developer',
+    ogImageAlt: 'Shlomi Nugarker — freelance full-stack developer in Tel Aviv',
   },
   he: {
-    title: 'שלומי נוגרקר — מפתח Full-Stack',
+    title: 'מפתח פולסטאק לפרויקטים — שלומי נוגרקר, תל אביב',
     description:
-      'מפתח Full-Stack שעובד עם React, Next.js ו-Node.js. זמין למשרה מלאה או לפרילנס.',
+      'מפתח פולסטאק פרילנס מתל אביב. בונה ומשיק אפליקציות ואתרים שלמים מקצה לקצה — React, Next.js ו-Node.js. בן אדם אחד אחראי על השרת, ה-API והממשק. זמין לפרויקטים חדשים.',
     keywords:
-      'מפתח Full-Stack, מפתח React, Next.js, Node.js, TypeScript, פרילנסר, ישראל',
-    siteName: 'שלומי נוגרקר — מפתח Full-Stack',
-    ogImageAlt: 'שלומי נוגרקר',
+      'מפתח פולסטאק, מפתח לפרויקט, פיתוח אפליקציות, בניית אפליקציה, מפתח React, מפתח פרילנס, פיתוח אתרים, מפתח תל אביב',
+    siteName: 'שלומי נוגרקר — מפתח פולסטאק פרילנס',
+    ogImageAlt: 'שלומי נוגרקר — מפתח פולסטאק פרילנס מתל אביב',
   },
   ar: {
-    title: 'شلومي نوجاركر — مطور Full-Stack',
+    title: 'مطور Full-Stack للمشاريع — شلومي نوجاركر',
     description:
-      'مطور Full-Stack يعمل مع React وNext.js وNode.js. متاح لوظيفة بدوام كامل أو لعمل مستقل.',
+      'مطور Full-Stack مستقل. أبني وأطلق تطبيقات ومواقع ويب كاملة من البداية إلى النهاية — React وNext.js وNode.js. شخص واحد مسؤول عن الخادم وواجهة البرمجة والواجهة. متاح لمشاريع جديدة.',
     keywords:
-      'مطور Full-Stack، مطور React، Next.js، Node.js، TypeScript، مطور مستقل، إسرائيل',
-    siteName: 'شلومي نوجاركر — مطور Full-Stack',
-    ogImageAlt: 'شلومي نوجاركر',
+      'مطور Full-Stack، مطور للمشاريع، تطوير تطبيقات، بناء تطبيق ويب، مطور React، مطور مستقل، تطوير مواقع',
+    siteName: 'شلومي نوجاركر — مطور Full-Stack مستقل',
+    ogImageAlt: 'شلومي نوجاركر — مطور Full-Stack مستقل',
   },
 }
 

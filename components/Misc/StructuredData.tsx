@@ -43,6 +43,11 @@ const StructuredData = () => {
     knowsAbout: KNOWS_ABOUT,
     email: PERSON.email,
     telephone: PERSON.telephone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Tel Aviv',
+      addressCountry: 'IL',
+    },
   }
 
   const professionalService = {
@@ -52,10 +57,18 @@ const StructuredData = () => {
     url: SITE_URL,
     description:
       'Freelance web development services in React, Next.js, and Node.js.',
-    provider: { '@type': 'Person', name: PERSON.name },
+    provider: {
+      '@type': 'Person',
+      name: PERSON.name,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Tel Aviv',
+        addressCountry: 'IL',
+      },
+    },
     telephone: PERSON.telephone,
     email: PERSON.email,
-    areaServed: 'Worldwide',
+    areaServed: ['Tel Aviv', 'Israel', 'Worldwide'],
     serviceType: [
       'Full Stack Development',
       'React Development',
