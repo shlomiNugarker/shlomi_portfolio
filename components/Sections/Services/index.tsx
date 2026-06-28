@@ -5,7 +5,7 @@ import { Services as ServicesList } from 'config/services'
 const ServicesSection = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="flex h-full w-[99%] flex-col gap-6 text-center xl:w-3/4 xl:gap-8 xl:text-start">
+    <div className="flex h-full mx-auto w-[99%] max-w-2xl flex-col gap-6 text-center xl:mx-0 xl:max-w-none xl:w-3/4 xl:gap-8 xl:text-start">
       <h2
         className="text-4xl font-bold xl:text-5xl"
         style={{ fontVariantCaps: 'small-caps' }}

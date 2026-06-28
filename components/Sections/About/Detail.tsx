@@ -48,7 +48,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
   const { t } = useTranslation('common')
 
   return (
-    <section className="flex w-full flex-col items-center gap-6 text-center xl:w-[70%] xl:items-stretch xl:gap-8 xl:text-start">
+    <section className="mx-auto flex w-full max-w-2xl flex-col items-center gap-6 text-center xl:mx-0 xl:w-[70%] xl:max-w-none xl:items-stretch xl:gap-8 xl:text-start">
       <h2
         className="text-4xl font-bold xl:text-5xl"
         style={{ fontVariantCaps: 'small-caps' }}
