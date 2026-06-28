@@ -1,13 +1,8 @@
 import { memo } from 'react'
 import { Heading, Text, Stack, SimpleGrid, Box } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
 import { useTranslation } from 'next-i18next/pages'
 import FeaturedCard from './FeaturedCard'
-import { fadeInUpSlower, galleryStagger } from 'config/animations'
 import { FeaturedWorksList } from 'config/works'
-
-const MotionGrid = motion.create(SimpleGrid)
-const MotionBox = motion.create(Box)
 
 const FeaturedWorksSection = () => {
   const { t } = useTranslation('common')
@@ -34,14 +29,9 @@ const FeaturedWorksSection = () => {
         {t('works.description')}
       </Text>
 
-      <MotionGrid
-        columns={1}
-        gap={{ base: 6, md: 8 }}
-        variants={galleryStagger}
-        marginTop={2}
-      >
+      <SimpleGrid columns={1} gap={{ base: 6, md: 8 }} marginTop={2}>
         {FeaturedWorksList.map((work, index) => (
-          <MotionBox key={work.key} variants={fadeInUpSlower} height="100%">
+          <Box key={work.key} height="100%">
             <FeaturedCard
               idx={index + 1}
               title={t(`works.items.${work.key}.title`)}
@@ -58,9 +48,9 @@ const FeaturedWorksSection = () => {
               )}
               isClient={work.type === 'client'}
             />
-          </MotionBox>
+          </Box>
         ))}
-      </MotionGrid>
+      </SimpleGrid>
     </Stack>
   )
 }

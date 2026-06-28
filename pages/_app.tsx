@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import { ChakraProvider } from '@chakra-ui/react'
-import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { appWithTranslation } from 'next-i18next/pages'
 import nextI18NextConfig from '../next-i18next.config'
 import system from 'config/theme'
@@ -24,21 +23,14 @@ function KLSite({ Component, pageProps }: AppProps): JSX.Element {
   }, [locale])
 
   return (
-    // reducedMotion="user" honors prefers-reduced-motion: framer-motion skips
-    // transform/opacity entrance animations and snaps elements to their final
-    // state, so the hero is fully visible for those users instead of animating.
-    <MotionConfig reducedMotion="user">
-      <AnimatePresence mode="wait">
-        <ChakraProvider value={system}>
-          <ColorModeProvider defaultTheme="dark" enableSystem={false}>
-            <FavIconProvider>
-              <Component {...pageProps} />
-              <Analytics />
-            </FavIconProvider>
-          </ColorModeProvider>
-        </ChakraProvider>
-      </AnimatePresence>
-    </MotionConfig>
+    <ChakraProvider value={system}>
+      <ColorModeProvider defaultTheme="dark" enableSystem={false}>
+        <FavIconProvider>
+          <Component {...pageProps} />
+          <Analytics />
+        </FavIconProvider>
+      </ColorModeProvider>
+    </ChakraProvider>
   )
 }
 

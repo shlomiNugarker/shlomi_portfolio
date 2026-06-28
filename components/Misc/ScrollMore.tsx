@@ -2,52 +2,9 @@ import { Box, Icon, Link, useBreakpointValue } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useColorModeValue } from 'components/ui/color-mode'
 import { RiMouseLine } from 'react-icons/ri'
-import { motion, Variants, AnimatePresence } from 'framer-motion'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 import { mobileBreakpointsMap } from 'config/theme'
 import { isRtl } from 'config/seo'
-
-const scrollMoreVariants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 50,
-  },
-  hidden: {
-    opacity: [0, 1],
-    transition: {
-      duration: 0.5,
-      delay: 1,
-      ease: 'easeIn',
-    },
-  },
-  bounce: {
-    y: [0, -18, 0],
-    transition: {
-      duration: 1.6,
-      ease: 'easeInOut',
-      repeat: Infinity,
-    },
-  },
-}
-
-const emailVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 250,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-  },
-  exit: {
-    opacity: [1, 0],
-    y: [0, 250],
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-}
 
 const ScrollMore = () => {
   const { locale } = useRouter()
@@ -66,33 +23,21 @@ const ScrollMore = () => {
       // shows on the wide xl layout, never on mobile/tablet widths.
       display={{ base: 'none', xl: 'block' }}
     >
-      <AnimatePresence>
-        {[ScrollDirection.Initial, ScrollDirection.Up].includes(
-          scrollDirection
-        ) && (
-          <motion.div
-            initial="initial"
-            animate={['hidden', 'bounce']}
-            variants={scrollMoreVariants}
-          >
-            <Icon
-              w={6}
-              h={6}
-              as={RiMouseLine}
-              color="currentColor"
-              opacity="0.75"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {scrollDirection === ScrollDirection.Down && (
-          <motion.div
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={emailVariants}
-            whileHover={{ y: -50 }}
+      {[ScrollDirection.Initial, ScrollDirection.Up].includes(
+        scrollDirection
+      ) && (
+        <div>
+          <Icon
+            w={6}
+            h={6}
+            as={RiMouseLine}
+            color="currentColor"
+            opacity="0.75"
+          />
+        </div>
+      )}
+      {scrollDirection === ScrollDirection.Down && (
+          <div
             style={{
               writingMode: 'vertical-rl',
               insetInlineEnd: '8%',
@@ -146,9 +91,8 @@ const ScrollMore = () => {
             >
               shlomin1231@gmail.com{' '}
             </Link>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </Box>
   )
 }

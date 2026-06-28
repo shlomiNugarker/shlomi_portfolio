@@ -10,9 +10,7 @@ import {
 import NextImage from 'next/image'
 import { LinkButton } from 'components/ui/link-button'
 import { useColorModeValue } from 'components/ui/color-mode'
-import { motion, AnimatePresence, TargetAndTransition } from 'framer-motion'
 import styles from './styles.module.css'
-import { easing, DURATIONS } from 'config/animations'
 
 export type FeaturedCardProps = {
   // One or more cover images; a gallery is shown when length > 1.
@@ -31,18 +29,6 @@ export type FeaturedCardProps = {
   // Kept for API compatibility with the section; layout is now uniform.
   isMobile?: boolean
 }
-
-const imageVariants: Record<'hover', TargetAndTransition> = {
-  hover: {
-    scale: 1.06,
-    transition: {
-      duration: DURATIONS.Normal,
-      ease: easing,
-    },
-  },
-}
-
-const MotionImageBox = motion.create(Box)
 
 const Tag = ({ label }: { label: string }) => (
   <Box
@@ -115,34 +101,18 @@ const Cover = ({
       bg={{ base: 'blackAlpha.100', _dark: 'whiteAlpha.50' }}
     >
       <Badge label={badgeLabel} isClient={isClient} />
-      <MotionImageBox
-        position="absolute"
-        inset={0}
-        whileHover={imageVariants.hover}
-      >
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={images[active]}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: DURATIONS.Fast }}
-            style={{ position: 'absolute', inset: 0 }}
-          >
-            <NextImage
-              src={images[active]}
-              alt={
-                hasGallery ? `${title} — image ${active + 1}` : title
-              }
-              fill
-              loading="lazy"
-              quality={75}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 760px"
-              style={{ objectFit: 'cover', objectPosition }}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </MotionImageBox>
+      <Box position="absolute" inset={0}>
+        <NextImage
+          key={images[active]}
+          src={images[active]}
+          alt={hasGallery ? `${title} — image ${active + 1}` : title}
+          fill
+          loading="lazy"
+          quality={75}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 760px"
+          style={{ objectFit: 'cover', objectPosition }}
+        />
+      </Box>
 
       {hasGallery && (
         <HStack

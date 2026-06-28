@@ -11,20 +11,18 @@ import { NavLinks } from 'config/navigation'
 import { useColorMode, useColorModeValue } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
 import { BsSun as SunIcon, BsMoon as MoonIcon } from 'react-icons/bs'
-import { motion, useCycle } from 'framer-motion'
+import { useState, useCallback as useCallbackToggle } from 'react'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import LanguageSwitcher from './LanguageSwitcher'
 import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
-import { menuAnim } from 'config/animations'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
-
-const MotionContainer = motion.create(Container)
 
 const Navigation = () => {
   const { t } = useTranslation('common')
   const { toggleColorMode, colorMode } = useColorMode()
-  const [isOpen, toggleOpen] = useCycle(false, true)
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleOpen = useCallbackToggle(() => setIsOpen((v) => !v), [])
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const menuButtonSize = useBreakpointValue({
     base: 'xl',
@@ -75,7 +73,7 @@ const Navigation = () => {
         <MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
       </Box>
 
-      <MotionContainer
+      <Container
         width="100%"
         // Transparent on desktop; the solid panel bg is only needed for the
         // full-screen mobile menu overlay.
@@ -88,8 +86,6 @@ const Navigation = () => {
               ? '2%'
               : '3.5%',
         }}
-        initial="hide"
-        animate={(!isMobile || isOpen) && 'show'}
         style={{
           width:
             !isMobile && scrollDirection === ScrollDirection.Down
@@ -104,7 +100,6 @@ const Navigation = () => {
         borderColor={isOpen && isMobile ? borderColor : undefined}
         borderBottomWidth={isOpen && isMobile ? '1px' : undefined}
         paddingBottom={isOpen && isMobile ? '1px' : undefined}
-        variants={menuAnim}
         marginTop={0}
         paddingTop={1}
         as="nav"
@@ -163,7 +158,7 @@ const Navigation = () => {
             </Box>
           )}
         </Flex>
-      </MotionContainer>
+      </Container>
     </>
   )
 }

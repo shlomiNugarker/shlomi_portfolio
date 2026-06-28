@@ -1,54 +1,32 @@
-import { useEffect } from 'react'
 import {
   Container,
+  Box,
   useBreakpointValue,
 } from '@chakra-ui/react'
-import { motion, Variants, useAnimation } from 'framer-motion'
 import Logo from '../Logo'
 import styles from './styles.module.css'
 import Navigation from './Navigation'
 import { mobileBreakpointsMap } from 'config/theme'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 
-const mobileMenuVariants: Variants = {
-  hidden: {
-    opacity: [1, 0.85, 0],
-    y: -80,
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.35,
-    },
-  },
-  show: {
-    opacity: [0, 0.85, 1],
-    y: 0,
-    transition: {
-      ease: 'easeInOut',
-      duration: 0.28,
-    },
-  },
-}
-
 const Menu = () => {
   // Match the site background exactly so the mobile/tablet header blends in
   // (kl.bg is gray.100 in light, #121212 in dark — same as the page body).
   const bg = 'kl.bg'
-  const controls = useAnimation()
   const isMobile = useBreakpointValue(mobileBreakpointsMap)
   const scrollDirection = useScrollDirection(true, isMobile)
-  useEffect(() => {
-    if (scrollDirection === ScrollDirection.Down && isMobile) {
-      controls.start('hidden')
-    } else {
-      controls.start('show')
-    }
-  }, [isMobile, controls, scrollDirection])
+  // Hide the mobile header on scroll-down (functional behavior, not an entrance
+  // animation): translate it out of view instead of animating it.
+  const hidden =
+    isMobile && scrollDirection === ScrollDirection.Down
   return (
-    <motion.div
-      initial={isMobile ? 'hidden' : false}
-      variants={mobileMenuVariants}
-      animate={controls}
+    <Box
       className={isMobile ? styles.mobileMenuContainer : ''}
+      style={
+        isMobile
+          ? { transform: hidden ? 'translateY(-100%)' : 'translateY(0)' }
+          : undefined
+      }
     >
       <Container
         as="header"
@@ -65,7 +43,7 @@ const Menu = () => {
         <Logo />
         <Navigation />
       </Container>
-    </motion.div>
+    </Box>
   )
 }
 

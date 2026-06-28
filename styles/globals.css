@@ -51,30 +51,8 @@ body::-webkit-scrollbar-thumb{
   }
 }
 
-/* Mobile: kill all motion. framer-motion writes opacity:0 / transform into the
-   initial state, so we can't just disable animation — we force the final,
-   visible state and strip every transition/animation. Targets motion nodes
-   (inline style or data-attr) plus our known animated elements. */
+/* Mobile: hero fills the viewport height with its content vertically centered. */
 @media (max-width: 767px) {
-  [style*="opacity:0"],
-  [style*="opacity: 0"],
-  [style*="transform"],
-  .chakra-stack [data-motion],
-  #sidebarCircle {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0s !important;
-    animation-delay: 0s !important;
-    transition-duration: 0s !important;
-  }
-
-  /* Hero fills the viewport height with its content vertically centered. */
   #mainGrid > div:first-child {
     min-height: 100vh;
     min-height: 100svh;

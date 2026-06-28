@@ -1,33 +1,10 @@
 import { memo } from 'react'
 import { Heading, Text, Stack, Link, Icon, Box, HStack } from '@chakra-ui/react'
-import { motion, Variants } from 'framer-motion'
 import { useTranslation } from 'next-i18next/pages'
-import { useInView } from 'hooks/useInView'
 import { RiCopyrightLine, RiGithubFill, RiMailLine } from 'react-icons/ri'
 import { FaWhatsapp } from 'react-icons/fa'
 import { LinkButton } from 'components/ui/link-button'
 import { whatsappUrl, PERSON } from 'config/seo'
-
-const rimuruVariant: Variants = {
-  shake: {
-    rotate: [0, 15, 0, -15, 0],
-    transition: {
-      delay: 1.2,
-      duration: 0.5,
-      repeat: 2,
-      ease: 'easeInOut',
-    },
-  },
-  jump: {
-    y: [0, -35, 0],
-    transition: {
-      delay: 1.8,
-      duration: 0.5,
-      repeat: 3,
-      ease: 'easeInOut',
-    },
-  },
-}
 
 // Inline links inside the body copy. The body Text sets a muted color, so a
 // bare <Link> blends in and reads as plain text — give these an explicit accent
@@ -55,7 +32,6 @@ const InlineLink = ({
 
 const GetInTouch = () => {
   const { t } = useTranslation('common')
-  const [ref, inView] = useInView()
   return (
     <Stack
       width={{ base: '99%', xl: '75%' }}
@@ -72,14 +48,7 @@ const GetInTouch = () => {
       >
         {t('contact.heading')}{' '}
         <Text as="span" fontSize="2xl" color="kl.emphasis">
-          <motion.div
-            style={{ display: 'inline-block' }}
-            variants={rimuruVariant}
-            ref={ref}
-            animate={inView ? ['shake', 'jump'] : false}
-          >
-            (⁀ᗢ⁀)
-          </motion.div>
+          (⁀ᗢ⁀)
         </Text>
       </Heading>
       <Text

@@ -73,7 +73,6 @@ module.exports = {
   experimental: {
     optimizePackageImports: [
       '@chakra-ui/react',
-      'framer-motion',
       'react-icons',
     ],
   },

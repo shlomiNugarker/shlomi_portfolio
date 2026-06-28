@@ -44,12 +44,6 @@ class MyDocument extends Document<DocProps> {
             hrefLang="x-default"
             href={localeUrl(DEFAULT_LOCALE)}
           />
-          {/* Progressive enhancement: framer-motion writes the entrance
-              `opacity:0` into the SSR HTML. If JS never runs the content would
-              stay invisible, so force everything visible when JS is disabled. */}
-          <noscript>
-            <style>{`[style*="opacity:0"],[style*="opacity: 0"]{opacity:1!important}`}</style>
-          </noscript>
         </Head>
         <body>
           <Main />

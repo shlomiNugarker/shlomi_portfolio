@@ -11,25 +11,8 @@ import {
 } from '@chakra-ui/react'
 import { useColorMode } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
-import { motion } from 'framer-motion'
 import styles from './styles.module.css'
-import {
-  fadeInUp,
-  letterSpace,
-  simpleOpacity,
-  stagger,
-  scaleUp,
-} from 'config/animations'
 import { SocialMedias } from 'config/sidebar'
-
-const MotionHeading = motion.create(Heading)
-const MotionText = motion.create(Text)
-const MotionStack = motion.create(Stack)
-// `as="a"` renders an anchor at runtime; Chakra 3 types don't infer the
-// polymorphic anchor props (href/target) through motion.create(), so this is cast.
- 
-const MotionButton: any = motion.create(Button)
-const MotionBox = motion.create(Box)
 
 const Sidebar = () => {
   const { t } = useTranslation('common')
@@ -42,26 +25,21 @@ const Sidebar = () => {
   } as const)
 
   return (
-    <MotionBox
-      initial="initial"
-      animate="animate"
+    <Box
       width="100%"
       position={{ xl: 'fixed' }}
       maxWidth={{ xl: '34%' }}
       top={{ xl: 0 }}
     >
-      {/* The arc is mirrored for RTL via the wrapper (.circleWrap), because
-          framer-motion writes transform:scale on the arc node itself. */}
+      {/* The arc is mirrored for RTL via the wrapper (.circleWrap). */}
       <div className={styles.circleWrap}>
-        <motion.div
+        <div
           id="sidebarCircle"
           className={`${styles.sidebar} ${
             colorMode === 'light' ? styles.dark : ''
           }`}
-          variants={scaleUp}
-          style={{ display: display }}
-          animate={colorMode === 'dark' ? 'animate' : 'lightMode'}
-        ></motion.div>
+          style={{ display: display, opacity: 1 }}
+        ></div>
       </div>
       <Container
         padding={0}
@@ -70,60 +48,52 @@ const Sidebar = () => {
         display={{ xl: 'flex' }}
         alignItems={{ xl: 'center' }}
       >
-        <MotionStack
-          variants={stagger}
+        <Stack
           gap={3}
           w="100%"
           textAlign={{ base: 'center', xl: 'start' }}
           alignItems={{ base: 'center', xl: 'flex-start' }}
         >
-          <MotionText
-            variants={fadeInUp}
+          <Text
             color="kl.accent"
             fontWeight="light"
             fontSize={{ base: 'md', md: 'lg' }}
           >
             {t('sidebar.greeting')}
-          </MotionText>
-          <MotionHeading
+          </Text>
+          <Heading
             as="h1"
             size="xl"
             paddingEnd={{ xl: '20' }}
             textTransform="uppercase"
-            variants={fadeInUp}
           >
             {t('sidebar.name')}
-          </MotionHeading>
-          <MotionHeading
+          </Heading>
+          <Heading
             as="h2"
             size={titleSize}
             lineHeight={1}
             color="kl.emphasis"
             className={styles.marginTopForce}
             textTransform="uppercase"
-            variants={letterSpace}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
             {t('sidebar.headline_line1')}{' '}
             <br />
             {t('sidebar.headline_line2')}
-          </MotionHeading>
-          <MotionText
+          </Heading>
+          <Text
             colorScheme="gray"
             fontSize={{ base: 'sm', md: 'md' }}
             className={styles.marginTopForce}
-            variants={fadeInUp}
           >
             {t('sidebar.location')}
-          </MotionText>
+          </Text>
 
-          <MotionText
+          <Text
             color="kl.description"
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight="tall"
             paddingEnd={{ xl: '12' }}
-            variants={fadeInUp}
             maxWidth={{ base: '100%', xl: '80%' }}
           >
             {t('sidebar.intro')}
@@ -133,8 +103,8 @@ const Sidebar = () => {
             </Text>
             <br />
             {t('sidebar.description')}
-          </MotionText>
-          <MotionButton
+          </Text>
+          <Button
             size="lg"
             variant="outline"
             borderWidth="1px"
@@ -142,20 +112,15 @@ const Sidebar = () => {
             fontWeight="normal"
             fontSize="sm"
             width="120px"
-            variants={simpleOpacity}
             as={'a'}
-            href="mailto:shlomin1231@gmail.com"
-            target="_blank"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            {...{ href: 'mailto:shlomin1231@gmail.com', target: '_blank' }}
           >
             {t('sidebar.cta')}
-          </MotionButton>
+          </Button>
 
-          <MotionBox
+          <Box
             display="flex"
             justifyContent={{ base: 'center', xl: 'flex-start' }}
-            variants={simpleOpacity}
           >
             {SocialMedias.map((socMedia) => {
               const isExternal = socMedia.href.startsWith('http')
@@ -174,10 +139,10 @@ const Sidebar = () => {
                 </Link>
               )
             })}
-          </MotionBox>
-        </MotionStack>
+          </Box>
+        </Stack>
       </Container>
-    </MotionBox>
+    </Box>
   )
 }
 
