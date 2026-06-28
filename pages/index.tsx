@@ -46,22 +46,23 @@ const Portfolio = (): JSX.Element => {
     <>
       <OpenGraphHead />
       <StructuredData />
-      {/* Skip-link: visually hidden until focused, lets keyboard users jump
-          past the nav straight to the main content. */}
+      {/* Skip-link: parked fully off-screen above the viewport and revealed only
+          when focused (keyboard Tab), letting keyboard users jump past the nav. */}
       <Link
         href="#main-content"
-        position="absolute"
+        position="fixed"
         insetStart={3}
         top={3}
-        zIndex={10}
+        zIndex={1000}
         paddingX={4}
         paddingY={2}
         borderRadius="md"
         bg="kl.bg"
         color="kl.emphasis"
         fontWeight="semibold"
-        transform="translateY(-150%)"
+        transform="translateY(-200%)"
         transition="transform 0.2s ease"
+        _focusVisible={{ transform: 'translateY(0)' }}
         _focus={{ transform: 'translateY(0)' }}
       >
         {t('a11y.skip_to_content')}
