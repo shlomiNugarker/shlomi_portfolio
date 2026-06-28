@@ -36,7 +36,7 @@ const GetInTouch = () => {
       </h2>
       <p className="text-sm leading-relaxed text-kl-description md:text-base 2xl:text-lg">
         {t('contact.body')}{' '}
-        <InlineLink href="https://www.linkedin.com/in/shlomi-nugarker-b89777155/">
+        <InlineLink href="https://www.linkedin.com/in/shlomi-nugarker/">
           {t('contact.linkedin')}
         </InlineLink>{' '}
         {t('contact.or_email')}{' '}
@@ -55,14 +55,14 @@ const GetInTouch = () => {
           rel="noreferrer"
           className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-teal-600 px-6 text-base font-semibold text-kl-emphasis transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-cyan-200 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)]"
         >
-          <FaWhatsapp />
+          <FaWhatsapp aria-hidden />
           {t('contact.cta_whatsapp')}
         </a>
         <a
           href={`mailto:${PERSON.email}`}
           className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-[#595959] px-6 text-base font-medium transition-colors hover:border-teal-400 dark:border-white/50 dark:hover:border-teal-300"
         >
-          <RiMailLine />
+          <RiMailLine aria-hidden />
           {t('contact.cta_email')}
         </a>
       </div>
@@ -75,8 +75,8 @@ const GetInTouch = () => {
           className="text-kl-description no-underline outline-none"
         >
           <span>
-            <RiGithubFill className="inline h-6 w-6" /> <br />
-            {t('sidebar.name')} <RiCopyrightLine className="inline" />{' '}
+            <RiGithubFill aria-hidden className="inline h-6 w-6" /> <br />
+            {t('sidebar.name')} <RiCopyrightLine aria-hidden className="inline" />{' '}
             {new Date().getFullYear()}
           </span>
         </a>

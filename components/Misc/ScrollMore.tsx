@@ -17,7 +17,7 @@ const ScrollMore = () => {
         scrollDirection
       ) && (
         <div>
-          <RiMouseLine className="h-6 w-6 opacity-75" />
+          <RiMouseLine aria-hidden className="h-6 w-6 opacity-75" />
         </div>
       )}
       {scrollDirection === ScrollDirection.Down && (

@@ -15,7 +15,7 @@ export const SocialMedias: SocialMedia[] = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/shlomi-nugarker-b89777155/',
+    href: 'https://www.linkedin.com/in/shlomi-nugarker/',
     icon: FaLinkedin,
   },
   {

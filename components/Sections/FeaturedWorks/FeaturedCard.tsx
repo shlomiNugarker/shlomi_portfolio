@@ -19,7 +19,7 @@ export type FeaturedCardProps = {
 }
 
 const Tag = ({ label }: { label: string }) => (
-  <span className="whitespace-nowrap rounded-full border border-black/20 bg-black/5 px-2.5 py-1 text-xs font-medium tracking-[0.02em] text-kl-accent-alt dark:border-white/30 dark:bg-white/10">
+  <span className="whitespace-nowrap rounded-full border border-black/20 bg-black/5 px-2.5 py-1 text-xs font-medium tracking-[0.02em] text-gray-700 dark:border-white/30 dark:bg-white/10 dark:text-gray-300">
     {label}
   </span>
 )

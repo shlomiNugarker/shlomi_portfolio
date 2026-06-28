@@ -41,7 +41,7 @@ const Navigation = () => {
           onClick={toggleColorMode}
           className="flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
         >
-          <Icon />
+          <Icon aria-hidden />
         </button>
         <LanguageSwitcher />
         <MobileMenu isDarkMode={isDark} toggle={toggleOpen} isOpen={isOpen} />
@@ -112,7 +112,7 @@ const Navigation = () => {
                 onClick={toggleColorMode}
                 className="mx-1 flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
               >
-                <Icon />
+                <Icon aria-hidden />
               </button>
               <LanguageSwitcher />
             </div>

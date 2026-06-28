@@ -39,7 +39,7 @@ const SkillItem = ({
   icon: typeof SiReact
 }) => (
   <li className="flex items-center text-sm md:text-base">
-    <Icon className="me-2 text-[2em] text-kl-emphasis" />
+    <Icon aria-hidden className="me-2 text-[2em] text-kl-emphasis" />
     {name}
   </li>
 )
@@ -69,7 +69,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
         <Tooltip content={t('about.coffee_tip')}>
           <span className="text-kl-emphasis">{t('about.coffee')}</span>
         </Tooltip>{' '}
-        <GiCoffeePot className="inline text-kl-emphasis" />.
+        <GiCoffeePot aria-hidden className="inline text-kl-emphasis" />.
       </p>
 
       <div className="grid grid-cols-2 gap-4">
@@ -88,7 +88,7 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             onClick={onOpen}
             className="inline-flex items-center gap-1 text-start text-sm text-kl-emphasis md:text-base"
           >
-            {t('about.see_skills')} <IoMdOpen />
+            {t('about.see_skills')} <IoMdOpen aria-hidden />
           </button>
         </div>
       </div>

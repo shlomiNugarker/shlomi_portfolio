@@ -63,7 +63,7 @@ const Sidebar = () => {
                   target={isExternal ? '_blank' : undefined}
                   className="flex w-8 text-kl-description outline-none"
                 >
-                  <SocialIcon className="h-6 w-6" />
+                  <SocialIcon aria-hidden className="h-6 w-6" />
                 </a>
               )
             })}

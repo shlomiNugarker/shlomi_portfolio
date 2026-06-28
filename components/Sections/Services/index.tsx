@@ -24,7 +24,7 @@ const ServicesSection = () => {
               key={service.key}
               className="rounded-2xl border border-black/20 bg-black/5 p-5 dark:border-white/10 dark:bg-white/10 xl:p-6"
             >
-              <Icon className="mb-3 size-9 text-kl-emphasis" />
+              <Icon aria-hidden className="mb-3 size-9 text-kl-emphasis" />
               <h3 className="mb-2 text-lg font-bold md:text-xl">
                 {t(`services.items.${service.key}.title`)}
               </h3>

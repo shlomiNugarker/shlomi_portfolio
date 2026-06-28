@@ -38,7 +38,7 @@ const LanguageSwitcher = () => {
         aria-label={`${(locale ?? '').toUpperCase()} — ${t('a11y.language')}`}
         className="flex h-8 items-center gap-1 rounded-md bg-transparent px-2 text-sm hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kl-emphasis dark:hover:bg-white/10"
       >
-        <LuGlobe />
+        <LuGlobe aria-hidden />
         <span className="text-sm uppercase">{locale}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

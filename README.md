@@ -148,6 +148,6 @@ Originally forked from [`klawingco/kl_portfolio`](https://github.com/klawingco/k
 
 Made with ❤ and ☕ by **Shlomi Nugarker**
 
-[Website](https://www.shlomi.dev) · [GitHub](https://github.com/shlomiNugarker) · [LinkedIn](https://www.linkedin.com/in/shlomi-nugarker-b89777155/)
+[Website](https://www.shlomi.dev) · [GitHub](https://github.com/shlomiNugarker) · [LinkedIn](https://www.linkedin.com/in/shlomi-nugarker/)
 
 </div>

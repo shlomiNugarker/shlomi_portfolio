@@ -26,7 +26,7 @@ const SkillColumn = ({ items }: { items: Skill[] }) => (
           key={item.name}
           className="flex items-center text-sm md:text-base"
         >
-          <Icon className="me-2 text-[2em] text-kl-emphasis" />
+          <Icon aria-hidden className="me-2 text-[2em] text-kl-emphasis" />
           {item.name}
         </li>
       )

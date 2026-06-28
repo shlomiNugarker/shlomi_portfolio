@@ -13,7 +13,7 @@ export const PERSON = {
   email: 'shlomin1231@gmail.com',
   telephone: '+972 52-952-6762',
   github: 'https://github.com/shlomiNugarker',
-  linkedin: 'https://www.linkedin.com/in/shlomi-nugarker-b89777155/',
+  linkedin: 'https://www.linkedin.com/in/shlomi-nugarker/',
   twitter: '@shlomi_nugarker',
 } as const
 

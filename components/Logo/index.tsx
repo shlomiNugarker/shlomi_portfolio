@@ -5,17 +5,18 @@ import styles from './styles.module.css'
 // Inline SVG monogram using currentColor so the logo follows the color mode:
 // teal.700 on the light background, cyan.200 in dark.
 const Logo = () => (
-  <Link href="/" passHref aria-label="SN — Home">
+  <Link href="/" passHref aria-label="SN, home">
     <div
       className={`${styles.logo} size-[30px] shrink-0 text-kl-emphasis lg:size-[50px]`}
     >
+      {/* The link provides the accessible name ("SN"), so the SVG is hidden to
+          avoid a duplicate/mismatched name. */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 50 50"
         width="100%"
         height="100%"
-        role="img"
-        aria-label="Shlomi Nugarker logo"
+        aria-hidden="true"
         style={{ display: 'block', aspectRatio: '1 / 1' }}
       >
         <rect
