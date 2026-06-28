@@ -36,11 +36,11 @@ const GetInTouch = () => {
       </h2>
       <p className="text-sm leading-relaxed text-kl-description md:text-base 2xl:text-lg">
         {t('contact.body')}{' '}
-        <InlineLink href="https://www.linkedin.com/in/shlomi-nugarker/">
+        <InlineLink href={PERSON.linkedin}>
           {t('contact.linkedin')}
         </InlineLink>{' '}
         {t('contact.or_email')}{' '}
-        <InlineLink href="mailto:shlomin1231@gmail.com">
+        <InlineLink href={`mailto:${PERSON.email}`}>
           {t('contact.email')}
         </InlineLink>
         .
@@ -69,7 +69,7 @@ const GetInTouch = () => {
 
       <div className="pt-10 pb-5 text-center font-mono lg:pt-20 lg:pb-[4.5rem] xl:pt-20">
         <a
-          href="https://github.com/shlomiNugarker"
+          href={PERSON.github}
           target="_blank"
           rel="noreferrer"
           className="text-kl-description no-underline"

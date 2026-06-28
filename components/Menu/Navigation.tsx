@@ -4,7 +4,7 @@ import { useColorMode } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
 import { BsSun as SunIcon, BsMoon as MoonIcon } from 'react-icons/bs'
 import styles from './styles.module.css'
-import MobileMenu from './toggle'
+import { MenuToggle } from './toggle'
 import LanguageSwitcher from './LanguageSwitcher'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 
@@ -33,7 +33,7 @@ const Navigation = () => {
           <Icon aria-hidden />
         </button>
         <LanguageSwitcher />
-        <MobileMenu isDarkMode={isDark} toggle={toggleOpen} isOpen={isOpen} />
+        <MenuToggle toggle={toggleOpen} isOpen={isOpen} />
       </div>
 
       {/* Nav panel: full-screen overlay below xl (toggled by data-open via CSS),

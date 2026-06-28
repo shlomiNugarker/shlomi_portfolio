@@ -1,15 +1,12 @@
-import * as React from 'react'
 import type { ComponentProps } from 'react'
 
-type PathProps = ComponentProps<'path'> & { isDarkMode?: boolean }
-
-const Path = ({ isDarkMode, ...props }: PathProps) => (
-  // isDarkMode is destructured out so it is not spread onto the DOM <path>
-  // element (React warns about unknown DOM attributes otherwise).
+// Strokes inherit the current text color so the icon follows the theme via the
+// surrounding `text-kl-*` / `dark:` utilities — no isDarkMode prop threading.
+const Path = (props: ComponentProps<'path'>) => (
   <path
     fill="transparent"
+    stroke="currentColor"
     strokeWidth="3"
-    stroke={isDarkMode ? 'hsl(240, 100%, 94%)' : 'hsl(0, 0%, 7%)'}
     strokeLinecap="round"
     {...props}
   />
@@ -17,48 +14,34 @@ const Path = ({ isDarkMode, ...props }: PathProps) => (
 
 export const MenuToggle = ({
   toggle,
-  isDarkMode = false,
+  isOpen = false,
 }: {
   toggle(): void
-  isDarkMode?: boolean
+  isOpen?: boolean
 }) => (
   <button
     onClick={toggle}
     aria-label="Toggle navigation menu"
+    aria-expanded={isOpen}
     type="button"
-    style={{
-      width: '40px',
-      height: '40px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
+    className="flex h-10 w-10 items-center justify-center text-kl-emphasis"
   >
-    <svg width="23" height="23" viewBox="0 0 23 18">
-      <Path isDarkMode={isDarkMode} d="M 2 2.5 L 20 2.5" />
-      <Path isDarkMode={isDarkMode} d="M 2 9.423 L 20 9.423" />
-      <Path isDarkMode={isDarkMode} d="M 2 16.346 L 20 16.346" />
+    {/* Three bars when closed, an X when open. */}
+    <svg width="23" height="23" viewBox="0 0 23 18" aria-hidden>
+      {isOpen ? (
+        <>
+          <Path d="M 3 3 L 20 16" />
+          <Path d="M 3 16 L 20 3" />
+        </>
+      ) : (
+        <>
+          <Path d="M 2 2.5 L 20 2.5" />
+          <Path d="M 2 9.423 L 20 9.423" />
+          <Path d="M 2 16.346 L 20 16.346" />
+        </>
+      )}
     </svg>
   </button>
 )
 
-const MobileMenu = ({
-  isOpen,
-  toggle,
-  isDarkMode = false,
-}: {
-  isOpen: boolean
-  isDarkMode: boolean
-  toggle(): void
-}) => (
-  <nav
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-    }}
-  >
-    <MenuToggle toggle={() => toggle()} isDarkMode={isDarkMode} />
-  </nav>
-)
-
-export default MobileMenu
+export default MenuToggle

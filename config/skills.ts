@@ -51,22 +51,9 @@ export const Skills: {
   ],
 }
 
-export const splitSkills = (srcArray: Skill[]) => {
-  const arrLength = srcArray.length
-  const isEvenChunk = arrLength % 2 === 0
-
-  let chunk = 4
-  if (isEvenChunk) {
-    chunk = arrLength / 2
-  } else if (arrLength <= 5 && arrLength > 2) {
-    chunk = 3
-  }
-
-  let i = 0
-  let j = 0
-  const temporary = []
-  for (i = 0, j = srcArray.length; i < j; i += chunk) {
-    temporary.push(srcArray.slice(i, i + chunk))
-  }
-  return temporary
+// Split a skill list into two balanced columns (first column gets the extra
+// item when the count is odd), as consumed by SkillList's two-column grid.
+export const splitSkills = (srcArray: Skill[]): Skill[][] => {
+  const mid = Math.ceil(srcArray.length / 2)
+  return [srcArray.slice(0, mid), srcArray.slice(mid)]
 }

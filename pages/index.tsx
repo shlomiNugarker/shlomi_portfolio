@@ -6,7 +6,6 @@ import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslation
 import nextI18NextConfig from '../next-i18next.config'
 import OpenGraphHead from 'components/Misc/OpenGraphHead'
 import StructuredData from 'components/Misc/StructuredData'
-import FadeInLayout from 'components/Layout/FadeWhenVisible'
 import Menu from 'components/Menu'
 import Sidebar from 'components/Sidebar'
 import Avatar from 'components/Avatar'
@@ -49,39 +48,28 @@ const Portfolio = (): JSX.Element => {
           className="overflow-hidden p-5 md:p-14 xl:p-0 xl:col-span-3 xl:row-span-2"
         >
           <div className="flex w-full flex-col gap-16 xl:gap-24">
-            <FadeInLayout>
-              <div
-                id="aboutMe"
-                className="contentRow flex flex-col items-center justify-center gap-10 py-4 xl:min-h-screen xl:flex-row xl:gap-0 xl:py-0"
-              >
-                <About />
-                <Avatar />
-              </div>
-            </FadeInLayout>
-            <FadeInLayout>
-              <div
-                id="services"
-                className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-0"
-              >
-                <Services />
-              </div>
-            </FadeInLayout>
-            <FadeInLayout>
-              <div
-                id="works"
-                className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-20"
-              >
-                <FeaturedWorks />
-              </div>
-            </FadeInLayout>
-            <FadeInLayout>
-              <div
-                id="contact"
-                className="contentRow lg:pt-20 xl:pt-20"
-              >
-                <GetInTouch />
-              </div>
-            </FadeInLayout>
+            <div
+              id="aboutMe"
+              className="contentRow flex flex-col items-center justify-center gap-10 py-4 xl:min-h-screen xl:flex-row xl:gap-0 xl:py-0"
+            >
+              <About />
+              <Avatar />
+            </div>
+            <div
+              id="services"
+              className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-0"
+            >
+              <Services />
+            </div>
+            <div
+              id="works"
+              className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-20"
+            >
+              <FeaturedWorks />
+            </div>
+            <div id="contact" className="contentRow lg:pt-20 xl:pt-20">
+              <GetInTouch />
+            </div>
           </div>
         </main>
       </div>

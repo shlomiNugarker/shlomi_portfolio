@@ -7,78 +7,66 @@ export enum ScrollDirection {
 }
 
 const AVATAR_PADD_OFFSET = 100
+const THRESHOLD = 10
 
-const useScrollDirection = (
-  isMobileOnly = false,
-  isMobile = false,
-  belowAvatar = true
-) => {
+// Tracks whether the user is scrolling up or down, used to hide/collapse the
+// menu chrome. `isMobileOnly` skips the "below the avatar" gate so the mobile
+// bar hides on any downward scroll; otherwise the Down state only kicks in once
+// the user has scrolled past the avatar hero.
+const useScrollDirection = (isMobileOnly = false) => {
   const [scrollDir, setScrollDir] = useState(ScrollDirection.Initial)
-  const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {
-    const avatarContainer = document.querySelector('#klAvatar') as HTMLElement | null
-    // Guard: under React 18 StrictMode the effect can run before #klAvatar is
-    // mounted (or after it unmounts on the double-invoke), so fall back to 0.
+    const avatarContainer = document.querySelector(
+      '#klAvatar'
+    ) as HTMLElement | null
+    // Under StrictMode the effect can run before #klAvatar mounts, so fall back
+    // to 0 (gate open) rather than crashing.
     const avatarScrollY = avatarContainer
       ? avatarContainer.offsetTop +
         avatarContainer.clientHeight -
         AVATAR_PADD_OFFSET
       : 0
-    const threshold = 10
-    let lastScrollY = window.scrollY || 0
 
+    let lastScrollY = window.scrollY || 0
     let ticking = false
+
     const updateScrollDir = () => {
       const scrollY = window.scrollY || 0
 
-      if (Math.abs(scrollY - lastScrollY) < threshold) {
-        ticking = false
-        return
-      }
-      const scrollingDown = scrollY > lastScrollY
-      const isBelowAvatar =
-        !isMobileOnly && belowAvatar ? scrollY > avatarScrollY : true
+      if (Math.abs(scrollY - lastScrollY) >= THRESHOLD) {
+        const scrollingDown = scrollY > lastScrollY
+        // On mobile the bar hides on any downward scroll; on desktop the Down
+        // state only applies once we're past the avatar hero.
+        const belowAvatar = isMobileOnly ? true : scrollY > avatarScrollY
+        const next =
+          scrollingDown && belowAvatar
+            ? ScrollDirection.Down
+            : ScrollDirection.Up
 
-      // Whether the menu should be in its "Down" (collapsed) state: below the
-      // avatar and either actively scrolling down or on desktop.
-      const wantsDown = isBelowAvatar && (scrollingDown || !isMobile)
-      const gateDirection = wantsDown
-        ? ScrollDirection.Down
-        : ScrollDirection.Up
-
-      // Only commit when the gate flips; the committed value tracks the actual
-      // scroll delta so a quick up-scroll still reveals the menu.
-      if (gateDirection !== scrollDir) {
-        setScrollDir(scrollingDown ? ScrollDirection.Down : ScrollDirection.Up)
+        // Functional update avoids reading committed state during the handler,
+        // so the listener can stay subscribed for the effect's whole lifetime.
+        setScrollDir((prev) => (prev === next ? prev : next))
+        lastScrollY = scrollY > 0 ? scrollY : 0
       }
-      lastScrollY = scrollY > 0 ? scrollY : 0
       ticking = false
     }
 
     const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(updateScrollDir)
         ticking = true
+        window.requestAnimationFrame(updateScrollDir)
       }
     }
 
-    if ((isMobileOnly && isMobile) || !isMobileOnly) {
-      window?.addEventListener('scroll', onScroll)
-    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    // Run once so a deep-linked / refreshed-mid-page load reflects the real
+    // scroll position instead of staying Initial.
+    updateScrollDir()
 
-    // Fallback for initial load — a one-shot guarded by isInitialized, so it
-    // does not cause the cascading re-renders the rule warns about.
-    if (!isMobile && !isInitialized && lastScrollY > avatarScrollY) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setScrollDir(ScrollDirection.Down)
-      setIsInitialized(true)
-    }
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [isMobileOnly])
 
-    return () => {
-      window?.removeEventListener('scroll', onScroll)
-    }
-  }, [scrollDir, isMobileOnly, isMobile, isInitialized, belowAvatar])
   return scrollDir
 }
 

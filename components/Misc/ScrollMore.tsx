@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { RiMouseLine } from 'react-icons/ri'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
-import { isRtl } from 'config/seo'
+import { isRtl, PERSON } from 'config/seo'
 
 const ScrollMore = () => {
   const { locale } = useRouter()
@@ -29,12 +29,10 @@ const ScrollMore = () => {
           }}
         >
           <a
-            href="mailto:shlomin1231@gmail.com"
-            target="_blank"
-            rel="noreferrer"
+            href={`mailto:${PERSON.email}`}
             className="relative flex items-center justify-center py-3 font-mono tracking-[3px] text-gray-700 transition-colors hover:text-kl-emphasis dark:text-gray-400 after:mx-auto after:mt-2.5 after:h-[8em] after:w-0.5 after:shrink-0 after:bg-kl-emphasis after:opacity-50 after:content-[''] hover:after:opacity-100"
           >
-            shlomin1231@gmail.com{' '}
+            {PERSON.email}{' '}
           </a>
         </div>
       )}
