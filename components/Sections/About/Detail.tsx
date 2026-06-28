@@ -1,15 +1,5 @@
 import { memo } from 'react'
-import {
-  Heading,
-  Text,
-  List,
-  Icon,
-  SimpleGrid,
-  Box,
-  Stack,
-} from '@chakra-ui/react'
 import { Tooltip } from 'components/ui/tooltip'
-import { useColorModeValue } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
 import {
   SiReact,
@@ -28,130 +18,81 @@ type ISkillSetModal = {
   onOpen(): void
 }
 
+const leftSkills = [
+  { name: 'React', icon: SiReact },
+  { name: 'Next.js', icon: SiNextdotjs },
+  { name: 'TypeScript', icon: SiTypescript },
+  { name: 'JavaScript', icon: SiJavascript },
+]
+const rightSkills = [
+  { name: 'Node.js', icon: SiNodedotjs },
+  { name: 'PostgreSQL', icon: SiPostgresql },
+  { name: 'MongoDB', icon: SiMongodb },
+  { name: 'Tailwind CSS', icon: SiTailwindcss },
+]
+
+const SkillItem = ({
+  name,
+  icon: Icon,
+}: {
+  name: string
+  icon: typeof SiReact
+}) => (
+  <li className="flex items-center text-sm md:text-base">
+    <Icon className="me-2 text-[2em] text-kl-emphasis" />
+    {name}
+  </li>
+)
+
 const Detail = ({ onOpen }: ISkillSetModal) => {
   const { t } = useTranslation('common')
-  const emphasis = useColorModeValue('teal.700', 'cyan.200')
 
   return (
-    <Stack
-      width={{ base: '100%', xl: '70%' }}
-      gap={{ base: 6, xl: 8 }}
-      textAlign={{ base: 'center', xl: 'start' }}
-      alignItems={{ base: 'center', xl: 'stretch' }}
-      as="section"
-    >
-      <Heading
-        as="h2"
-        size={{ base: '4xl', xl: '5xl' }}
-        style={{
-          fontVariantCaps: 'small-caps',
-        }}
+    <section className="flex w-full flex-col items-center gap-6 text-center xl:w-[70%] xl:items-stretch xl:gap-8 xl:text-start">
+      <h2
+        className="text-4xl font-bold xl:text-5xl"
+        style={{ fontVariantCaps: 'small-caps' }}
       >
         {t('about.heading')}
-      </Heading>
-      <Text
-        color="kl.description"
-        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
-        lineHeight="tall"
-      >
+      </h2>
+      <p className="text-sm leading-relaxed text-kl-description md:text-base 2xl:text-lg">
         {t('about.lead_1')}{' '}
         <Tooltip content={t('about.end_to_end_tip')}>
-          <Text as="span" color="kl.emphasis">
+          <span className="text-kl-emphasis">
             <b>{t('about.end_to_end')}</b>
-          </Text>
+          </span>
         </Tooltip>{' '}
         {t('about.lead_2')}
-        <br /> <br />
+        <br />
+        <br />
         {t('about.body')}{' '}
         <Tooltip content={t('about.coffee_tip')}>
-          <Text as="span" color="kl.emphasis">
-            {t('about.coffee')}
-          </Text>
+          <span className="text-kl-emphasis">{t('about.coffee')}</span>
         </Tooltip>{' '}
-        <Icon as={GiCoffeePot} color={emphasis} />.
-      </Text>
+        <GiCoffeePot className="inline text-kl-emphasis" />.
+      </p>
 
-      <SimpleGrid columns={2} gap={4}>
-        <List.Root gap={3} listStyle="none">
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon as={SiReact} color={emphasis} fontSize="2em" marginEnd={2} />
-            React
-          </List.Item>
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon
-              as={SiNextdotjs}
-              color={emphasis}
-              fontSize="2em"
-              marginEnd={2}
-            />
-            Next.js
-          </List.Item>
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon
-              as={SiTypescript}
-              color={emphasis}
-              fontSize="2em"
-              marginEnd={2}
-            />
-            TypeScript
-          </List.Item>
-
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon
-              as={SiJavascript}
-              color={emphasis}
-              fontSize="2em"
-              marginEnd={2}
-            />
-            JavaScript
-          </List.Item>
-        </List.Root>
-        <List.Root gap={3} listStyle="none">
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon
-              as={SiNodedotjs}
-              color={emphasis}
-              fontSize="2em"
-              marginEnd={2}
-            />
-            Node.js
-          </List.Item>
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon
-              as={SiPostgresql}
-              color={emphasis}
-              fontSize="2em"
-              marginEnd={2}
-            />
-            PostgreSQL
-          </List.Item>
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon as={SiMongodb} color={emphasis} fontSize="2em" marginEnd={2} />
-            MongoDB
-          </List.Item>
-          <List.Item fontSize={{ base: 'sm', md: 'md' }} display="flex" alignItems="center">
-            <Icon
-              as={SiTailwindcss}
-              color={emphasis}
-              fontSize="2em"
-              marginEnd={2}
-            />
-            Tailwind CSS
-          </List.Item>
-        </List.Root>
-        <Box>
-          <Text
-            as="button"
-            color="kl.emphasis"
-            fontSize={{ base: 'sm', md: 'md' }}
-            textAlign="start"
+      <div className="grid grid-cols-2 gap-4">
+        <ul className="flex list-none flex-col gap-3">
+          {leftSkills.map((s) => (
+            <SkillItem key={s.name} name={s.name} icon={s.icon} />
+          ))}
+        </ul>
+        <ul className="flex list-none flex-col gap-3">
+          {rightSkills.map((s) => (
+            <SkillItem key={s.name} name={s.name} icon={s.icon} />
+          ))}
+        </ul>
+        <div>
+          <button
             onClick={onOpen}
+            className="inline-flex items-center gap-1 text-start text-sm text-kl-emphasis md:text-base"
           >
-            {t('about.see_skills')} <Icon as={IoMdOpen} />
-          </Text>
-        </Box>
-      </SimpleGrid>
-    </Stack>
+            {t('about.see_skills')} <IoMdOpen />
+          </button>
+        </div>
+      </div>
+    </section>
   )
 }
 

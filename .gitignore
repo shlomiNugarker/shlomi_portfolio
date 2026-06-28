@@ -41,3 +41,6 @@ tsconfig.tsbuildinfo
 
 # internal upgrade working doc (not for upstream PR)
 UPGRADE_PLAN.md
+
+# local Lighthouse report exports (not committed)
+lighthouse_*.json

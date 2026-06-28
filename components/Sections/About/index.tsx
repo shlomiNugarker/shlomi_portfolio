@@ -1,12 +1,13 @@
-import { memo } from 'react'
+import { memo, useState, useCallback } from 'react'
 import dynamic from 'next/dynamic'
-import { useDisclosure } from '@chakra-ui/react'
 import Detail from './Detail'
 
 const SkillSetModal = dynamic(() => import('./SkillSetModal'))
 
 const AboutSection = () => {
-  const { open, onOpen, onClose } = useDisclosure()
+  const [open, setOpen] = useState(false)
+  const onOpen = useCallback(() => setOpen(true), [])
+  const onClose = useCallback(() => setOpen(false), [])
   return (
     <>
       <Detail onOpen={onOpen} />

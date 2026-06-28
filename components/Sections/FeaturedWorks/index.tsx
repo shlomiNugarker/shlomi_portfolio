@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import { Heading, Text, Stack, SimpleGrid, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next/pages'
 import FeaturedCard from './FeaturedCard'
 import { FeaturedWorksList } from 'config/works'
@@ -7,31 +6,20 @@ import { FeaturedWorksList } from 'config/works'
 const FeaturedWorksSection = () => {
   const { t } = useTranslation('common')
   return (
-    <Stack
-      width={{ base: '99%', xl: '75%' }}
-      height="100%"
-      gap={{ base: 6, xl: 8 }}
-      textAlign={{ base: 'center', xl: 'start' }}
-    >
-      <Heading
-        size={{ base: '4xl', xl: '5xl' }}
-        style={{
-          fontVariantCaps: 'small-caps',
-        }}
+    <div className="flex h-full w-[99%] flex-col gap-6 text-center xl:w-3/4 xl:gap-8 xl:text-start">
+      <h2
+        className="text-4xl font-bold xl:text-5xl"
+        style={{ fontVariantCaps: 'small-caps' }}
       >
         {t('works.heading')}
-      </Heading>
-      <Text
-        color="kl.description"
-        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
-        lineHeight="tall"
-      >
+      </h2>
+      <p className="text-sm leading-relaxed text-kl-description md:text-base 2xl:text-lg">
         {t('works.description')}
-      </Text>
+      </p>
 
-      <SimpleGrid columns={1} gap={{ base: 6, md: 8 }} marginTop={2}>
+      <div className="mt-2 grid grid-cols-1 gap-6 md:gap-8">
         {FeaturedWorksList.map((work, index) => (
-          <Box key={work.key} height="100%">
+          <div key={work.key} className="h-full">
             <FeaturedCard
               idx={index + 1}
               title={t(`works.items.${work.key}.title`)}
@@ -48,10 +36,10 @@ const FeaturedWorksSection = () => {
               )}
               isClient={work.type === 'client'}
             />
-          </Box>
+          </div>
         ))}
-      </SimpleGrid>
-    </Stack>
+      </div>
+    </div>
   )
 }
 

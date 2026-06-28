@@ -1,18 +1,13 @@
 import { memo } from 'react'
-import { Box } from '@chakra-ui/react'
 import Link from 'next/link'
 import styles from './styles.module.css'
 
-// Inline SVG monogram (not next/image) so `currentColor` resolves against the
-// surrounding text color — letting the logo follow the color mode: teal.700 on
-// the light background, cyan.200 in dark. A static <img> can't do that.
+// Inline SVG monogram using currentColor so the logo follows the color mode:
+// teal.700 on the light background, cyan.200 in dark.
 const Logo = () => (
   <Link href="/" passHref aria-label="SN — Home">
-    <Box
-      className={styles.logo}
-      boxSize={{ base: '30px', lg: '50px' }}
-      flexShrink={0}
-      color={{ base: 'teal.700', _dark: 'cyan.200' }}
+    <div
+      className={`${styles.logo} size-[30px] shrink-0 text-kl-emphasis lg:size-[50px]`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +42,7 @@ const Logo = () => (
           SN
         </text>
       </svg>
-    </Box>
+    </div>
   </Link>
 )
 

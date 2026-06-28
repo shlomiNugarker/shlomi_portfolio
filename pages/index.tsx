@@ -1,13 +1,5 @@
 import type { JSX } from 'react'
 import type { GetStaticProps } from 'next'
-import {
-  Grid,
-  GridItem,
-  Stack,
-  Box,
-  Link,
-  useBreakpointValue,
-} from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { useTranslation } from 'next-i18next/pages'
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
@@ -22,145 +14,77 @@ import About from 'components/Sections/About'
 import ScrollMore from 'components/Misc/ScrollMore'
 
 // Only the above-the-fold content (Menu, Sidebar, Avatar, About) is in the
-// initial bundle. Every section below the hero is code-split so its
-// framer-motion / Chakra weight isn't shipped on first load.
+// initial bundle. Every section below the hero is code-split so its weight
+// isn't shipped on first load.
 const Services = dynamic(() => import('components/Sections/Services'))
-const FeaturedWorks = dynamic(
-  () => import('components/Sections/FeaturedWorks')
-)
+const FeaturedWorks = dynamic(() => import('components/Sections/FeaturedWorks'))
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))
 
 const Portfolio = (): JSX.Element => {
   const { t } = useTranslation('common')
-  const sideBarPadding = useBreakpointValue({ base: '5', md: '8', lg: '14' })
-  const mainContent = useBreakpointValue({
-    base: '5',
-    md: '14',
-    lg: '14',
-    xl: '0',
-  })
-  // Below xl the header is a fixed ~68px bar; 4rem (64px) top space tucks the
-  // hero just under it. At xl the header is transparent and non-blocking.
-  const paddTop = useBreakpointValue({ base: '4rem', xl: '20' })
   return (
     <>
       <OpenGraphHead />
       <StructuredData />
-      {/* Skip-link: parked fully off-screen above the viewport and revealed only
-          when focused (keyboard Tab), letting keyboard users jump past the nav. */}
-      <Link
+      {/* Skip-link: parked off-screen above the viewport, revealed only on focus
+          (keyboard Tab), letting keyboard users jump past the nav. */}
+      <a
         href="#main-content"
-        position="fixed"
-        insetStart={3}
-        top={3}
-        zIndex={1000}
-        paddingX={4}
-        paddingY={2}
-        borderRadius="md"
-        bg="kl.bg"
-        color="kl.emphasis"
-        fontWeight="semibold"
-        transform="translateY(-200%)"
-        transition="transform 0.2s ease"
-        _focusVisible={{ transform: 'translateY(0)' }}
-        _focus={{ transform: 'translateY(0)' }}
+        className="fixed start-3 top-3 z-[1000] -translate-y-[200%] rounded-md bg-kl-bg px-4 py-2 font-semibold text-kl-emphasis transition-transform duration-200 focus:translate-y-0 focus-visible:translate-y-0"
       >
         {t('a11y.skip_to_content')}
-      </Link>
+      </a>
       <Menu />
-      <Grid
+      {/* Below xl the hero and main stack in normal flow; the two-column grid
+          (with its 2-row track) only kicks in on the wide xl layout. */}
+      <div
         id="mainGrid"
-        // Below xl the hero and main simply stack in normal flow; the two-column
-        // grid (with its 2-row track) only kicks in on the wide xl layout. This
-        // avoids the collapsed first row that overlapped the hero on tablet.
-        display={{ base: 'block', xl: 'grid' }}
-        templateColumns={{
-          xl: 'repeat(5, 1fr)',
-        }}
-        templateRows={{
-          xl: 'repeat(2, 1fr)',
-        }}
-        gap={4}
+        className="block gap-4 xl:grid xl:grid-cols-5 xl:grid-rows-2"
       >
-        <GridItem
-          padding={sideBarPadding}
-          marginTop={paddTop}
-          rowSpan={{ base: 1, xl: 2 }}
-          colSpan={{ base: 1, xl: 2 }}
-          display="flex"
-          alignContent="center"
-          as="div"
-          flexDirection={'row'}
-        >
+        <div className="flex flex-row content-center p-5 md:p-8 lg:p-14 mt-16 xl:mt-20 xl:col-span-2 xl:row-span-2">
           <Sidebar />
-        </GridItem>
-        <GridItem
-          as="main"
+        </div>
+        <main
           id="main-content"
-          padding={mainContent}
-          rowSpan={{ base: 1, xl: 2 }}
-          colSpan={{ base: 1, xl: 3 }}
-          overflow="hidden"
+          className="overflow-hidden p-5 md:p-14 xl:p-0 xl:col-span-3 xl:row-span-2"
         >
-          <Stack w="100%" gap={{ base: 16, xl: 24 }}>
+          <div className="flex w-full flex-col gap-16 xl:gap-24">
             <FadeInLayout>
-              <Box
+              <div
                 id="aboutMe"
-                className="contentRow"
-                minH={{ xl: '100vh' }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                gap={{ base: 10, xl: 0 }}
-                paddingTop={{ base: 4, xl: 0 }}
-                paddingBottom={{ base: 4, xl: 0 }}
-                flexDirection={{
-                  base: 'column',
-                  xl: 'row',
-                }}
+                className="contentRow flex flex-col items-center justify-center gap-10 py-4 xl:min-h-screen xl:flex-row xl:gap-0 xl:py-0"
               >
                 <About />
                 <Avatar />
-              </Box>
+              </div>
             </FadeInLayout>
             <FadeInLayout>
-              <Box
+              <div
                 id="services"
-                className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 0 }}
-                paddingBottom={{ base: 12, lg: 10 }}
-                paddingX={0}
-                flexDirection={'row'}
+                className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-0"
               >
                 <Services />
-              </Box>
+              </div>
             </FadeInLayout>
             <FadeInLayout>
-              <Box
+              <div
                 id="works"
-                className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 20 }}
-                paddingBottom={{ base: 12, lg: 10 }}
-                paddingX={0}
-                flexDirection={'row'}
+                className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-20"
               >
                 <FeaturedWorks />
-              </Box>
+              </div>
             </FadeInLayout>
             <FadeInLayout>
-              <Box
+              <div
                 id="contact"
-                className="contentRow"
-                paddingTop={{ base: 0, lg: 20, xl: 20 }}
-                paddingX={0}
-                flexDirection={'row'}
+                className="contentRow lg:pt-20 xl:pt-20"
               >
                 <GetInTouch />
-              </Box>
+              </div>
             </FadeInLayout>
-          </Stack>
-        </GridItem>
-      </Grid>
+          </div>
+        </main>
+      </div>
       <ScrollMore />
     </>
   )

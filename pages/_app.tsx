@@ -3,10 +3,9 @@ import type { JSX } from 'react'
 import { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import { ChakraProvider } from '@chakra-ui/react'
 import { appWithTranslation } from 'next-i18next/pages'
 import nextI18NextConfig from '../next-i18next.config'
-import system from 'config/theme'
+import { poppins } from 'config/fonts'
 import { isRtl } from 'config/seo'
 import { ColorModeProvider } from 'components/ui/color-mode'
 import FavIconProvider from 'components/Misc/FavIconProvider'
@@ -22,15 +21,21 @@ function KLSite({ Component, pageProps }: AppProps): JSX.Element {
     if (locale) document.documentElement.lang = locale
   }, [locale])
 
+  // Expose the Poppins CSS variable to the whole tree (Tailwind's --font-sans
+  // references it). next-themes drives the .dark class for the dark: variant.
+  useEffect(() => {
+    document.documentElement.classList.add(poppins.variable)
+  }, [])
+
   return (
-    <ChakraProvider value={system}>
-      <ColorModeProvider defaultTheme="dark" enableSystem={false}>
-        <FavIconProvider>
+    <ColorModeProvider defaultTheme="dark" enableSystem={false}>
+      <FavIconProvider>
+        <div className={poppins.variable}>
           <Component {...pageProps} />
-          <Analytics />
-        </FavIconProvider>
-      </ColorModeProvider>
-    </ChakraProvider>
+        </div>
+        <Analytics />
+      </FavIconProvider>
+    </ColorModeProvider>
   )
 }
 

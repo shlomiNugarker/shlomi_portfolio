@@ -1,12 +1,9 @@
-import { Box } from '@chakra-ui/react'
 import NextImage from 'next/image'
 
 const Avatar = () => (
-  <Box
+  <div
     id="klAvatar"
-    boxSize={{ base: 56, md: 64, xl: 'sm' }}
-    flexShrink={0}
-    padding={{ base: 0, xl: 8 }}
+    className="size-56 shrink-0 p-0 md:size-64 xl:size-96 xl:p-8"
   >
     <NextImage
       src="/avatar.jpg"
@@ -14,14 +11,9 @@ const Avatar = () => (
       width={463}
       height={486}
       priority
-      style={{
-        width: '100%',
-        height: 'auto',
-        margin: 'auto',
-        borderRadius: '50%',
-      }}
+      className="m-auto h-auto w-full rounded-full"
     />
-  </Box>
+  </div>
 )
 
 export default Avatar

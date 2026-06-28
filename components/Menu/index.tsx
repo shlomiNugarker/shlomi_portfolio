@@ -1,26 +1,17 @@
-import {
-  Container,
-  Box,
-  useBreakpointValue,
-} from '@chakra-ui/react'
 import Logo from '../Logo'
 import styles from './styles.module.css'
 import Navigation from './Navigation'
-import { mobileBreakpointsMap } from 'config/theme'
+import { useIsMobile } from 'hooks/useMediaQuery'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 
 const Menu = () => {
-  // Match the site background exactly so the mobile/tablet header blends in
-  // (kl.bg is gray.100 in light, #121212 in dark — same as the page body).
-  const bg = 'kl.bg'
-  const isMobile = useBreakpointValue(mobileBreakpointsMap)
+  const isMobile = useIsMobile()
   const scrollDirection = useScrollDirection(true, isMobile)
-  // Hide the mobile header on scroll-down (functional behavior, not an entrance
-  // animation): translate it out of view instead of animating it.
-  const hidden =
-    isMobile && scrollDirection === ScrollDirection.Down
+  // Hide the mobile header on scroll-down (functional, not an animation):
+  // translate it out of view.
+  const hidden = isMobile && scrollDirection === ScrollDirection.Down
   return (
-    <Box
+    <div
       className={isMobile ? styles.mobileMenuContainer : ''}
       style={
         isMobile
@@ -28,22 +19,16 @@ const Menu = () => {
           : undefined
       }
     >
-      <Container
-        as="header"
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        padding={{ base: 5, lg: 0 }}
-        paddingY={{ base: 5, lg: 0 }}
-        backgroundColor={isMobile ? bg : 'transparent'}
-        width="100vw"
-        maxWidth="100vw"
-        margin={0}
+      {/* Match the site background so the mobile header blends in (kl.bg). */}
+      <header
+        className={`m-0 flex w-screen max-w-[100vw] items-center justify-between p-5 lg:p-0 ${
+          isMobile ? 'bg-kl-bg' : 'bg-transparent'
+        }`}
       >
         <Logo />
         <Navigation />
-      </Container>
-    </Box>
+      </header>
+    </div>
   )
 }
 

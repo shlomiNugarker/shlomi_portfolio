@@ -1,148 +1,76 @@
-import {
-  Stack,
-  Heading,
-  Text,
-  Button,
-  Container,
-  Link,
-  Box,
-  Icon,
-  useBreakpointValue,
-} from '@chakra-ui/react'
-import { useColorMode } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
+import { useColorMode } from 'components/ui/color-mode'
 import styles from './styles.module.css'
 import { SocialMedias } from 'config/sidebar'
 
 const Sidebar = () => {
   const { t } = useTranslation('common')
   const { colorMode } = useColorMode()
-  const display = useBreakpointValue({ base: 'none', lg: 'block' })
-  const titleSize = useBreakpointValue({
-    base: '4xl',
-    md: '4xl',
-    xl: '5xl',
-  } as const)
 
   return (
-    <Box
-      width="100%"
-      position={{ xl: 'fixed' }}
-      maxWidth={{ xl: '34%' }}
-      top={{ xl: 0 }}
-    >
-      {/* The arc is mirrored for RTL via the wrapper (.circleWrap). */}
+    <div className="w-full xl:fixed xl:top-0 xl:max-w-[34%]">
+      {/* Decorative arc, mirrored for RTL via the wrapper (.circleWrap). Shown
+          only on lg+; light mode swaps the stroke to black via .dark. */}
       <div className={styles.circleWrap}>
         <div
           id="sidebarCircle"
-          className={`${styles.sidebar} ${
+          className={`${styles.sidebar} hidden lg:block ${
             colorMode === 'light' ? styles.dark : ''
           }`}
-          style={{ display: display, opacity: 1 }}
+          style={{ opacity: 1 }}
         ></div>
       </div>
-      <Container
-        padding={0}
-        margin={0}
-        height={{ xl: '100vh' }}
-        display={{ xl: 'flex' }}
-        alignItems={{ xl: 'center' }}
-      >
-        <Stack
-          gap={3}
-          w="100%"
-          textAlign={{ base: 'center', xl: 'start' }}
-          alignItems={{ base: 'center', xl: 'flex-start' }}
-        >
-          <Text
-            color="kl.accent"
-            fontWeight="light"
-            fontSize={{ base: 'md', md: 'lg' }}
-          >
+      <div className="mx-auto flex w-full max-w-[60ch] flex-col items-center gap-3 p-0 text-center xl:mx-0 xl:h-screen xl:max-w-none xl:items-start xl:justify-center xl:text-start">
+        <div className="flex w-full flex-col items-center gap-3 xl:items-start">
+          <p className="font-light text-base text-kl-accent md:text-lg">
             {t('sidebar.greeting')}
-          </Text>
-          <Heading
-            as="h1"
-            size="xl"
-            paddingEnd={{ xl: '20' }}
-            textTransform="uppercase"
-          >
+          </p>
+          <h1 className="text-xl font-bold uppercase xl:pe-20">
             {t('sidebar.name')}
-          </Heading>
-          <Heading
-            as="h2"
-            size={titleSize}
-            lineHeight={1}
-            color="kl.emphasis"
-            className={styles.marginTopForce}
-            textTransform="uppercase"
-          >
-            {t('sidebar.headline_line1')}{' '}
-            <br />
+          </h1>
+          <h2 className="text-4xl font-bold uppercase leading-none text-kl-emphasis xl:text-5xl">
+            {t('sidebar.headline_line1')} <br />
             {t('sidebar.headline_line2')}
-          </Heading>
-          <Text
-            colorScheme="gray"
-            fontSize={{ base: 'sm', md: 'md' }}
-            className={styles.marginTopForce}
-          >
-            {t('sidebar.location')}
-          </Text>
+          </h2>
+          <p className="text-sm md:text-base">{t('sidebar.location')}</p>
 
-          <Text
-            color="kl.description"
-            fontSize={{ base: 'sm', md: 'md' }}
-            lineHeight="tall"
-            paddingEnd={{ xl: '12' }}
-            maxWidth={{ base: '100%', xl: '80%' }}
-          >
+          <p className="max-w-full text-sm leading-relaxed text-kl-description md:text-base xl:max-w-[80%] xl:pe-12">
             {t('sidebar.intro')}
-            <Text color="kl.emphasis" as="span">
-              {' '}
-              {t('sidebar.welcome')}
-            </Text>
+            <span className="text-kl-emphasis"> {t('sidebar.welcome')}</span>
             <br />
             {t('sidebar.description')}
-          </Text>
-          <Button
-            size="lg"
-            variant="outline"
-            borderWidth="1px"
-            borderRadius="0"
-            fontWeight="normal"
-            fontSize="sm"
-            width="120px"
-            as={'a'}
-            {...{ href: 'mailto:shlomin1231@gmail.com', target: '_blank' }}
+          </p>
+
+          <a
+            href="mailto:shlomin1231@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-12 w-[120px] items-center justify-center border border-current text-sm font-normal transition-colors hover:bg-black/5 dark:hover:bg-white/5"
           >
             {t('sidebar.cta')}
-          </Button>
+          </a>
 
-          <Box
-            display="flex"
-            justifyContent={{ base: 'center', xl: 'flex-start' }}
-          >
+          <div className="flex justify-center xl:justify-start">
             {SocialMedias.map((socMedia) => {
               const isExternal = socMedia.href.startsWith('http')
+              const SocialIcon = socMedia.icon
               return (
-                <Link
-                  color="kl.description"
+                <a
                   key={socMedia.label}
                   aria-label={t(`social.${socMedia.label.toLowerCase()}`)}
                   rel={isExternal ? 'noreferrer' : undefined}
-                  width={8}
                   href={socMedia.href}
                   target={isExternal ? '_blank' : undefined}
-                  _focus={{ boxShadow: 'none' }}
+                  className="flex w-8 text-kl-description outline-none"
                 >
-                  <Icon w={6} h={6} as={socMedia.icon} color="currentColor" />
-                </Link>
+                  <SocialIcon className="h-6 w-6" />
+                </a>
               )
             })}
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

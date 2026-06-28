@@ -1,14 +1,11 @@
 import { memo } from 'react'
-import { Heading, Text, Stack, Link, Icon, Box, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next/pages'
 import { RiCopyrightLine, RiGithubFill, RiMailLine } from 'react-icons/ri'
 import { FaWhatsapp } from 'react-icons/fa'
-import { LinkButton } from 'components/ui/link-button'
 import { whatsappUrl, PERSON } from 'config/seo'
 
-// Inline links inside the body copy. The body Text sets a muted color, so a
-// bare <Link> blends in and reads as plain text — give these an explicit accent
-// color, weight and a persistent underline so it's obvious they're clickable.
+// Inline links inside the body copy: explicit accent color, weight and a
+// persistent underline so they're obviously clickable against muted body text.
 const InlineLink = ({
   href,
   children,
@@ -16,46 +13,28 @@ const InlineLink = ({
   href: string
   children: React.ReactNode
 }) => (
-  <Link
+  <a
     href={href}
     target="_blank"
     rel="noreferrer"
-    color="kl.emphasis"
-    fontWeight="semibold"
-    textDecoration="underline"
-    textUnderlineOffset="3px"
-    _hover={{ textDecoration: 'none' }}
+    className="font-semibold text-kl-emphasis underline underline-offset-[3px] hover:no-underline"
   >
     {children}
-  </Link>
+  </a>
 )
 
 const GetInTouch = () => {
   const { t } = useTranslation('common')
   return (
-    <Stack
-      width={{ base: '99%', xl: '75%' }}
-      height="100%"
-      gap={{ base: 6, xl: 8 }}
-      textAlign={{ base: 'center', xl: 'start' }}
-      as="footer"
-    >
-      <Heading
-        size={{ base: '4xl', xl: '5xl' }}
-        style={{
-          fontVariantCaps: 'small-caps',
-        }}
+    <footer className="flex h-full w-[99%] flex-col gap-6 text-center xl:w-3/4 xl:gap-8 xl:text-start">
+      <h2
+        className="text-4xl font-bold xl:text-5xl"
+        style={{ fontVariantCaps: 'small-caps' }}
       >
         {t('contact.heading')}{' '}
-        <Text as="span" fontSize="2xl" color="kl.emphasis">
-          (⁀ᗢ⁀)
-        </Text>
-      </Heading>
-      <Text
-        color="kl.description"
-        fontSize={{ base: 'sm', md: 'md', '2xl': 'lg' }}
-        lineHeight="tall"
-      >
+        <span className="text-2xl text-kl-emphasis">(⁀ᗢ⁀)</span>
+      </h2>
+      <p className="text-sm leading-relaxed text-kl-description md:text-base 2xl:text-lg">
         {t('contact.body')}{' '}
         <InlineLink href="https://www.linkedin.com/in/shlomi-nugarker-b89777155/">
           {t('contact.linkedin')}
@@ -65,75 +44,44 @@ const GetInTouch = () => {
           {t('contact.email')}
         </InlineLink>
         .
-      </Text>
+      </p>
 
-      {/* Primary CTAs, kept on the site's teal/cyan accent so the palette stays
-          tight. WhatsApp is the primary (filled accent) action; email the
-          secondary outline action. */}
-      <HStack
-        gap={3}
-        flexWrap="wrap"
-        justify={{ base: 'center', xl: 'flex-start' }}
-      >
-        <LinkButton
+      {/* CTAs on the site's teal/cyan accent (tight palette). WhatsApp primary,
+          email secondary; both outline to match the rest of the site. */}
+      <div className="flex flex-wrap justify-center gap-3 xl:justify-start">
+        <a
           href={whatsappUrl()}
           target="_blank"
           rel="noreferrer"
-          variant="outline"
-          borderWidth="1px"
-          borderColor={{ base: 'teal.500', _dark: 'cyan.200' }}
-          color="kl.emphasis"
-          _hover={{
-            bg: {
-              base: 'rgba(49, 151, 149, 0.08)',
-              _dark: 'rgba(157, 236, 249, 0.08)',
-            },
-            borderColor: { base: 'teal.400', _dark: 'teal.300' },
-          }}
-          borderRadius="md"
-          fontWeight="semibold"
-          size="lg"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-teal-600 px-6 text-base font-semibold text-kl-emphasis transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-cyan-200 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)]"
         >
-          <Icon as={FaWhatsapp} marginEnd={2} />
+          <FaWhatsapp />
           {t('contact.cta_whatsapp')}
-        </LinkButton>
-        <LinkButton
+        </a>
+        <a
           href={`mailto:${PERSON.email}`}
-          variant="outline"
-          borderWidth="1px"
-          borderColor={{ base: '#595959', _dark: 'whiteAlpha.500' }}
-          _hover={{ borderColor: { base: 'teal.400', _dark: 'teal.300' } }}
-          borderRadius="md"
-          fontWeight="medium"
-          size="lg"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-[#595959] px-6 text-base font-medium transition-colors hover:border-teal-400 dark:border-white/50 dark:hover:border-teal-300"
         >
-          <Icon as={RiMailLine} marginEnd={2} />
+          <RiMailLine />
           {t('contact.cta_email')}
-        </LinkButton>
-      </HStack>
+        </a>
+      </div>
 
-      <Box
-        textAlign="center"
-        fontFamily="monospace"
-        paddingTop={{ base: 10, lg: 20, xl: 20 }}
-        paddingBottom={{ base: 5, lg: 18 }}
-      >
-        <Link
-          color="kl.description"
-          textDecoration="none"
-          rel="noreferrer"
+      <div className="pt-10 pb-5 text-center font-mono lg:pt-20 lg:pb-[4.5rem] xl:pt-20">
+        <a
           href="https://github.com/shlomiNugarker"
           target="_blank"
-          _focus={{ boxShadow: 'none' }}
+          rel="noreferrer"
+          className="text-kl-description no-underline outline-none"
         >
-          <Text as="span">
-            <Icon as={RiGithubFill} h={6} w={6} /> <br />
-            {t('sidebar.name')} <Icon as={RiCopyrightLine} />{' '}
+          <span>
+            <RiGithubFill className="inline h-6 w-6" /> <br />
+            {t('sidebar.name')} <RiCopyrightLine className="inline" />{' '}
             {new Date().getFullYear()}
-          </Text>
-        </Link>
-      </Box>
-    </Stack>
+          </span>
+        </a>
+      </div>
+    </footer>
   )
 }
 

@@ -1,10 +1,17 @@
+/* On mobile/tablet the logo is a normal flex child of the <header>, so it sits
+   inline with the nav controls. Only on the wide (xl) layout — where the header
+   is transparent and the nav floats — does it become a fixed corner mark. */
 .logo{
-  position: fixed;
-  top: 3%;
-  /* Logical start edge: left in LTR, right in RTL — mirrors with the nav. */
-  inset-inline-start: 3.5%;
   cursor: pointer;
-  z-index: 100;
+}
+@media (min-width: 80em) {
+  .logo{
+    position: fixed;
+    top: 3%;
+    /* Logical start edge: left in LTR, right in RTL — mirrors with the nav. */
+    inset-inline-start: 3.5%;
+    z-index: 100;
+  }
 }
 .sidebar{
   border: 3px solid #97DFFC;

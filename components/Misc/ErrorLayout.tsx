@@ -1,6 +1,5 @@
-import { Box, Heading, Text, Stack } from '@chakra-ui/react'
-import { LinkButton } from 'components/ui/link-button'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useTranslation } from 'next-i18next/pages'
 
 type ErrorLayoutProps = {
@@ -15,8 +14,7 @@ type ErrorLayoutProps = {
   fallbackMessage: string
 }
 
-// Shared layout for the custom 404 / 500 pages. Matches the site theme (dark
-// background, cyan accent, Poppins) and stays lightweight — no animations.
+// Shared layout for the custom 404 / 500 pages. Matches the site theme.
 const ErrorLayout = ({
   code,
   titleKey,
@@ -40,43 +38,24 @@ const ErrorLayout = ({
         <title>{`${code} — ${title} | Shlomi Nugarker`}</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <Box
-        as="main"
-        minH="100vh"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        paddingX={6}
-        textAlign="center"
-      >
-        <Stack gap={6} maxWidth="lg" alignItems="center">
-          <Heading
-            as="h1"
-            size="7xl"
-            color="kl.emphasis"
-            lineHeight={1}
+      <main className="flex min-h-screen items-center justify-center px-6 text-center">
+        <div className="flex max-w-lg flex-col items-center gap-6">
+          <h1
+            className="text-7xl font-bold leading-none text-kl-emphasis"
             style={{ fontVariantCaps: 'small-caps' }}
           >
             {code}
-          </Heading>
-          <Heading as="h2" size="xl">
-            {title}
-          </Heading>
-          <Text color="kl.description" fontSize={{ base: 'sm', md: 'md' }}>
-            {message}
-          </Text>
-          <LinkButton
+          </h1>
+          <h2 className="text-xl font-bold">{title}</h2>
+          <p className="text-sm text-kl-description md:text-base">{message}</p>
+          <Link
             href="/"
-            variant="outline"
-            borderRadius={0}
-            borderWidth="1px"
-            fontWeight="light"
-            size="lg"
+            className="inline-flex h-12 items-center justify-center border border-current px-6 text-base font-light transition-colors hover:bg-black/5 dark:hover:bg-white/5"
           >
             {backHome}
-          </LinkButton>
-        </Stack>
-      </Box>
+          </Link>
+        </div>
+      </main>
     </>
   )
 }

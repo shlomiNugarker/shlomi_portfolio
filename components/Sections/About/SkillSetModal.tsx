@@ -1,18 +1,13 @@
- 
-import {
-  Heading,
-  Dialog,
-  Portal,
-  CloseButton,
-  List,
-  Icon,
-  SimpleGrid,
-  Separator,
-  Text,
-} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useColorModeValue } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogBody,
+} from 'components/ui/dialog'
+import { Separator } from 'components/ui/separator'
 import styles from './styles.module.css'
 import { Skill, Skills, splitSkills } from 'config/skills'
 import { isRtl } from 'config/seo'
@@ -22,6 +17,23 @@ type ISkillSetModal = {
   onClose(): void
 }
 
+const SkillColumn = ({ items }: { items: Skill[] }) => (
+  <ul className="flex list-none flex-col gap-3">
+    {items.map((item) => {
+      const Icon = item.icon
+      return (
+        <li
+          key={item.name}
+          className="flex items-center text-sm md:text-base"
+        >
+          <Icon className="me-2 text-[2em] text-kl-emphasis" />
+          {item.name}
+        </li>
+      )
+    })}
+  </ul>
+)
+
 const SkillList = ({
   title,
   columns,
@@ -29,45 +41,19 @@ const SkillList = ({
   title: string
   columns: Skill[][]
 }) => {
-  const emphasis = useColorModeValue('teal.700', 'cyan.200')
   const [colOne, colTwo = []] = columns
   return (
     <>
-      <Heading as="div" size="sm" paddingBottom={1} color="kl.description">
-        {title}
-      </Heading>
-      <Separator marginBottom={4} />
-      <SimpleGrid columns={2} gap={4} paddingBottom={6}>
-        <List.Root gap={3} listStyle="none">
-          {colOne.map((item) => (
-            <List.Item
-              key={item.name}
-              fontSize={{ base: 'sm', md: 'md' }}
-              display="flex"
-              alignItems="center"
-            >
-              <Icon as={item.icon} color={emphasis} fontSize="2em" marginEnd={2} />
-              {item.name}
-            </List.Item>
-          ))}
-        </List.Root>
-        <List.Root gap={3} listStyle="none">
-          {colTwo.map((item) => (
-            <List.Item
-              key={item.name}
-              fontSize={{ base: 'sm', md: 'md' }}
-              display="flex"
-              alignItems="center"
-            >
-              <Icon as={item.icon} color={emphasis} fontSize="2em" marginEnd={2} />
-              {item.name}
-            </List.Item>
-          ))}
-        </List.Root>
-      </SimpleGrid>
+      <div className="pb-1 text-sm font-bold text-kl-description">{title}</div>
+      <Separator className="mb-4" />
+      <div className="grid grid-cols-2 gap-4 pb-6">
+        <SkillColumn items={colOne} />
+        <SkillColumn items={colTwo} />
+      </div>
     </>
   )
 }
+
 const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
   const { t } = useTranslation('common')
   const { locale } = useRouter()
@@ -77,39 +63,20 @@ const SkillSetModal = ({ isOpen, onClose }: ISkillSetModal) => {
   const dataBaseCols = splitSkills(Skills.database)
   const toolsCols = splitSkills(Skills.tools)
   return (
-    <Dialog.Root
-      open={isOpen}
-      onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
-      motionPreset="slide-in-bottom"
-      scrollBehavior="inside"
-    >
-      <Portal>
-        <Dialog.Backdrop />
-        <Dialog.Positioner>
-          {/* Portaled content escapes the page's RTL context, so set the
-              direction explicitly to keep the modal aligned in he/ar. */}
-          <Dialog.Content dir={dir}>
-            {/* The close button sits at the inline-end edge (right in LTR, left
-                in RTL). Reserve space there so the title never sits under it. */}
-            <Dialog.Header paddingInlineEnd={10}>
-              {t('skills.modal_title')}
-            </Dialog.Header>
-            {/* The portaled close trigger doesn't inherit the Content's dir, so
-                its inset-inline-end resolves as LTR (right) even in RTL. Set dir
-                explicitly so it lands on the correct (start/left) corner. */}
-            <Dialog.CloseTrigger asChild dir={dir}>
-              <CloseButton size="sm" />
-            </Dialog.CloseTrigger>
-            <Dialog.Body className={styles.skillModal}>
-              <SkillList title={t('skills.frontend')} columns={frontendCols} />
-              <SkillList title={t('skills.backend')} columns={backendCols} />
-              <SkillList title={t('skills.databases')} columns={dataBaseCols} />
-              <SkillList title={t('skills.tools')} columns={toolsCols} />
-            </Dialog.Body>
-          </Dialog.Content>
-        </Dialog.Positioner>
-      </Portal>
-    </Dialog.Root>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      {/* dir set explicitly: portaled content escapes the page RTL context. */}
+      <DialogContent dir={dir}>
+        <DialogHeader>
+          <DialogTitle>{t('skills.modal_title')}</DialogTitle>
+        </DialogHeader>
+        <DialogBody className={styles.skillModal}>
+          <SkillList title={t('skills.frontend')} columns={frontendCols} />
+          <SkillList title={t('skills.backend')} columns={backendCols} />
+          <SkillList title={t('skills.databases')} columns={dataBaseCols} />
+          <SkillList title={t('skills.tools')} columns={toolsCols} />
+        </DialogBody>
+      </DialogContent>
+    </Dialog>
   )
 }
 

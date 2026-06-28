@@ -1,166 +1,126 @@
-import { memo, useCallback } from 'react'
-import {
-  Container,
-  Flex,
-  Box,
-  IconButton,
-  useBreakpointValue,
-} from '@chakra-ui/react'
-import { LinkButton } from 'components/ui/link-button'
+import { useState, useCallback } from 'react'
 import { NavLinks } from 'config/navigation'
-import { useColorMode, useColorModeValue } from 'components/ui/color-mode'
+import { useColorMode } from 'components/ui/color-mode'
 import { useTranslation } from 'next-i18next/pages'
 import { BsSun as SunIcon, BsMoon as MoonIcon } from 'react-icons/bs'
-import { useState, useCallback as useCallbackToggle } from 'react'
 import styles from './styles.module.css'
 import MobileMenu from './toggle'
 import LanguageSwitcher from './LanguageSwitcher'
-import { ThemeMode, mobileBreakpointsMap } from 'config/theme'
+import { useIsMobile } from 'hooks/useMediaQuery'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 
 const Navigation = () => {
   const { t } = useTranslation('common')
   const { toggleColorMode, colorMode } = useColorMode()
   const [isOpen, setIsOpen] = useState(false)
-  const toggleOpen = useCallbackToggle(() => setIsOpen((v) => !v), [])
-  const isMobile = useBreakpointValue(mobileBreakpointsMap)
-  const menuButtonSize = useBreakpointValue({
-    base: 'xl',
-    md: 'sm',
-  })
+  const toggleOpen = useCallback(() => setIsOpen((v) => !v), [])
+  const isMobile = useIsMobile()
+  const scrollDirection = useScrollDirection()
 
-  const bg = useColorModeValue(
-    'rgba(237, 242, 247, 0.95)',
-    'rgba(18, 18, 18, 0.9)'
-  )
+  const isDark = colorMode === 'dark'
+  const Icon = isDark ? SunIcon : MoonIcon
+  const collapsed = !isMobile && scrollDirection === ScrollDirection.Down
 
-  const borderColor = useColorModeValue('teal.700', 'cyan.200')
-
-  const IsDark = colorMode === ThemeMode.Dark
-  const btnClassName = `${styles.blogBtn} ${!IsDark && styles.dark}`
-  const Icon = IsDark ? SunIcon : MoonIcon
   const onMenuItemClick = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation()
-      if (isMobile) {
-        toggleOpen()
-      }
+      if (isMobile) toggleOpen()
     },
     [isMobile, toggleOpen]
   )
-  const scrollDirection = useScrollDirection()
 
   return (
     <>
-      <Box
-        display={{ base: 'flex', xl: 'none' }}
-        alignItems="center"
-        paddingTop={1}
-        className={styles.menuBar}
-        zIndex={100}
-        top="3%"
+      {/* Mobile control bar (toggle + language + hamburger) */}
+      <div
+        className="z-[100] flex items-center pt-1 top-[3%]"
+        style={{ display: isMobile ? 'flex' : 'none' }}
       >
-        <IconButton
+        <button
           aria-label={t('a11y.color_mode')}
-          variant="ghost"
-          boxShadow="none"
           onClick={toggleColorMode}
-          padding={0}
+          className="flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
         >
           <Icon />
-        </IconButton>
+        </button>
         <LanguageSwitcher />
-        <MobileMenu isDarkMode={IsDark} toggle={toggleOpen} isOpen={isOpen} />
-      </Box>
+        <MobileMenu isDarkMode={isDark} toggle={toggleOpen} isOpen={isOpen} />
+      </div>
 
-      <Container
-        width="100%"
-        // Transparent on desktop; the solid panel bg is only needed for the
-        // full-screen mobile menu overlay.
-        backgroundColor={isMobile && isOpen ? bg : 'transparent'}
-        maxWidth={{ base: '100%', sm: '100%', lg: '50%', xl: '60%' }}
-        className={styles.menu}
-        insetEnd={{
-          lg:
-            !isMobile && scrollDirection === ScrollDirection.Down
-              ? '2%'
-              : '3.5%',
-        }}
-        style={{
-          width:
-            !isMobile && scrollDirection === ScrollDirection.Down
-              ? '12%'
-              : '100%',
-          // Resolve to undefined (omitted) when false so server and client
-          // render the same style string — avoids React hydration mismatches.
-          top: !isOpen && isMobile ? '-100vh' : undefined,
-          opacity: !isOpen && isMobile ? 0 : undefined,
-          left: isOpen && isMobile ? 0 : undefined,
-        }}
-        borderColor={isOpen && isMobile ? borderColor : undefined}
-        borderBottomWidth={isOpen && isMobile ? '1px' : undefined}
-        paddingBottom={isOpen && isMobile ? '1px' : undefined}
-        marginTop={0}
-        paddingTop={1}
-        as="nav"
+      {/* Nav panel: fixed top-end bar on desktop; full-screen overlay on mobile */}
+      <nav
+        className={`${styles.menu} w-full max-w-full pt-1 lg:max-w-[50%] xl:max-w-[60%] ${
+          isMobile && isOpen ? 'bg-kl-bg' : 'bg-transparent'
+        }`}
+        style={
+          isMobile
+            ? // Mobile: a full-screen opaque overlay when open; parked fully
+              // off-screen (and non-interactive) when closed.
+              {
+                position: 'fixed',
+                inset: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: 50,
+                top: isOpen ? 0 : '-100vh',
+                opacity: isOpen ? 1 : 0,
+                pointerEvents: isOpen ? 'auto' : 'none',
+              }
+            : {
+                // Desktop: fixed bar at the top inline-end edge; collapses on
+                // scroll-down.
+                width: collapsed ? '12%' : '100%',
+                insetInlineEnd: collapsed ? '2%' : '3.5%',
+              }
+        }
       >
-        <Flex
-          justifyContent={{ base: 'center', lg: 'flex-end' }}
-          direction={{
-            base: 'column',
-            lg: scrollDirection === ScrollDirection.Down ? 'column' : 'row',
+        <div
+          className={`flex justify-center pe-0 lg:justify-end ${
+            collapsed ? 'lg:flex-col lg:py-10' : 'lg:flex-row lg:py-3'
+          } flex-col py-10 sm:px-10 lg:px-0`}
+          style={{
+            height: isMobile ? '100vh' : 'auto',
+            paddingBottom: isMobile ? '2.5rem' : '0',
           }}
-          paddingX={{ base: '', sm: '10', lg: '0' }}
-          paddingY={{
-            base: '10',
-            lg: scrollDirection === ScrollDirection.Down ? '10' : '3',
-          }}
-          height={{ base: '100vh', lg: 'auto' }}
-          paddingRight="0"
-          paddingBottom={isMobile ? 10 : '0'}
           onClick={() => isMobile && toggleOpen()}
         >
           {NavLinks.map((link, index) => (
-            <Box
+            <div
               key={link.key}
-              width={{ base: '100%', lg: 'auto' }}
-              textAlign={{ base: 'center', lg: 'start' }}
-              marginY={index === 0 ? undefined : { base: 2, lg: 0 }}
+              className={`w-full text-center lg:w-auto lg:text-start ${
+                index === 0 ? '' : 'my-2 lg:my-0'
+              }`}
             >
-              <LinkButton
-                fontWeight="light"
-                variant="ghost"
-                fontSize={menuButtonSize}
-                letterSpacing={2}
-                className={btnClassName}
-                padding={2}
-                marginX={2}
-                href={isMobile && link.mobileHref ? link.mobileHref : link.href}
+              <a
+                href={
+                  isMobile && link.mobileHref ? link.mobileHref : link.href
+                }
                 rel="noreferrer"
                 onClick={onMenuItemClick}
+                className={`${styles.blogBtn} ${!isDark ? styles.dark : ''} mx-2 inline-block p-2 font-light tracking-[2px] ${
+                  isMobile ? 'text-xl' : 'text-sm'
+                }`}
               >
                 {t(`nav.${link.key}`)}
-              </LinkButton>
-            </Box>
+              </a>
+            </div>
           ))}
           {!isMobile && (
-            <Box display="flex" alignItems="center">
-              <IconButton
-                marginX={1}
+            <div className="flex items-center">
+              <button
                 aria-label={t('a11y.color_mode')}
-                variant="ghost"
-                boxShadow="none"
                 onClick={toggleColorMode}
+                className="mx-1 flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
               >
                 <Icon />
-              </IconButton>
+              </button>
               <LanguageSwitcher />
-            </Box>
+            </div>
           )}
-        </Flex>
-      </Container>
+        </div>
+      </nav>
     </>
   )
 }
 
-export default memo(Navigation)
+export default Navigation

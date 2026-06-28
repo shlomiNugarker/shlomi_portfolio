@@ -1,7 +1,13 @@
 import { useRouter } from 'next/router'
-import { Box, Button, Menu, Portal } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next/pages'
 import { LuGlobe } from 'react-icons/lu'
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from 'components/ui/dropdown-menu'
+import { isRtl } from 'config/seo'
 
 const LOCALE_LABELS: Record<string, string> = {
   en: 'English',
@@ -15,11 +21,9 @@ const LanguageSwitcher = () => {
   const router = useRouter()
   const { t } = useTranslation('common')
   const { locale, locales, pathname, query, asPath } = router
+  const dir = isRtl(locale) ? 'rtl' : 'ltr'
 
   const change = (next: string) => {
-    // Persist the choice so '/' redirects here on the next visit. Set via the
-    // document API (not a direct `document.cookie =` assignment) to satisfy the
-    // react-hooks immutability lint rule.
     if (typeof document !== 'undefined') {
       const maxAge = 60 * 60 * 24 * 365
       // eslint-disable-next-line react-hooks/immutability -- setting a cookie is a deliberate DOM side-effect in an event handler
@@ -29,40 +33,26 @@ const LanguageSwitcher = () => {
   }
 
   return (
-    <Menu.Root>
-      <Menu.Trigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          // Include the visible locale code so the accessible name matches the
-          // visible label (WCAG label-in-name / voice control).
-          aria-label={`${(locale ?? '').toUpperCase()} — ${t('a11y.language')}`}
-          boxShadow="none"
-          paddingX={2}
-        >
-          <LuGlobe />
-          <Box as="span" textTransform="uppercase" fontSize="sm" marginStart={1}>
-            {locale}
-          </Box>
-        </Button>
-      </Menu.Trigger>
-      <Portal>
-        <Menu.Positioner>
-          <Menu.Content>
-            {(locales ?? []).map((l) => (
-              <Menu.Item
-                key={l}
-                value={l}
-                onClick={() => change(l)}
-                fontWeight={l === locale ? 'bold' : 'normal'}
-              >
-                {LOCALE_LABELS[l] ?? l}
-              </Menu.Item>
-            ))}
-          </Menu.Content>
-        </Menu.Positioner>
-      </Portal>
-    </Menu.Root>
+    <DropdownMenu dir={dir}>
+      <DropdownMenuTrigger
+        aria-label={`${(locale ?? '').toUpperCase()} — ${t('a11y.language')}`}
+        className="flex h-8 items-center gap-1 rounded-md bg-transparent px-2 text-sm hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-kl-emphasis dark:hover:bg-white/10"
+      >
+        <LuGlobe />
+        <span className="text-sm uppercase">{locale}</span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {(locales ?? []).map((l) => (
+          <DropdownMenuItem
+            key={l}
+            onClick={() => change(l)}
+            className={l === locale ? 'font-bold' : 'font-normal'}
+          >
+            {LOCALE_LABELS[l] ?? l}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

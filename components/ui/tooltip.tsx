@@ -1,60 +1,50 @@
-import { Tooltip as ChakraTooltip, Portal } from '@chakra-ui/react'
 import * as React from 'react'
-import { useIsMounted } from 'hooks/useIsMounted'
+import * as TooltipPrimitive from '@radix-ui/react-tooltip'
+import { cn } from 'lib/utils'
 
-// Tooltip snippet for Chakra UI v3 (compound Tooltip API), exposing a simple
-// `content`-based API similar to the v2 `label` prop the app used.
-export interface TooltipProps extends ChakraTooltip.RootProps {
-  showArrow?: boolean
-  portalled?: boolean
+const TooltipProvider = TooltipPrimitive.Provider
+const TooltipRoot = TooltipPrimitive.Root
+const TooltipTrigger = TooltipPrimitive.Trigger
+
+const TooltipContent = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
+>(({ className, sideOffset = 6, children, ...props }, ref) => (
+  <TooltipPrimitive.Portal>
+    <TooltipPrimitive.Content
+      ref={ref}
+      sideOffset={sideOffset}
+      className={cn(
+        'z-50 max-w-xs rounded-md bg-gray-800 px-3 py-1.5 text-xs text-white shadow-md dark:bg-gray-200 dark:text-gray-900',
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <TooltipPrimitive.Arrow className="fill-gray-800 dark:fill-gray-200" />
+    </TooltipPrimitive.Content>
+  </TooltipPrimitive.Portal>
+))
+TooltipContent.displayName = TooltipPrimitive.Content.displayName
+
+// Convenience wrapper matching the old `content`-based API used in Detail.tsx.
+export interface TooltipProps {
   content: React.ReactNode
-  contentProps?: ChakraTooltip.ContentProps
-  disabled?: boolean
+  children: React.ReactNode
 }
 
-export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
-  function Tooltip(props, ref) {
-    const {
-      showArrow = true,
-      children,
-      disabled,
-      portalled = true,
-      content,
-      contentProps,
-      ...rest
-    } = props
-
-    // Ark's Tooltip generates a random id that differs between the SSR and the
-    // client render, causing a hydration mismatch. Render the plain trigger on
-    // the server and mount the interactive tooltip only after hydration.
-    const mounted = useIsMounted()
-
-    if (disabled || !mounted) return children
-
-    return (
-      <ChakraTooltip.Root {...rest}>
-        <ChakraTooltip.Trigger asChild>{children}</ChakraTooltip.Trigger>
-        <PortalWrapper portalled={portalled}>
-          <ChakraTooltip.Positioner>
-            <ChakraTooltip.Content ref={ref} {...contentProps}>
-              {showArrow && (
-                <ChakraTooltip.Arrow>
-                  <ChakraTooltip.ArrowTip />
-                </ChakraTooltip.Arrow>
-              )}
-              {content}
-            </ChakraTooltip.Content>
-          </ChakraTooltip.Positioner>
-        </PortalWrapper>
-      </ChakraTooltip.Root>
-    )
-  }
+export const Tooltip = ({ content, children }: TooltipProps) => (
+  <TooltipProvider delayDuration={200}>
+    <TooltipRoot>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent>{content}</TooltipContent>
+    </TooltipRoot>
+  </TooltipProvider>
 )
 
-const PortalWrapper = ({
-  portalled,
-  children,
-}: {
-  portalled: boolean
-  children: React.ReactNode
-}) => (portalled ? <Portal>{children}</Portal> : <>{children}</>)
+export {
+  TooltipProvider,
+  TooltipRoot,
+  TooltipTrigger,
+  TooltipContent,
+}

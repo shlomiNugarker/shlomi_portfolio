@@ -1,15 +1,5 @@
 import { useState } from 'react'
-import {
-  Box,
-  Separator,
-  Text,
-  Stack,
-  HStack,
-  Heading,
-} from '@chakra-ui/react'
 import NextImage from 'next/image'
-import { LinkButton } from 'components/ui/link-button'
-import { useColorModeValue } from 'components/ui/color-mode'
 import styles from './styles.module.css'
 
 export type FeaturedCardProps = {
@@ -26,52 +16,24 @@ export type FeaturedCardProps = {
   badgeLabel: string
   // Paid client work gets a prominent accent badge; personal projects a muted one.
   isClient: boolean
-  // Kept for API compatibility with the section; layout is now uniform.
-  isMobile?: boolean
 }
 
 const Tag = ({ label }: { label: string }) => (
-  <Box
-    as="span"
-    fontSize="xs"
-    fontWeight="medium"
-    letterSpacing="0.02em"
-    paddingX={2.5}
-    paddingY={1}
-    borderRadius="full"
-    borderWidth="1px"
-    borderColor={{ base: 'blackAlpha.200', _dark: 'whiteAlpha.300' }}
-    color="kl.accentAlternative"
-    bg={{ base: 'blackAlpha.50', _dark: 'whiteAlpha.100' }}
-    whiteSpace="nowrap"
-  >
+  <span className="whitespace-nowrap rounded-full border border-black/20 bg-black/5 px-2.5 py-1 text-xs font-medium tracking-[0.02em] text-kl-accent-alt dark:border-white/30 dark:bg-white/10">
     {label}
-  </Box>
+  </span>
 )
 
 const Badge = ({ label, isClient }: { label: string; isClient: boolean }) => (
-  <Box
-    as="span"
-    position="absolute"
-    top={3}
-    insetStart={3}
-    zIndex={2}
-    fontSize="xs"
-    fontWeight="bold"
-    letterSpacing="0.04em"
-    textTransform="uppercase"
-    paddingX={2.5}
-    paddingY={1}
-    borderRadius="full"
-    backdropFilter="blur(6px)"
-    color="white"
-    // teal.700 (not teal.500) so white label text clears WCAG AA (~7:1 vs
-    // ~2.5:1); the personal badge already has white-on-dark contrast.
-    bg={isClient ? 'teal.700' : 'blackAlpha.700'}
-    boxShadow="sm"
+  <span
+    className={`absolute start-3 top-3 z-[2] rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-[0.04em] text-white shadow-sm backdrop-blur-[6px] ${
+      // teal.700 so the white label clears WCAG AA; personal badge is dark.
+      isClient ? 'bg-teal-700' : 'bg-black/70'
+    }`}
+    style={isClient ? { backgroundColor: '#0f766e' } : undefined}
   >
     {label}
-  </Box>
+  </span>
 )
 
 const Cover = ({
@@ -89,19 +51,11 @@ const Cover = ({
 }) => {
   const [active, setActive] = useState(0)
   const hasGallery = images.length > 1
-  const dotBg = useColorModeValue('blackAlpha.400', 'whiteAlpha.500')
-  const dotActive = useColorModeValue('teal.700', 'cyan.200')
 
   return (
-    <Box
-      position="relative"
-      width="100%"
-      aspectRatio={16 / 8}
-      overflow="hidden"
-      bg={{ base: 'blackAlpha.100', _dark: 'whiteAlpha.50' }}
-    >
+    <div className="relative aspect-[16/8] w-full overflow-hidden bg-black/10 dark:bg-white/5">
       <Badge label={badgeLabel} isClient={isClient} />
-      <Box position="absolute" inset={0}>
+      <div className="absolute inset-0">
         <NextImage
           key={images[active]}
           src={images[active]}
@@ -112,46 +66,31 @@ const Cover = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 760px"
           style={{ objectFit: 'cover', objectPosition }}
         />
-      </Box>
+      </div>
 
       {hasGallery && (
-        <HStack
-          position="absolute"
-          bottom={1}
-          insetStart="50%"
-          transform="translateX(-50%)"
-          gap={0}
-          zIndex={1}
-        >
+        <div className="absolute bottom-1 start-1/2 z-[1] flex -translate-x-1/2 gap-0 rtl:translate-x-1/2">
           {images.map((img, i) => (
             // 24x24 transparent hit area (WCAG target size) with a small visible
-            // dot centered inside, so the dot stays compact but is easy to tap.
-            <Box
-              as="button"
+            // dot centered inside.
+            <button
               key={img}
               aria-label={`Show image ${i + 1}`}
               onClick={() => setActive(i)}
-              width="24px"
-              height="24px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              bg="transparent"
-              cursor="pointer"
+              className="flex h-6 w-6 cursor-pointer items-center justify-center bg-transparent"
             >
-              <Box
-                as="span"
-                width={i === active ? '18px' : '8px'}
-                height="8px"
-                borderRadius="full"
-                bg={i === active ? dotActive : dotBg}
-                transition="width 0.2s ease, background 0.2s ease"
+              <span
+                className={`h-2 rounded-full transition-all duration-200 ${
+                  i === active
+                    ? 'w-[18px] bg-kl-emphasis'
+                    : 'w-2 bg-black/40 dark:bg-white/50'
+                }`}
               />
-            </Box>
+            </button>
           ))}
-        </HStack>
+        </div>
       )}
-    </Box>
+    </div>
   )
 }
 
@@ -167,25 +106,9 @@ const FeaturedCard = ({
   badgeLabel,
   isClient,
 }: FeaturedCardProps) => {
-  const bg = useColorModeValue('blackAlpha.50', 'whiteAlpha.100')
-  const borderCol = useColorModeValue('blackAlpha.100', 'whiteAlpha.200')
-
   return (
-    <Box
-      role="group"
-      bg={bg}
-      borderRadius="1.25em"
-      borderWidth="1px"
-      borderColor={borderCol}
-      overflow="hidden"
-      height="100%"
-      display="flex"
-      flexDirection="column"
-      className={styles.featureCard}
-      transition="border-color 0.2s ease, transform 0.2s ease"
-      _hover={{
-        borderColor: { base: 'teal.400', _dark: 'teal.300' },
-      }}
+    <div
+      className={`${styles.featureCard} group flex h-full flex-col overflow-hidden rounded-[1.25em] border border-black/10 bg-black/5 transition-colors duration-200 hover:border-teal-400 dark:border-white/20 dark:bg-white/10 dark:hover:border-teal-300`}
     >
       {/* Wide, full-bleed cover (single image or a small gallery). */}
       <Cover
@@ -197,76 +120,41 @@ const FeaturedCard = ({
       />
 
       {/* Content */}
-      <Stack
-        gap={4}
-        flex="1"
-        paddingX={{ base: 5, md: 7 }}
-        paddingY={{ base: 5, md: 6 }}
-        textAlign="start"
-      >
-        <Stack gap={2}>
-          <HStack gap={3} align="baseline">
-            <Text
-              color="kl.accentAlternative"
-              fontSize={{ base: 'sm', md: 'md' }}
-              fontWeight="bold"
-              fontVariantNumeric="tabular-nums"
-            >
+      <div className="flex flex-1 flex-col gap-4 px-5 py-5 text-start md:px-7 md:py-6">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-baseline gap-3">
+            <span className="text-sm font-bold tabular-nums text-kl-accent-alt md:text-base">
               #0{idx}
-            </Text>
-            <Heading
-              as="h3"
-              size={{ base: 'lg', md: 'xl' }}
-              letterSpacing="wide"
-              textTransform="uppercase"
-            >
+            </span>
+            <h3 className="text-lg font-bold uppercase tracking-wide md:text-xl">
               {title}
-            </Heading>
-          </HStack>
-          <Separator borderColor={borderCol} />
-        </Stack>
+            </h3>
+          </div>
+          <hr className="border-black/10 dark:border-white/20" />
+        </div>
 
-        <Text
-          fontSize={{ base: 'sm', md: 'md' }}
-          color="kl.description"
-          lineHeight="tall"
-        >
+        <p className="text-sm leading-relaxed text-kl-description md:text-base">
           {description}
-        </Text>
+        </p>
 
         {tags && tags.length > 0 && (
-          <HStack gap={2} wrap="wrap">
-            {tags.map((t) => (
-              <Tag key={t} label={t} />
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <Tag key={tag} label={tag} />
             ))}
-          </HStack>
+          </div>
         )}
 
-        <LinkButton
-          variant="outline"
-          borderWidth="1px"
-          borderRadius="md"
-          alignSelf="flex-start"
-          borderColor={{ base: '#595959', _dark: 'whiteAlpha.500' }}
-          _hover={{
-            backgroundColor: {
-              base: 'rgba(49, 151, 149, 0.08)',
-              _dark: 'rgba(157, 236, 249, 0.08)',
-            },
-            borderColor: { base: 'teal.400', _dark: 'teal.300' },
-          }}
-          fontWeight="medium"
-          fontSize={{ base: 'sm', md: 'md' }}
-          size="sm"
+        <a
           href={ctaUrl}
           rel="noreferrer"
           target="_blank"
-          marginTop="auto"
+          className="mt-auto inline-flex h-8 items-center justify-center self-start rounded-md border border-[#595959] px-3 text-sm font-medium transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-white/50 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)] md:text-base"
         >
           {ctaLabel}
-        </LinkButton>
-      </Stack>
-    </Box>
+        </a>
+      </div>
+    </div>
   )
 }
 
