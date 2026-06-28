@@ -1,14 +1,12 @@
 import { useRouter } from 'next/router'
 import { RiMouseLine } from 'react-icons/ri'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
-import { useIsMobile } from 'hooks/useMediaQuery'
 import { isRtl } from 'config/seo'
 
 const ScrollMore = () => {
   const { locale } = useRouter()
   const rtl = isRtl(locale)
-  const isMobile = useIsMobile()
-  const scrollDirection = useScrollDirection(false, isMobile)
+  const scrollDirection = useScrollDirection(false)
 
   return (
     // Pure-CSS responsive hide: the vertical email only shows on xl+.
@@ -28,7 +26,6 @@ const ScrollMore = () => {
             // LTR: fixed to the viewport bottom. RTL: stay inside the parent
             // (which owns the fixed bottom/end anchor) so it mirrors correctly.
             ...(rtl ? {} : { position: 'fixed', bottom: '-8%' }),
-            display: isMobile === false ? undefined : 'none',
           }}
         >
           <a

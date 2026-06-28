@@ -1,20 +1,97 @@
 
 
-.menu{
-  position: fixed;
-  top:0;
-  /* Logical end edge: right in LTR, left in RTL — so the fixed nav mirrors. */
-  inset-inline-end: 3.5%;
-  z-index: 1;
-}
-.mobileMenuContainer{
+/* Mobile/tablet header bar: a fixed, full-width bar with the site background.
+   Driven purely by a media query (not a JS isMobile flag) so it's correct on
+   first paint — no hydration jump. Above xl it becomes a normal, transparent
+   element and the desktop nav (.menu) takes over. */
+.menuBar{
   position: fixed;
   z-index: 40;
   top: 0;
   inset-inline: 0;
   width: 100%;
-  height: 68px;
   transition: transform 0.2s ease;
+}
+@media (min-width: 80em) {
+  .menuBar{
+    position: static;
+    transform: none !important;
+  }
+}
+
+/* Desktop floating nav — only fixed at xl. */
+.menu{
+  position: static;
+}
+@media (min-width: 80em) {
+  .menu{
+    position: fixed;
+    top: 0;
+    inset-inline-end: 3.5%;
+    z-index: 1;
+    width: 100%;
+    transition: width 0.2s ease, inset-inline-end 0.2s ease;
+  }
+  /* Collapse to a compact corner pill on scroll-down (desktop only). */
+  .menu[data-collapsed='true']{
+    width: 12%;
+    inset-inline-end: 2%;
+  }
+}
+
+/* --- Nav panel: full-screen overlay below xl, inline bar at xl --- */
+.navPanel{
+  padding-top: 0.25rem;
+}
+/* Below xl: a full-screen opaque overlay, parked off-screen until opened.
+   Driven by data-open (post-mount interaction), so first paint = closed,
+   which is the correct mobile state — no jump. */
+@media (max-width: 79.99em) {
+  .navPanel{
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    background: var(--kl-bg);
+    top: -100vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: top 0.25s ease, opacity 0.25s ease;
+  }
+  .navPanel[data-open='true']{
+    top: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+@media (min-width: 80em) {
+  .navPanel{
+    max-width: 60%;
+    background: transparent;
+  }
+}
+
+.navInner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  padding-block: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+@media (min-width: 62em) {
+  .navInner{
+    height: auto;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding-block: 0.75rem;
+    padding-bottom: 0;
+  }
+  .menu[data-collapsed='true'] .navInner{
+    flex-direction: column;
+    padding-block: 2.5rem;
+  }
 }
 
 .blogBtn{

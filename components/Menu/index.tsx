@@ -1,32 +1,23 @@
 import Logo from '../Logo'
 import styles from './styles.module.css'
 import Navigation from './Navigation'
-import { useIsMobile } from 'hooks/useMediaQuery'
 import useScrollDirection, { ScrollDirection } from 'hooks/useScrollDirection'
 
 const Menu = () => {
-  const isMobile = useIsMobile()
-  const scrollDirection = useScrollDirection(true, isMobile)
-  // Hide the mobile header on scroll-down (functional, not an animation):
-  // translate it out of view.
-  const hidden = isMobile && scrollDirection === ScrollDirection.Down
+  // Scroll direction is the only JS-driven bit and it only affects an already-
+  // mounted interaction (hiding the bar on scroll-down), never first paint.
+  const scrollDirection = useScrollDirection(true)
+  const hidden = scrollDirection === ScrollDirection.Down
+
   return (
+    // The fixed bar + background are applied via CSS media query (.menuBar),
+    // not a JS isMobile flag, so the mobile layout is correct on first paint
+    // (no hydration jump). The bar only exists/styles below xl.
     <div
-      className={isMobile ? styles.mobileMenuContainer : ''}
-      style={
-        isMobile
-          ? { transform: hidden ? 'translateY(-100%)' : 'translateY(0)' }
-          : undefined
-      }
+      className={styles.menuBar}
+      style={{ transform: hidden ? 'translateY(-100%)' : 'translateY(0)' }}
     >
-      {/* Match the site background so the mobile header blends in (kl.bg).
-          Roomier horizontal padding on tablet keeps the logo and nav from
-          hugging the far screen edges. */}
-      <header
-        className={`m-0 flex w-full items-center justify-between px-5 py-5 md:px-12 lg:px-20 lg:py-0 ${
-          isMobile ? 'bg-kl-bg' : 'bg-transparent'
-        }`}
-      >
+      <header className="m-0 flex w-full items-center justify-between bg-kl-bg px-5 py-5 md:px-12 lg:bg-transparent lg:px-20 lg:py-0">
         <Logo />
         <Navigation />
       </header>
