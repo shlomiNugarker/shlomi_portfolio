@@ -55,11 +55,3 @@ export const FeaturedWorksList: FeaturedWork[] = [
     type: 'personal',
   },
 ]
-
-// Real, verifiable counts derived from the project list above — used by the
-// About "proof strip". Nothing is asserted that isn't backed by an entry here,
-// so the numbers update automatically as projects are added or changed.
-export const workStats = {
-  shipped: FeaturedWorksList.length,
-  clients: FeaturedWorksList.filter((w) => w.type === 'client').length,
-}

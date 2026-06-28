@@ -19,13 +19,7 @@
     "body": "I've shipped a bilingual marketing site for a paying client and built two products of my own from scratch, including an AI website builder that generates, previews and deploys live apps. When you hire me you get one person accountable from first idea to launch — fueled by",
     "coffee": "coffee",
     "coffee_tip": "Lots of it.",
-    "see_skills": "See the full list",
-    "proof_shipped_one": "{{count}} product shipped end-to-end",
-    "proof_shipped_other": "{{count}} products shipped end-to-end",
-    "proof_clients_one": "{{count}} paying client",
-    "proof_clients_other": "{{count}} paying clients",
-    "proof_ai": "Live AI website builder",
-    "proof_i18n": "3 languages · full RTL"
+    "see_skills": "See the full list"
   },
   "services": {
     "heading": "How I can help.",
