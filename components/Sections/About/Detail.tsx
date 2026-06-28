@@ -72,7 +72,9 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
         <GiCoffeePot aria-hidden className="inline text-kl-emphasis" />.
       </p>
 
-      <div className="grid grid-cols-2 gap-4">
+      {/* Skills grid: kept narrow and centered below xl so the two columns sit
+          close together (no big mid gap); left-aligned full width at xl. */}
+      <div className="mx-auto grid w-fit grid-cols-2 gap-x-10 gap-y-3 xl:mx-0 xl:w-auto xl:gap-x-4">
         <ul className="flex list-none flex-col gap-3">
           {leftSkills.map((s) => (
             <SkillItem key={s.name} name={s.name} icon={s.icon} />
@@ -83,10 +85,10 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
             <SkillItem key={s.name} name={s.name} icon={s.icon} />
           ))}
         </ul>
-        <div>
+        <div className="col-span-2 flex justify-center xl:col-span-1 xl:justify-start">
           <button
             onClick={onOpen}
-            className="inline-flex items-center gap-1 text-start text-sm text-kl-emphasis md:text-base"
+            className="inline-flex items-center gap-1 text-sm text-kl-emphasis md:text-base"
           >
             {t('about.see_skills')} <IoMdOpen aria-hidden />
           </button>
