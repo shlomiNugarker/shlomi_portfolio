@@ -13,6 +13,7 @@ import {
 } from 'react-icons/si'
 import { GiCoffeePot } from 'react-icons/gi'
 import { IoMdOpen } from 'react-icons/io'
+import { workStats } from 'config/works'
 
 type ISkillSetModal = {
   onOpen(): void
@@ -44,6 +45,31 @@ const SkillItem = ({
   </li>
 )
 
+// Credibility row built ONLY from verifiable facts in config/works.ts (no
+// invented claims). Counts come from workStats, so they stay accurate as the
+// project list changes.
+const ProofStrip = () => {
+  const { t } = useTranslation('common')
+  const items = [
+    t('about.proof_shipped', { count: workStats.shipped }),
+    t('about.proof_clients', { count: workStats.clients }),
+    t('about.proof_ai'),
+    t('about.proof_i18n'),
+  ]
+  return (
+    <ul className="flex flex-wrap justify-center gap-2 xl:justify-start">
+      {items.map((label) => (
+        <li
+          key={label}
+          className="rounded-full border border-teal-600/40 bg-[rgba(49,151,149,0.06)] px-3 py-1 text-xs font-medium text-kl-emphasis dark:border-cyan-200/30 dark:bg-[rgba(157,236,249,0.06)] md:text-sm"
+        >
+          {label}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 const Detail = ({ onOpen }: ISkillSetModal) => {
   const { t } = useTranslation('common')
 
@@ -71,6 +97,8 @@ const Detail = ({ onOpen }: ISkillSetModal) => {
         </Tooltip>{' '}
         <GiCoffeePot aria-hidden className="inline text-kl-emphasis" />.
       </p>
+
+      <ProofStrip />
 
       {/* Skills grid: kept narrow and centered below xl so the two columns sit
           close together (no big mid gap); left-aligned full width at xl. */}
