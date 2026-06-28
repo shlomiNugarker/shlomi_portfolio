@@ -28,7 +28,7 @@ const Navigation = () => {
         <button
           aria-label={t('a11y.color_mode')}
           onClick={toggleColorMode}
-          className="flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
+          className="flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-kl-hover"
         >
           <Icon aria-hidden />
         </button>
@@ -55,7 +55,7 @@ const Navigation = () => {
                 href={link.mobileHref ?? link.href}
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className={`${styles.blogBtn} ${!isDark ? styles.dark : ''} mx-2 inline-block p-2 font-light tracking-[2px] text-xl lg:text-sm`}
+                className={`${styles.blogBtn} mx-2 inline-block p-2 font-light tracking-[2px] text-xl lg:text-sm`}
               >
                 {t(`nav.${link.key}`)}
               </a>
@@ -66,7 +66,7 @@ const Navigation = () => {
             <button
               aria-label={t('a11y.color_mode')}
               onClick={toggleColorMode}
-              className="mx-1 flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-black/5 dark:hover:bg-white/10"
+              className="mx-1 flex h-10 w-10 items-center justify-center rounded-md bg-transparent hover:bg-kl-hover"
             >
               <Icon aria-hidden />
             </button>

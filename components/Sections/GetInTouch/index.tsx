@@ -53,14 +53,14 @@ const GetInTouch = () => {
           href={whatsappUrl()}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-teal-600 px-6 text-base font-semibold text-kl-emphasis transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-cyan-200 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)]"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-kl-accent-strong px-6 text-base font-semibold text-kl-emphasis transition-colors hover:border-kl-accent-hover hover:bg-kl-accent-soft"
         >
           <FaWhatsapp aria-hidden />
           {t('contact.cta_whatsapp')}
         </a>
         <a
           href={`mailto:${PERSON.email}`}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-[#595959] px-6 text-base font-medium transition-colors hover:border-teal-400 dark:border-white/50 dark:hover:border-teal-300"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-kl-muted px-6 text-base font-medium transition-colors hover:border-kl-accent-hover hover:bg-kl-accent-soft"
         >
           <RiMailLine aria-hidden />
           {t('contact.cta_email')}

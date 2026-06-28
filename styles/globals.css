@@ -18,6 +18,29 @@
   --kl-accent-alt: #404040;
   --kl-arc: #97dffc;
 
+  /* Semantic accent variants — every accent-colored border/hover/glow in the
+     app routes through these so the palette stays consistent and themeable.
+     Light theme leads with teal. */
+  --kl-accent-strong: #0f766e; /* teal.700 — primary CTA border */
+  --kl-accent-hover: #2dd4bf; /* teal.400 — hover border */
+  --kl-accent-soft: rgba(49, 151, 149, 0.08); /* tinted hover background */
+
+  /* Neutral surface/border tokens (theme-aware alpha) for cards, pills,
+     dividers and subtle hovers — replaces ad-hoc black/white opacities. */
+  --kl-surface: rgba(0, 0, 0, 0.05);
+  --kl-surface-strong: rgba(0, 0, 0, 0.1);
+  --kl-border: rgba(0, 0, 0, 0.1);
+  --kl-border-strong: rgba(0, 0, 0, 0.2);
+  --kl-hover: rgba(0, 0, 0, 0.05);
+  --kl-muted: #595959; /* neutral outline (secondary buttons) */
+  --kl-scrollbar: #718096;
+  --kl-overlay: rgba(0, 0, 0, 0.6); /* dialog backdrop */
+  --kl-on-accent: #ffffff; /* text/badge on a solid accent fill */
+
+  /* Inverse surface (tooltips): dark chip in light theme, flips in dark. */
+  --kl-inverse: #1a202c; /* gray.800 */
+  --kl-inverse-fg: #ffffff;
+
   /* v2 gray scale (kept 1:1 for borders/surfaces) */
   --gray-50: #f7fafc;
   --gray-100: #edf2f7;
@@ -38,6 +61,24 @@
   --kl-description: #a0aec0; /* gray.400 */
   --kl-accent: #a5f3fc;
   --kl-accent-alt: #a6a6a6;
+
+  /* Dark theme leads with cyan; hovers/borders brighten rather than darken. */
+  --kl-accent-strong: #a5f3fc; /* cyan.200 */
+  --kl-accent-hover: #5eead4; /* teal.300 */
+  --kl-accent-soft: rgba(157, 236, 249, 0.08);
+
+  --kl-surface: rgba(255, 255, 255, 0.1);
+  --kl-surface-strong: rgba(255, 255, 255, 0.1);
+  --kl-border: rgba(255, 255, 255, 0.1);
+  --kl-border-strong: rgba(255, 255, 255, 0.2);
+  --kl-hover: rgba(255, 255, 255, 0.1);
+  --kl-muted: rgba(255, 255, 255, 0.5);
+  --kl-overlay: rgba(0, 0, 0, 0.6);
+  /* Dark accent is light cyan, so text/badges on it must be dark to stay AA. */
+  --kl-on-accent: #121212;
+
+  --kl-inverse: #e2e8f0; /* gray.200 */
+  --kl-inverse-fg: #171923; /* gray.900 */
 }
 
 /* ---------------------------------------------------------------------------
@@ -53,6 +94,20 @@
   --color-kl-accent: var(--kl-accent);
   --color-kl-accent-alt: var(--kl-accent-alt);
   --color-kl-arc: var(--kl-arc);
+
+  /* Semantic accent + surface tokens (see :root / .dark). */
+  --color-kl-accent-strong: var(--kl-accent-strong);
+  --color-kl-accent-hover: var(--kl-accent-hover);
+  --color-kl-accent-soft: var(--kl-accent-soft);
+  --color-kl-surface: var(--kl-surface);
+  --color-kl-surface-strong: var(--kl-surface-strong);
+  --color-kl-border: var(--kl-border);
+  --color-kl-border-strong: var(--kl-border-strong);
+  --color-kl-hover: var(--kl-hover);
+  --color-kl-muted: var(--kl-muted);
+  --color-kl-on-accent: var(--kl-on-accent);
+  --color-kl-inverse: var(--kl-inverse);
+  --color-kl-inverse-fg: var(--kl-inverse-fg);
 
   --color-gray-50: var(--gray-50);
   --color-gray-100: var(--gray-100);
@@ -184,7 +239,7 @@ body::-webkit-scrollbar-track-piece {
   width: 10px;
 }
 body::-webkit-scrollbar-thumb {
-  background: var(--gray-500);
+  background: var(--kl-scrollbar);
   border-radius: 1em;
 }
 @media (max-width: 480px) {

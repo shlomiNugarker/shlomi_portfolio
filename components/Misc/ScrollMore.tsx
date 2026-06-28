@@ -30,7 +30,7 @@ const ScrollMore = () => {
         >
           <a
             href={`mailto:${PERSON.email}`}
-            className="relative flex items-center justify-center py-3 font-mono tracking-[3px] text-gray-700 transition-colors hover:text-kl-emphasis dark:text-gray-400 after:mx-auto after:mt-2.5 after:h-[8em] after:w-0.5 after:shrink-0 after:bg-kl-emphasis after:opacity-50 after:content-[''] hover:after:opacity-100"
+            className="relative flex items-center justify-center py-3 font-mono tracking-[3px] text-kl-description transition-colors hover:text-kl-emphasis after:mx-auto after:mt-2.5 after:h-[8em] after:w-0.5 after:shrink-0 after:bg-kl-emphasis after:opacity-50 after:content-[''] hover:after:opacity-100"
           >
             {PERSON.email}{' '}
           </a>

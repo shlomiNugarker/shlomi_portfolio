@@ -11,8 +11,8 @@ const buttonVariants = cva(
         solid:
           'bg-kl-emphasis text-kl-bg hover:opacity-90',
         outline:
-          'border border-current bg-transparent hover:bg-black/5 dark:hover:bg-white/5',
-        ghost: 'bg-transparent hover:bg-black/5 dark:hover:bg-white/10',
+          'border border-current bg-transparent hover:bg-kl-hover',
+        ghost: 'bg-transparent hover:bg-kl-hover',
         link: 'bg-transparent underline-offset-4 hover:underline',
       },
       size: {

@@ -18,18 +18,20 @@ const FavIconProvider = ({ children }: { children: ReactNode }) => (
       <link rel="apple-touch-icon" href="/apple-touch-icon-180.png" />
       <link rel="manifest" href="/manifest.json" />
 
-      {/* Theming */}
+      {/* Theming — kept in sync with the --kl-bg tokens (light #edf2f7 /
+          dark #121212). Meta tags can't reference CSS vars, so the hex is
+          mirrored here intentionally. */}
       <meta
         name="theme-color"
         media="(prefers-color-scheme: light)"
-        content="#FAFAFA"
+        content="#edf2f7"
       />
       <meta
         name="theme-color"
         media="(prefers-color-scheme: dark)"
-        content="#171717"
+        content="#121212"
       />
-      <meta name="msapplication-TileColor" content="#171717" />
+      <meta name="msapplication-TileColor" content="#121212" />
     </Head>
     {children}
   </>

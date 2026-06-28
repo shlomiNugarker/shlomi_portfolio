@@ -43,7 +43,7 @@ const Sidebar = () => {
 
           <a
             href="#contact"
-            className="inline-flex h-12 items-center justify-center border border-current px-6 text-sm font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+            className="inline-flex h-12 items-center justify-center border border-current px-6 text-sm font-medium transition-colors hover:bg-kl-hover"
           >
             {t('sidebar.cta')}
           </a>

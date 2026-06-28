@@ -107,12 +107,8 @@
 .blogBtn:hover,
 .blogBtn:focus,
 .blogBtn:active {
-  text-decoration-color: #97DFFC;
+  /* Underline tracks the active accent (cyan in dark, teal in light), so no
+     separate light-mode override is needed. */
+  text-decoration-color: var(--kl-emphasis);
   background-color: transparent;
-}
-
-.blogBtn.dark:hover,
-.blogBtn.dark:focus,
-.blogBtn.dark:active {
-  text-decoration-color: #121212;
 }

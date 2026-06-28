@@ -23,18 +23,18 @@ export type FeaturedCardProps = {
 }
 
 const Tag = ({ label }: { label: string }) => (
-  <span className="whitespace-nowrap rounded-full border border-black/20 bg-black/5 px-2.5 py-1 text-xs font-medium tracking-[0.02em] text-gray-700 dark:border-white/30 dark:bg-white/10 dark:text-gray-300">
+  <span className="whitespace-nowrap rounded-full border border-kl-border-strong bg-kl-surface px-2.5 py-1 text-xs font-medium tracking-[0.02em] text-kl-description">
     {label}
   </span>
 )
 
 const Badge = ({ label, isClient }: { label: string; isClient: boolean }) => (
   <span
-    className={`absolute start-3 top-3 z-[2] rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-[0.04em] text-white shadow-sm backdrop-blur-[6px] ${
-      // teal.700 so the white label clears WCAG AA; personal badge is dark.
-      isClient ? 'bg-teal-700' : 'bg-black/70'
+    className={`absolute start-3 top-3 z-[2] rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-[0.04em] text-kl-on-accent shadow-sm backdrop-blur-[6px] ${
+      // Accent fill for client work (white label clears WCAG AA); neutral
+      // overlay for personal projects.
+      isClient ? 'bg-kl-accent-strong' : 'bg-black/70'
     }`}
-    style={isClient ? { backgroundColor: '#0f766e' } : undefined}
   >
     {label}
   </span>
@@ -57,7 +57,7 @@ const Cover = ({
   const hasGallery = images.length > 1
 
   return (
-    <div className="relative aspect-[16/8] w-full overflow-hidden bg-black/10 dark:bg-white/5">
+    <div className="relative aspect-[16/8] w-full overflow-hidden bg-kl-surface-strong">
       <Badge label={badgeLabel} isClient={isClient} />
       <div className="absolute inset-0">
         <NextImage
@@ -87,7 +87,7 @@ const Cover = ({
                 className={`h-2 rounded-full transition-all duration-200 ${
                   i === active
                     ? 'w-[18px] bg-kl-emphasis'
-                    : 'w-2 bg-black/40 dark:bg-white/50'
+                    : 'w-2 bg-kl-muted'
                 }`}
               />
             </button>
@@ -114,7 +114,7 @@ const FeaturedCard = ({
 }: FeaturedCardProps) => {
   return (
     <div
-      className={`${styles.featureCard} group flex h-full flex-col overflow-hidden rounded-[1.25em] border border-black/10 bg-black/5 transition-colors duration-200 hover:border-teal-400 dark:border-white/20 dark:bg-white/10 dark:hover:border-teal-300`}
+      className={`${styles.featureCard} group flex h-full flex-col overflow-hidden rounded-[1.25em] border border-kl-border bg-kl-surface transition-colors duration-200 hover:border-kl-accent-hover`}
     >
       {/* Wide, full-bleed cover (single image or a small gallery). */}
       <Cover
@@ -136,7 +136,7 @@ const FeaturedCard = ({
               {title}
             </h3>
           </div>
-          <hr className="border-black/10 dark:border-white/20" />
+          <hr className="border-kl-border" />
         </div>
 
         <p className="text-sm leading-relaxed text-kl-description md:text-base">
@@ -156,7 +156,7 @@ const FeaturedCard = ({
             href={ctaUrl}
             rel="noreferrer"
             target="_blank"
-            className="inline-flex h-8 items-center justify-center rounded-md border border-[#595959] px-3 text-sm font-medium transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-white/50 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)] md:text-base"
+            className="inline-flex h-8 items-center justify-center rounded-md border border-kl-muted px-3 text-sm font-medium transition-colors hover:border-kl-accent-hover hover:bg-kl-accent-soft md:text-base"
           >
             {ctaLabel}
           </a>
@@ -165,7 +165,7 @@ const FeaturedCard = ({
               href={repoUrl}
               rel="noreferrer"
               target="_blank"
-              className="inline-flex h-8 items-center justify-center gap-1.5 rounded-md border border-[#595959] px-3 text-sm font-medium transition-colors hover:border-teal-400 hover:bg-[rgba(49,151,149,0.08)] dark:border-white/50 dark:hover:border-teal-300 dark:hover:bg-[rgba(157,236,249,0.08)] md:text-base"
+              className="inline-flex h-8 items-center justify-center gap-1.5 rounded-md border border-kl-muted px-3 text-sm font-medium transition-colors hover:border-kl-accent-hover hover:bg-kl-accent-soft md:text-base"
             >
               <RiGithubFill aria-hidden />
               {repoLabel}
