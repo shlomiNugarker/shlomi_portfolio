@@ -11,6 +11,7 @@ const Logo = () => (
     <Box
       className={styles.logo}
       boxSize={{ base: '30px', lg: '50px' }}
+      flexShrink={0}
       color={{ base: 'teal.700', _dark: 'cyan.200' }}
     >
       <svg
@@ -20,6 +21,7 @@ const Logo = () => (
         height="100%"
         role="img"
         aria-label="Shlomi Nugarker logo"
+        style={{ display: 'block', aspectRatio: '1 / 1' }}
       >
         <rect
           x="2"
