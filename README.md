@@ -4,12 +4,12 @@
 
 # Shlomi Nugarker — Portfolio
 
-A fast, multilingual, accessible developer portfolio built with Next.js 16, React, TypeScript and Chakra UI.
+A fast, multilingual, accessible developer portfolio built with Next.js 16, React, TypeScript and Tailwind CSS v4.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Chakra UI](https://img.shields.io/badge/Chakra%20UI-3-319795?logo=chakraui&logoColor=white)](https://chakra-ui.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![i18n](https://img.shields.io/badge/i18n-en%20%C2%B7%20he%20%C2%B7%20ar-2dd4bf)](#-internationalization)
 
 **Live:** [www.shlomi.dev](https://www.shlomi.dev) · [Hebrew](https://www.shlomi.dev/he) · [Arabic](https://www.shlomi.dev/ar)
@@ -30,9 +30,10 @@ The whole thing is content-driven: projects, services and skills live in typed c
 - **↔️ Full RTL** — Hebrew and Arabic mirror the entire layout (not just text) using CSS logical properties; `<html dir>` is set per-locale at SSR.
 - **🔍 Comprehensive SEO** — 5 JSON-LD schemas (Person, ProfessionalService, WebSite, Organization, ItemList), per-locale Open Graph & Twitter cards, `hreflang` alternates, canonical URLs, a dynamic `sitemap.xml`, `robots.txt` and a PWA `manifest.json`.
 - **🛡️ Security headers** — HSTS, CSP, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` and more, configured in `next.config.js`.
-- **🌗 Dark / light mode** — powered by [next-themes](https://github.com/pacocoursey/next-themes), with no flash on load.
+- **🌗 Dark / light mode** — powered by [next-themes](https://github.com/pacocoursey/next-themes), with no flash on load; all colors route through semantic CSS design tokens.
 - **📱 Responsive & accessible** — tuned for mobile, tablet and desktop; semantic markup, ARIA labels and keyboard-friendly controls.
-- **🎞️ Motion** — subtle, performant animations with [Framer Motion](https://www.framer.com/motion/).
+- **🎞️ Motion** — subtle CSS-only scroll reveals and micro-interactions, with full `prefers-reduced-motion` support.
+- **📈 Conversion analytics** — Google Analytics events on every lead path (WhatsApp, email, project and social clicks).
 - **🖼️ Multi-image project cards** — featured work supports an image gallery with dot navigation.
 - **⚡ Performance** — SSG pages, `next/image` optimization, modern AVIF/WebP output, and tree-shaken package imports.
 
@@ -42,11 +43,11 @@ The whole thing is content-driven: projects, services and skills live in typed c
 | --- | --- |
 | **Framework** | Next.js 16 (Pages Router, SSG) |
 | **Language** | TypeScript 5.3 |
-| **UI** | React 18.3, Chakra UI 3, Emotion 11 |
-| **Animation** | Framer Motion 12 |
-| **Theming** | next-themes |
+| **UI** | React 18.3, Tailwind CSS 4, Radix UI primitives |
+| **Animation** | CSS transitions + IntersectionObserver scroll reveals |
+| **Theming** | next-themes + semantic CSS design tokens |
 | **i18n** | next-i18next 16, i18next 26, react-i18next 17 |
-| **Icons** | react-icons 5 |
+| **Icons** | react-icons 5, lucide-react |
 | **Tooling** | ESLint 9, Prettier 3 |
 
 ## 📂 Project Structure
@@ -64,7 +65,7 @@ The whole thing is content-driven: projects, services and skills live in typed c
 │   ├── Menu/               # Nav + language switcher
 │   ├── Sections/           # About, Services, FeaturedWorks, GetInTouch
 │   ├── Misc/               # OpenGraphHead, StructuredData, ScrollMore…
-│   └── ui/                 # Color-mode + link-button helpers
+│   └── ui/                 # Radix-based primitives + color-mode helpers
 ├── config/                 # Typed content & config
 │   ├── seo.ts              # Canonical URLs + per-locale meta
 │   ├── works.ts            # Featured projects (multi-image)
@@ -140,7 +141,7 @@ yarn start
 
 ## 🙏 Acknowledgements
 
-Originally forked from [`klawingco/kl_portfolio`](https://github.com/klawingco/kl_portfolio) — rebuilt and extensively customized: upgraded to Next 16 / Chakra UI 3, re-themed, and extended with multilingual support, RTL, a full SEO suite and new project content.
+Originally forked from [`klawingco/kl_portfolio`](https://github.com/klawingco/kl_portfolio) — rebuilt and extensively customized: upgraded to Next 16, migrated from Chakra UI to Tailwind CSS v4 + Radix primitives, re-themed with semantic design tokens, and extended with multilingual support, RTL, a full SEO suite and new project content.
 
 ---
 

@@ -36,9 +36,7 @@ export const FeaturedWorksList: FeaturedWork[] = [
     key: 'makeble',
     images: ['/works/makeble.webp'],
     ctaUrl: 'https://makeble.vercel.app/',
-    // TODO: set the real public repo URL (e.g. https://github.com/shlomiNugarker/makeble)
-    // so the "Code" link appears. Remove this line if the repo is private.
-    repoUrl: undefined,
+    // Repo is private — no "Code" link. Set repoUrl if it goes public.
     objectPosition: 'left top',
     tags: ['Next.js', 'AI', 'Monaco Editor', 'Vercel'],
     type: 'personal',
@@ -47,9 +45,7 @@ export const FeaturedWorksList: FeaturedWork[] = [
     key: 'wanderly',
     images: ['/works/wanderly.webp'],
     ctaUrl: 'https://wanderly-seven.vercel.app',
-    // TODO: set the real public repo URL (e.g. https://github.com/shlomiNugarker/wanderly)
-    // so the "Code" link appears. Remove this line if the repo is private.
-    repoUrl: undefined,
+    // Repo is private — no "Code" link. Set repoUrl if it goes public.
     objectPosition: 'left top',
     tags: ['Next.js 16', 'React 19', 'Mapbox', 'Claude AI', 'Socket.IO'],
     type: 'personal',

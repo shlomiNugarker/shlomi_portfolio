@@ -1,8 +1,8 @@
 'use client'
 
-// Color-mode utilities for Chakra UI v3, backed by next-themes.
-// Chakra v3 removed its built-in color mode, so these thin wrappers preserve the
-// v2 API (useColorMode / useColorModeValue) that the rest of the app relies on.
+// Color-mode utilities backed by next-themes. Thin wrappers exposing a simple
+// useColorMode / useColorModeValue API (a holdover from the Chakra era that the
+// rest of the app still consumes).
 import { ThemeProvider, useTheme } from 'next-themes'
 import type { ThemeProviderProps } from 'next-themes'
 import { useIsMounted } from 'hooks/useIsMounted'
