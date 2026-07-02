@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next/pages'
 import { SITE_URL, PERSON, META, DEFAULT_LOCALE, localeUrl, type Locale } from 'config/seo'
 import { FeaturedWorksList } from 'config/works'
+import { FAQ_KEYS } from 'config/faq'
 
-// Emits the five schema.org graphs from the SEO handoff (§6) as JSON-LD.
-// The ItemList is derived from FeaturedWorksList so it stays in sync with the
-// real projects rendered on the page.
+// Emits the six schema.org graphs as JSON-LD. The ItemList is derived from
+// FeaturedWorksList and the FAQPage from the same i18n keys the visible FAQ
+// section renders, so both stay in sync with the real page content.
 
 const KNOWS_ABOUT = [
   'React',
@@ -123,12 +124,28 @@ const StructuredData = () => {
     })),
   }
 
+  // Mirrors the visible FAQ section (components/Sections/Faq) — Google only
+  // honors FAQ rich results when the schema matches on-page content.
+  const faqPage = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_KEYS.map((key) => ({
+      '@type': 'Question',
+      name: t(`faq.items.${key}.q`),
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t(`faq.items.${key}.a`),
+      },
+    })),
+  }
+
   const graphs = [
     person,
     professionalService,
     webSite,
     organization,
     itemList,
+    faqPage,
   ]
 
   return (

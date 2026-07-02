@@ -231,6 +231,23 @@ a {
   outline: none;
 }
 
+/* ---------------------------------------------------------------------------
+   Scroll reveal (components/Misc/Reveal.tsx). The .reveal class is added by JS
+   after hydration — never in markup — so content is fully visible for no-JS
+   visitors and crawlers; Reveal also skips it under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Scrollbar */
 body::-webkit-scrollbar {
   width: 0.4em;
