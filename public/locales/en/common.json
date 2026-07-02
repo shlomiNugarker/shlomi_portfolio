@@ -41,7 +41,8 @@
         "title": "Data & Integrations",
         "description": "Connecting databases and third-party services — PostgreSQL, MongoDB, Supabase, Firebase and more."
       }
-    }
+    },
+    "cta": "Need one of these? Let's talk"
   },
   "works": {
     "heading": "A few things I've built.",
@@ -63,6 +64,28 @@
         "title": "Wanderly",
         "description": "A social network for travelers I built from scratch — plan multi-stop trips, share them as posts, and see community routes on an interactive map. Uses Claude AI to generate itineraries and a real-time live feed. A full-stack project covering everything from database to UI."
       }
+    },
+    "cta": "Have a similar project in mind? Tell me about it"
+  },
+  "faq": {
+    "heading": "Questions clients ask.",
+    "items": {
+      "process": {
+        "q": "How does working together look?",
+        "a": "We start with a short call about what you need. You get a clear scope, timeline and price — then I build, keep you updated with working versions along the way, and we launch."
+      },
+      "timeline": {
+        "q": "How long does a project take?",
+        "a": "A landing or marketing site typically takes 1–3 weeks; a full web application usually 4–10 weeks, depending on scope. You get a concrete estimate before we start."
+      },
+      "price": {
+        "q": "How much does it cost?",
+        "a": "It depends on scope. After a first call you get a fixed quote — no surprises mid-project. A small site and a large application are priced very differently, so tell me what you're building."
+      },
+      "after": {
+        "q": "What happens after launch?",
+        "a": "I don't disappear. You get support after going live, and I can keep maintaining and growing the product on an ongoing basis if you want."
+      }
     }
   },
   "skills": {
@@ -79,7 +102,8 @@
     "or_email": "or drop me an",
     "email": "email",
     "cta_whatsapp": "Send me your project on WhatsApp",
-    "cta_email": "Send an email"
+    "cta_email": "Send an email",
+    "whatsapp_prefill": "Hi Shlomi, I have a project I'd like to talk to you about"
   },
   "nav": {
     "about": "About",

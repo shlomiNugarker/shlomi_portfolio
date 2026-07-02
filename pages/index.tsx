@@ -11,13 +11,20 @@ import Sidebar from 'components/Sidebar'
 import Avatar from 'components/Avatar'
 import About from 'components/Sections/About'
 import ScrollMore from 'components/Misc/ScrollMore'
+import Reveal from 'components/Misc/Reveal'
 
 // Only the above-the-fold content (Menu, Sidebar, Avatar, About) is in the
 // initial bundle. Every section below the hero is code-split so its weight
 // isn't shipped on first load.
 const Services = dynamic(() => import('components/Sections/Services'))
 const FeaturedWorks = dynamic(() => import('components/Sections/FeaturedWorks'))
+const Faq = dynamic(() => import('components/Sections/Faq'))
 const GetInTouch = dynamic(() => import('components/Sections/GetInTouch'))
+// Client-only floating lead button (scroll/IntersectionObserver driven).
+const FloatingWhatsApp = dynamic(
+  () => import('components/Misc/FloatingWhatsApp'),
+  { ssr: false }
+)
 
 const Portfolio = (): JSX.Element => {
   const { t } = useTranslation('common')
@@ -59,7 +66,9 @@ const Portfolio = (): JSX.Element => {
               id="services"
               className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-0"
             >
-              <Services />
+              <Reveal>
+                <Services />
+              </Reveal>
             </div>
             <div
               id="works"
@@ -67,13 +76,21 @@ const Portfolio = (): JSX.Element => {
             >
               <FeaturedWorks />
             </div>
+            <div id="faq" className="contentRow pb-12 lg:pt-20 lg:pb-10 xl:pt-20">
+              <Reveal>
+                <Faq />
+              </Reveal>
+            </div>
             <div id="contact" className="contentRow lg:pt-20 xl:pt-20">
-              <GetInTouch />
+              <Reveal>
+                <GetInTouch />
+              </Reveal>
             </div>
           </div>
         </main>
       </div>
       <ScrollMore />
+      <FloatingWhatsApp />
     </>
   )
 }

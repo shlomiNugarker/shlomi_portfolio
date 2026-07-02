@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { useTranslation } from 'next-i18next/pages'
 import { Services as ServicesList } from 'config/services'
+import SectionCta from 'components/Misc/SectionCta'
 
 const ServicesSection = () => {
   const { t } = useTranslation('common')
@@ -35,6 +36,8 @@ const ServicesSection = () => {
           )
         })}
       </div>
+
+      <SectionCta label={t('services.cta')} location="services" />
     </div>
   )
 }
